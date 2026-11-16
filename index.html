@@ -10,6 +10,18 @@
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://publicicu.github.io/black-friday-calc/">
 <meta property="og:url" content="https://publicicu.github.io/black-friday-calc/">
+<meta property="og:site_name" content="ICU">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:image" content="https://publicicu.github.io/black-friday-calc/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Інвестувати чи витрачати? Чек з прикладом: 5 000 ₴ щороку протягом 10 років під 12% можуть стати 98 273 ₴">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Інвестувати чи витрачати?">
+<meta name="twitter:description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції">
+<meta name="twitter:image" content="https://publicicu.github.io/black-friday-calc/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0B253B">
 <style>
 @font-face{font-family:"e-Ukraine";src:url("fonts/e-Ukraine-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
@@ -63,7 +75,7 @@ h3{font-size:18px;line-height:1.3}
 .fill.bare,.fill.bare:hover,.fill.bare:focus{background:transparent;border:0;border-radius:0;padding:0;margin:0;text-align:right}
 .fillbox .unit{color:var(--turq)}
 .fill.bare.center{text-align:center}
-.measure{position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre;font-weight:700;pointer-events:none}
+.measure{position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:normal;pointer-events:none}
 .sentences{display:flex;flex-direction:column;gap:6px}
 .sentence{font-size:clamp(19px,2.9vw,34px);line-height:1.9;font-weight:400;max-width:30em;margin:0 auto}
 .ask{display:flex;flex-direction:column;align-items:center;gap:18px}
@@ -590,7 +602,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     update();
   });
 
-  attachSizer(amountEl, () => amountEl.value, 0.05);
+  attachSizer(amountEl, () => amountEl.value, 0.12);
   attachSizer(rateIn, () => rateIn.options[rateIn.selectedIndex].text, 1.4);
   attachSizer(yearsIn, () => yearsIn.options[yearsIn.selectedIndex].text, 1.4);
   attachSizer(modeEl, () => modeEl.options[modeEl.selectedIndex].text, 1.4);
