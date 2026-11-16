@@ -61,12 +61,14 @@ h3{font-size:18px;line-height:1.3}
 .hero>.deco-r{right:0}
 @media (max-width:760px){.hero>.deco{opacity:.4;width:46%}}
 .hero{text-align:left}
-.bar{align-self:stretch;margin-bottom:-24px;padding:0 var(--pad-x);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bar{align-self:stretch;margin-bottom:-8px;padding:0 var(--pad-x);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .logo{display:block;width:102px;height:46px;overflow:visible}
 .pill b{font-weight:700;font-variant-numeric:tabular-nums}
-@media (max-width:480px){.pill{font-size:12px;white-space:nowrap;padding:7px 12px}}
-.pill{display:inline-block;background:var(--turq);color:var(--ink);font-weight:500;font-size:13px;padding:7px 14px;border-radius:999px}
-.page-head{display:flex;flex-direction:column;gap:18px;padding:0 var(--pad-x)}
+@media (max-width:600px){.bar{flex-direction:column;justify-content:center;gap:12px;text-align:center}}
+@media (max-width:480px){.pill{font-size:12px}}
+.pill{display:inline-block;color:var(--ink);font-weight:500;font-size:15px;line-height:1.4}
+.pill .clock{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;margin-right:6px}
+.page-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:0 var(--pad-x);margin-bottom:-8px}
 .page-head h1{font-size:clamp(32px,4.4vw,58px);line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
 .page-head h1 .hl{position:relative;z-index:0;padding:0 .2em;white-space:nowrap;--t:.14em;--b:.06em}
 .page-head h1 .hl::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:var(--t);bottom:var(--b);border-radius:var(--r-sm)}
@@ -74,6 +76,9 @@ h3{font-size:18px;line-height:1.3}
 .page-head h1 .bad{color:var(--white)}.page-head h1 .bad::before{background:var(--red)}
 .subtitle{margin:0;font-size:clamp(17px,1.8vw,22px);line-height:1.4;color:var(--text);max-width:60ch}
 .nw{white-space:nowrap}
+.arrow{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.95em}
+.arrow .a-d{display:none}
+@media (max-width:900px){.arrow .a-r{display:none}.arrow .a-d{display:inline}}
 .fillbox{display:inline-flex;align-items:baseline;gap:.08em;font-weight:700;background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;padding:0 .24em;margin:0 .06em;line-height:1.3;cursor:text;vertical-align:baseline}
 .fillbox:hover{background:rgba(255,255,255,.16)}
 .fillbox:focus-within{background:rgba(116,187,184,.25)}
@@ -81,9 +86,10 @@ h3{font-size:18px;line-height:1.3}
 .fillbox .unit{color:var(--turq)}
 .fill.bare.center{text-align:center}
 .measure{position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:normal;pointer-events:none}
-.sentences{display:flex;flex-direction:column;gap:clamp(24px,3vw,36px)}
-.sentence{font-size:clamp(18px,1.8vw,22px);line-height:1.9;font-weight:400;max-width:30em;margin:0}
-.ask{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.sentences{display:flex;flex-direction:column;gap:clamp(40px,4.4vw,56px)}
+.sentence{font-size:clamp(18px,1.8vw,22px);line-height:2.2;font-weight:400;max-width:30em;margin:0}
+.ask{display:flex;flex-direction:column;align-items:flex-start;gap:26px}
+.ask .chips{margin-top:4px}
 .question{margin:0;font-size:clamp(18px,1.8vw,22px);line-height:1.3;font-weight:500}
 .amount-box{display:inline-flex;align-items:center;gap:.22em;background:var(--white);color:var(--ink);border-radius:var(--r-md);padding:.12em .42em .12em .5em;font-size:clamp(42px,4.8vw,62px);font-weight:700;line-height:1.15;cursor:text;box-shadow:0 0 0 6px rgba(116,187,184,.4),0 22px 44px rgba(0,0,0,.28);transition:transform .15s ease,box-shadow .15s ease}
 .amount-box:hover{transform:translateY(-2px);box-shadow:0 0 0 9px rgba(116,187,184,.55),0 26px 48px rgba(0,0,0,.3)}
@@ -93,7 +99,7 @@ h3{font-size:18px;line-height:1.3}
 .amount{font:inherit;color:inherit;background:transparent;border:0;padding:0;margin:0;text-align:center;outline:none;font-variant-numeric:tabular-nums;min-width:1ch}
 .amount-box .cur{color:var(--text)}
 .amount-box .pen{width:.36em;height:.36em;flex:none;margin-left:.08em;stroke:#638D91}
-.chips{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:8px}
+.chips{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:10px}
 .chip{appearance:none;background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--white);font:inherit;font-weight:500;font-size:14px;padding:7px 14px;border-radius:999px;cursor:pointer;font-variant-numeric:tabular-nums}
 .chip:hover{border-color:var(--white)}
 .chip[aria-pressed="true"]{background:var(--turq);border-color:var(--turq);color:var(--ink)}
@@ -186,7 +192,7 @@ select.fill option{color:var(--ink);background:var(--white)}
 .prize a{color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
 .prize-count{align-self:flex-start;background:var(--ink);color:var(--white);font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;margin-bottom:4px}
 .prize-book{flex-direction:row;align-items:center;gap:20px}
-.prize-book img{width:96px;height:auto;flex:none;border-radius:8px;box-shadow:0 8px 18px rgba(11,37,59,.18)}
+.prize-book img{width:96px;height:auto;flex:none;filter:drop-shadow(0 8px 12px rgba(11,37,59,.22))}
 .prize-text{display:flex;flex-direction:column;gap:6px;min-width:0}
 .prize-book .prize-big{font-size:clamp(24px,2.6vw,30px)}
 .gw-steps li a{color:var(--ink);font-weight:700}
@@ -255,7 +261,7 @@ select.fill option{color:var(--ink);background:var(--white)}
             <option value="yearly" selected>щороку</option>
           </select>
           <span class="nw">під <select class="fill" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12" selected>12%</option><option value="13">13%</option><option value="14">14%</option><option value="15">15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select> річних</span>
-          <span class="nw">на <select class="fill" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5">5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10" selected>10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span>, то ви можете отримати:
+          <span class="nw">на <select class="fill" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5">5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10" selected>10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span>, то ви можете отримати <span class="arrow" aria-hidden="true"><span class="a-r">➡️</span><span class="a-d">⬇️</span></span>
         </p>
       </div>
       </div>
@@ -280,7 +286,7 @@ select.fill option{color:var(--ink);background:var(--white)}
             <div class="barcode-cap"><span id="capFrom">2026</span><span>ріст суми по роках</span><span id="capTo">2036</span></div>
           </div>
           <hr class="dash">
-          <div class="r-foot"><b>Дякуємо за спокійні інвестиції!</b><span>Дохід у майбутньому не є гарантованим.</span></div>
+          <div class="r-foot"><span>Дохід у майбутньому не є гарантованим.</span></div>
         </div>
       </div>
         <button type="button" class="btn primary" data-open-share>Поділитися чеком</button>
@@ -292,11 +298,11 @@ select.fill option{color:var(--ink);background:var(--white)}
     <div class="gw-main">
       <span class="gw-badge">Розіграш · 6 переможців</span>
       <h2 id="gwTitle">Поділись чеком і вигравай</h2>
-      <p class="gw-lead">Серед тих, хто поширить свій чек і відзначить ICU, оберемо шістьох переможців. Результати оголосимо <b>4&nbsp;грудня</b>.</p>
+      <p class="gw-lead">Серед тих, хто поширить свій чек і затегає ICU, оберемо шістьох переможців. Результати оголосимо <b>4&nbsp;грудня</b>.</p>
       <ol class="gw-steps">
         <li>Порахуй свою інвестиційну Чорну п’ятницю</li>
         <li>Поділись чеком у сторіз або дописі</li>
-        <li><span>Відзнач <b>@icukraine</b> в <a href="https://www.instagram.com/icukraine/">Instagram</a>, <a href="https://www.threads.com/@icukraine">Threads</a> або <a href="https://www.facebook.com/pages/ICU/148699395242028">Facebook</a></span></li>
+        <li><span>Затегай <b>@icukraine</b> в <a href="https://www.instagram.com/icukraine/">Instagram</a>, <a href="https://www.threads.com/@icukraine">Threads</a> або <a href="https://www.facebook.com/pages/ICU/148699395242028">Facebook</a></span></li>
       </ol>
       <button type="button" class="btn primary" data-open-share>Поділитися чеком</button>
     </div>
@@ -307,7 +313,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         <p>до дохідності будь-якого котирування в ICU&nbsp;Trade</p>
       </div>
       <div class="prize prize-book">
-        <img src="img/memonomika.jpg" width="461" height="700" alt="Обкладинка книжки «Мемономіка»" loading="lazy">
+        <img src="img/memonomika.webp" width="275" height="450" alt="Обкладинка книжки «Мемономіка»" loading="lazy">
         <div class="prize-text">
           <span class="prize-count">3 переможці</span>
           <span class="prize-big">«Мемономіка»</span>
@@ -423,14 +429,14 @@ select.fill option{color:var(--ink);background:var(--white)}
     let target = bfDate(now.getFullYear());
     const end = new Date(target); end.setDate(end.getDate() + 1);
     if (now >= end){ target = bfDate(now.getFullYear() + 1); }
-    if (now >= target && now < end){ cdEl.textContent = 'Чорна п’ятниця вже сьогодні'; return; }
+    if (now >= target && now < end){ cdEl.innerHTML = '<span class="clock" aria-hidden="true">⏰</span>Чорна п’ятниця вже сьогодні'; return; }
     let t = Math.max(0, Math.floor((target - now) / 1000));
     const d = Math.floor(t / 86400); t -= d * 86400;
     const h = Math.floor(t / 3600); t -= h * 3600;
     const m = Math.floor(t / 60), sec = t - m * 60;
     cdEl.innerHTML = window.innerWidth < 420
-      ? 'До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') + ' <b>' + pad2(h) + ':' + pad2(m) + ':' + pad2(sec) + '</b>'
-      : 'До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') +
+      ? '<span class="clock" aria-hidden="true">⏰</span>До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') + ' <b>' + pad2(h) + ':' + pad2(m) + ':' + pad2(sec) + '</b>'
+      : '<span class="clock" aria-hidden="true">⏰</span>До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') +
         ' <b>' + pad2(h) + '</b>&nbsp;год <b>' + pad2(m) + '</b>&nbsp;хв <b>' + pad2(sec) + '</b>&nbsp;с';
   }
   tickCountdown(); setInterval(tickCountdown, 1000);
