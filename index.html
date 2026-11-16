@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Інвестувати чи витрачати? Калькулятор Чорної п’ятниці від ICU</title>
+<meta name="description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції. Порахуй і поділися своїм чеком.">
+<meta property="og:title" content="Інвестувати чи витрачати?">
+<meta property="og:description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://publicicu.github.io/black-friday-calc/">
+<meta property="og:url" content="https://publicicu.github.io/black-friday-calc/">
+<meta name="theme-color" content="#0B253B">
+<style>
+@font-face{font-family:"e-Ukraine";src:url("fonts/e-Ukraine-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"e-Ukraine";src:url("fonts/e-Ukraine-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"e-Ukraine";src:url("fonts/e-Ukraine-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+:root{
+  /* Дизайн-система ICU. Композиція: речення-калькулятор на головному градієнті, під ним касовий чек із розпродажу, де покупки закреслені, а «разом» дорівнює інвестиції. */
+  --white:#FFFFFF;
+  --surface:#F6F6F6;
+  --hint:#D0D0D0;
+  --ink:#0B253B;
+  --text:#586276;
+  --turq:#74BBB8;
+  --orange:#E25603;
+  --yellow:#FBEB50;
+  --red:#E0352B;
+  --gradient-main:linear-gradient(60deg,#02182D,#204E7A);
+  --font:"e-Ukraine",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r-sm:12px; --r-md:24px; --r-lg:48px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#F5F7F8 url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22440%22 height=%22440%22 viewBox=%220 0 440 440%22%3E%3Cg transform=%22translate(60.0,70.0) rotate(10.0) scale(1.417) translate(-12,-12)%22 fill=%22none%22 stroke=%22rgba(11,37,59,.11)%22 stroke-width=%220.99%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M7.6 7.4c.8-1.5 2.4-2.4 4.4-2.4 2.4 0 4 1.3 4 3.2 0 2.5-2.7 3.5-5.2 4.8-2.3 1.2-3.6 2.2-3.6 3.9 0 1.7 1.5 2.6 3.5 2.6 1.9 0 3.4-.7 4.4-2.1M5 10.2h14M5 13.8h14%22/%3E%3C/g%3E%3Cg transform=%22translate(250.0,40.0) rotate(0.2) scale(1.250) translate(-12,-12)%22 fill=%22none%22 stroke=%22rgba(11,37,59,.11)%22 stroke-width=%221.12%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%227.5%22 cy=%227.5%22 r=%222.6%22/%3E%3Ccircle cx=%2216.5%22 cy=%2216.5%22 r=%222.6%22/%3E%3Cpath d=%22M18.5 5.5L5.5 18.5%22/%3E%3C/g%3E%3Cg transform=%22translate(380.0,150.0) rotate(-8.8) scale(1.083) translate(-12,-12)%22 fill=%22none%22 stroke=%22rgba(116,187,184,.55)%22 stroke-width=%221.29%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%225%22 y=%223%22 width=%2214%22 height=%2218%22 rx=%222.5%22/%3E%3Crect x=%227.5%22 y=%225.5%22 width=%229%22 height=%223.5%22 rx=%221%22/%3E%3Cpath d=%22M8.5 12.5h.01M12 12.5h.01M15.5 12.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h.01M12 18.5h.01M15.5 18.5h.01%22/%3E%3C/g%3E%3Cg transform=%22translate(150.0,200.0) rotate(3.6) scale(1.250) translate(-12,-12)%22 fill=%22none%22 stroke=%22rgba(116,187,184,.55)%22 stroke-width=%221.12%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M15.5 7.6c-.9-1.4-2.5-2.1-4.1-2.1-2.1 0-3.7 1.1-3.7 2.9 0 4.1 8 2.5 8 6.9 0 1.9-1.7 3.1-4 3.1-1.7 0-3.3-.7-4.3-2.1M11.7 3v18%22/%3E%3C/g%3E%3Cg transform=%22translate(320.0,300.0) rotate(-1.5) scale(1.083) translate(-12,-12)%22 fill=%22none%22 stroke=%22rgba(11,37,59,.11)%22 stroke-width=%221.29%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M3.5 17.5l5.5-5.5 4 3.5 7.5-8M15.5 7.5h5v5%22/%3E%3C/g%3E%3Cg transform=%22translate(70.0,350.0) rotate(1.1) scale(1.083) translate(-12,-12)%22 fill=%22none%22 stroke=%22rgba(11,37,59,.11)%22 stroke-width=%221.29%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%227.5%22 cy=%227.5%22 r=%222.6%22/%3E%3Ccircle cx=%2216.5%22 cy=%2216.5%22 r=%222.6%22/%3E%3Cpath d=%22M18.5 5.5L5.5 18.5%22/%3E%3C/g%3E%3Cg transform=%22translate(220.0,400.0) rotate(-12.8) scale(1.417) translate(-12,-12)%22 fill=%22none%22 stroke=%22rgba(116,187,184,.55)%22 stroke-width=%220.99%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M7.6 7.4c.8-1.5 2.4-2.4 4.4-2.4 2.4 0 4 1.3 4 3.2 0 2.5-2.7 3.5-5.2 4.8-2.3 1.2-3.6 2.2-3.6 3.9 0 1.7 1.5 2.6 3.5 2.6 1.9 0 3.4-.7 4.4-2.1M5 10.2h14M5 13.8h14%22/%3E%3C/g%3E%3C/svg%3E") 0 0/440px 440px repeat;color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:700}
+h2{font-size:clamp(22px,2.6vw,30px);line-height:1.2}
+h3{font-size:18px;line-height:1.3}
+:focus-visible{outline:2px solid var(--turq);outline-offset:3px}
+.page{max-width:1160px;margin:0 auto;padding:16px 16px 56px;display:flex;flex-direction:column;gap:40px}
+
+/* ---------- hero: the sentence ---------- */
+.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--gradient-main);color:var(--white);border-radius:var(--r-lg);padding:28px clamp(22px,5vw,64px) 150px;display:flex;flex-direction:column;gap:clamp(28px,4vw,44px)}
+.hero>*{position:relative;z-index:1;max-width:100%;min-width:0}
+.hero>.deco{position:absolute;z-index:0;top:0;width:min(400px,30%);height:640px;max-height:100%;pointer-events:none}
+.hero>.deco-r{right:0}
+.hero>.deco-l{left:0}
+@media (max-width:760px){.hero>.deco{opacity:.4;width:46%}}
+.hero{text-align:center;align-items:center}
+.bar{align-self:stretch;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{display:block;width:102px;height:46px;overflow:visible}
+.pill{display:inline-flex;align-items:center;background:var(--turq);color:var(--ink);font-weight:500;font-size:13px;padding:7px 14px;border-radius:999px}
+.hero h1{font-size:clamp(34px,6vw,72px);line-height:1.08;letter-spacing:-.01em}
+.hero h1 mark{position:relative;z-index:0;background:none;color:var(--white);padding:0 .22em;white-space:nowrap;--t:.14em;--b:.06em}
+.hero h1 mark::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:var(--t);bottom:var(--b);background:var(--red);border-radius:var(--r-sm)}
+.subtitle{margin:-12px auto 0;font-size:clamp(18px,2.1vw,24px);line-height:1.4;color:rgba(255,255,255,.82);max-width:60ch}
+.nw{white-space:nowrap}
+.fillbox{display:inline-flex;align-items:baseline;gap:.08em;font-weight:700;background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;padding:0 .24em;margin:0 .06em;line-height:1.3;cursor:text;vertical-align:baseline}
+.fillbox:hover{background:rgba(255,255,255,.16)}
+.fillbox:focus-within{background:rgba(116,187,184,.25)}
+.fill.bare,.fill.bare:hover,.fill.bare:focus{background:transparent;border:0;border-radius:0;padding:0;margin:0;text-align:right}
+.fillbox .unit{color:var(--turq)}
+.fill.bare.center{text-align:center}
+.measure{position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre;font-weight:700;pointer-events:none}
+.sentences{display:flex;flex-direction:column;gap:6px}
+.sentence{font-size:clamp(19px,2.9vw,34px);line-height:1.9;font-weight:400;max-width:30em;margin:0 auto}
+.ask{display:flex;flex-direction:column;align-items:center;gap:18px}
+.question{margin:0;font-size:clamp(19px,2.9vw,34px);line-height:1.3;font-weight:500}
+.amount-box{display:inline-flex;align-items:center;gap:.22em;background:var(--white);color:var(--ink);border-radius:var(--r-md);padding:.12em .42em .12em .5em;font-size:clamp(46px,8vw,88px);font-weight:700;line-height:1.15;cursor:text;box-shadow:0 0 0 6px rgba(116,187,184,.4),0 22px 44px rgba(0,0,0,.28);transition:transform .15s ease,box-shadow .15s ease}
+.amount-box:hover{transform:translateY(-2px);box-shadow:0 0 0 9px rgba(116,187,184,.55),0 26px 48px rgba(0,0,0,.3)}
+.amount-box:focus-within{box-shadow:0 0 0 9px var(--turq),0 26px 48px rgba(0,0,0,.3)}
+.amount-box.pulse{animation:ring 2.2s ease-in-out infinite}
+@keyframes ring{0%,100%{box-shadow:0 0 0 6px rgba(116,187,184,.4),0 22px 44px rgba(0,0,0,.28)}50%{box-shadow:0 0 0 16px rgba(116,187,184,.12),0 22px 44px rgba(0,0,0,.28)}}
+.amount{font:inherit;color:inherit;background:transparent;border:0;padding:0;margin:0;text-align:center;outline:none;font-variant-numeric:tabular-nums;min-width:1ch}
+.amount-box .cur{color:var(--text)}
+.amount-box .pen{width:.36em;height:.36em;flex:none;margin-left:.08em;stroke:#638D91}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.chip{appearance:none;background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--white);font:inherit;font-weight:500;font-size:14px;padding:7px 14px;border-radius:999px;cursor:pointer;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--white)}
+.chip[aria-pressed="true"]{background:var(--turq);border-color:var(--turq);color:var(--ink)}
+.fill{font:inherit;font-weight:700;color:var(--white);background:rgba(255,255,255,.1);border:0;border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;padding:0 .22em;margin:0 .06em;text-align:center;font-variant-numeric:tabular-nums;line-height:1.3;min-width:2ch}
+.fill:hover{background:rgba(255,255,255,.16)}
+.fill:focus{outline:none;background:rgba(116,187,184,.25)}
+select.fill{-webkit-appearance:none;appearance:none;cursor:pointer;padding-right:1.1em;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374BBB8' stroke-width='2.2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .3em center;background-size:.42em auto;text-align:left}
+select.fill option{color:var(--ink);background:var(--white)}
+
+/* ---------- the receipt ---------- */
+.receipt-zone{display:flex;justify-content:center;margin-top:-150px;position:relative}
+.receipt-wrap{width:min(460px,100%);filter:drop-shadow(0 18px 30px rgba(2,24,45,.22));transform:rotate(-1.2deg)}
+.receipt{background:var(--white);padding:30px 30px 22px;border-radius:6px 6px 0 0;display:flex;flex-direction:column;gap:16px;position:relative}
+.receipt::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:12px;background:linear-gradient(135deg,var(--white) 50%,transparent 50%) 0 0/18px 12px repeat-x,linear-gradient(225deg,var(--white) 50%,transparent 50%) 0 0/18px 12px repeat-x}
+.r-head{text-align:center;display:flex;flex-direction:column;gap:2px}
+.r-head strong{font-size:15px;letter-spacing:.1em}
+.r-head span{color:var(--text);font-size:13px}
+.dash{border:0;border-top:2px dashed var(--hint);margin:0}
+.rows{display:flex;flex-direction:column;gap:10px;margin:0}
+.row{display:flex;align-items:baseline;gap:8px;font-size:15px}
+.row dt{color:var(--text);flex:0 1 auto}
+.row .dots{flex:1;border-bottom:2px dotted var(--hint);transform:translateY(-4px);min-width:16px}
+.row dd{margin:0;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.struck{position:relative;color:var(--text)}
+.struck::after{content:"";position:absolute;left:-3px;right:-3px;top:52%;height:3px;background:var(--orange);border-radius:2px;transform:rotate(-5deg)}
+.gain{color:#2E7B77}
+.total-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.total-row span{font-weight:700;letter-spacing:.14em;font-size:15px}
+.tag{position:relative;display:inline-flex;align-items:center;background:var(--yellow);color:var(--ink);font-weight:700;font-size:19px;padding:8px 14px 8px 30px;clip-path:polygon(14px 0,100% 0,100% 100%,14px 100%,0 50%);transform:rotate(-6deg);font-variant-numeric:tabular-nums}
+.tag::before{content:"";position:absolute;left:12px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--white)}
+.total{font-weight:700;font-size:clamp(40px,8vw,58px);line-height:1.05;letter-spacing:-.02em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.barcode svg{display:block;width:100%;height:auto}
+.barcode-cap{display:flex;justify-content:space-between;color:var(--text);font-size:12px;font-variant-numeric:tabular-nums;margin-top:4px}
+.r-foot{text-align:center;color:var(--text);font-size:13px;display:flex;flex-direction:column;gap:2px}
+.r-foot b{color:var(--ink);font-weight:500}
+.summary{max-width:560px;margin:36px auto 0;background:var(--white);border-radius:var(--r-md);padding:14px 22px;text-align:center;color:var(--text);font-size:16px}
+.summary b{color:var(--ink)}
+
+/* ---------- share ---------- */
+.share{background:var(--white);border-radius:var(--r-md);padding:28px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center;max-width:900px;margin:0 auto;width:100%}
+@media (max-width:700px){.share{grid-template-columns:1fr;justify-items:start}}
+.preview{display:block;width:290px;max-width:100%;border-radius:16px;background:#0B253B;box-shadow:0 0 0 1px var(--hint)}
+.preview.story{width:230px}
+.share-side{display:flex;flex-direction:column;gap:18px}
+.share-side p{margin:0;color:var(--text);font-size:15px;max-width:44ch}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:var(--white);border:1px solid var(--hint);border-radius:var(--r-sm);padding:4px;gap:4px;max-width:320px}
+.seg button{appearance:none;border:0;background:transparent;color:var(--text);font:inherit;font-weight:500;font-size:14px;padding:10px 8px;border-radius:9px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;font:inherit;font-weight:700;font-size:15px;padding:14px 24px;cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--orange);color:var(--white)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.ghost:hover{background:var(--surface)}
+.socials{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.socials span{color:var(--text);font-size:14px;margin-right:4px}
+.soc{appearance:none;background:var(--surface);border:1px solid var(--hint);color:var(--ink);font:inherit;font-weight:500;font-size:14px;padding:8px 16px;border-radius:999px;cursor:pointer}
+.soc:hover{border-color:var(--ink);background:var(--white)}
+.linkbtn{appearance:none;align-self:flex-start;background:none;border:0;padding:0;font:inherit;font-size:14px;font-weight:500;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.status{min-height:1.5em;font-size:14px;color:var(--ink);font-weight:500}
+
+/* ---------- ICU block ---------- */
+.icu{background:var(--white);border-radius:var(--r-lg);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:28px}
+.icu-head{display:flex;flex-direction:column;gap:12px;max-width:62ch;border-left:4px solid var(--turq);padding-left:18px}
+.icu-head p{margin:0;color:var(--text);font-size:17px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border-radius:var(--r-md);padding:24px;display:flex;flex-direction:column;gap:10px}
+.card .badge{align-self:flex-start;background:var(--turq);color:var(--ink);font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px}
+.card p{margin:0;color:var(--text);font-size:15px;flex:1}
+.card a{font-weight:700;font-size:15px;text-decoration:none;color:var(--ink)}
+.card a:hover{text-decoration:underline}
+.icu-foot{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.icu-foot .note{color:var(--text);font-size:13px;margin:0;max-width:52ch}
+.fine{color:var(--text);font-size:13px;max-width:80ch;margin:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main class="page">
+  <section class="hero" aria-label="Калькулятор">
+    <svg class="deco deco-r" viewBox="0 0 400 640" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(280.0,190.0) rotate(-8.0) scale(9.167) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.34)" stroke-width="0.17" stroke-linecap="round" stroke-linejoin="round"><path d="M7.6 7.4c.8-1.5 2.4-2.4 4.4-2.4 2.4 0 4 1.3 4 3.2 0 2.5-2.7 3.5-5.2 4.8-2.3 1.2-3.6 2.2-3.6 3.9 0 1.7 1.5 2.6 3.5 2.6 1.9 0 3.4-.7 4.4-2.1M5 10.2h14M5 13.8h14"/></g>
+<g transform="translate(320.0,480.0) rotate(9.0) scale(5.000) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.26)" stroke-width="0.28" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><rect x="7.5" y="5.5" width="9" height="3.5" rx="1"/><path d="M8.5 12.5h.01M12 12.5h.01M15.5 12.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h.01M12 18.5h.01M15.5 18.5h.01"/></g>
+<g transform="translate(200.0,380.0) rotate(-12.0) scale(2.667) translate(-12,-12)" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="0.53" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 7.6c-.9-1.4-2.5-2.1-4.1-2.1-2.1 0-3.7 1.1-3.7 2.9 0 4.1 8 2.5 8 6.9 0 1.9-1.7 3.1-4 3.1-1.7 0-3.3-.7-4.3-2.1M11.7 3v18"/></g>
+    </svg>
+    <svg class="deco deco-l" viewBox="0 0 400 640" preserveAspectRatio="xMinYMin meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(90.0,230.0) rotate(10.0) scale(5.000) translate(-12,-12)" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="0.28" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="7.5" r="2.6"/><circle cx="16.5" cy="16.5" r="2.6"/><path d="M18.5 5.5L5.5 18.5"/></g>
+<g transform="translate(190.0,110.0) rotate(0.0) scale(2.667) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.32)" stroke-width="0.53" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 17.5l5.5-5.5 4 3.5 7.5-8M15.5 7.5h5v5"/></g>
+<g transform="translate(100.0,490.0) rotate(-10.0) scale(5.833) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.24)" stroke-width="0.24" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 7.6c-.9-1.4-2.5-2.1-4.1-2.1-2.1 0-3.7 1.1-3.7 2.9 0 4.1 8 2.5 8 6.9 0 1.9-1.7 3.1-4 3.1-1.7 0-3.3-.7-4.3-2.1M11.7 3v18"/></g>
+    </svg>
+    <div class="bar">
+      <a href="https://online.icu/" aria-label="ICU">
+        <svg class="logo" width="102" height="46" viewBox="56 326 899 428" preserveAspectRatio="xMinYMid meet" overflow="visible" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ICU"><path fill="#fff" d="M189.2,713.9h-92.7v-347h92.7v347Z"/><path fill="#fff" d="M590.7,633.1v80.8h-277.4c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-227c0-16.5,6.8-30.6,20.3-42.4,13.5-11.7,29.8-17.6,48.9-17.6h277.4v80.3h-229.9c-6.5,0-12,2-16.6,5.9-4.6,4-7.1,8.8-7.4,14.4v145.2c.4,5.6,2.9,10.4,7.4,14.4,4.6,4,10.1,5.9,16.6,5.9h229.9Z"/><path fill="#fff" d="M914.5,713.9h-208.2c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-287h92.7v245.9c0,5.6,2.3,10.4,6.9,14.4,4.6,4,10.1,5.9,16.6,5.9h113.8c6.5,0,12-2,16.6-5.9,4.6-4,6.9-8.8,6.9-14.4v-245.9h93.2v287c-.4,16.5-7.2,30.7-20.6,42.4-13.4,11.7-29.6,17.6-48.6,17.6Z"/><rect fill="#0057b8" x="664.6" y="468.1" width="38.1" height="54.4"/><rect fill="#ffd700" x="664.6" y="522.6" width="38.1" height="54.4"/></svg>
+      </a>
+      <span class="pill" id="countdown">Чорна п’ятниця</span>
+    </div>
+
+    <h1>Інвестувати чи <mark>витрачати?</mark></h1>
+    <p class="subtitle">Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції</p>
+
+    <div class="sentences">
+      <div class="ask">
+        <p class="question">Я планую витратити на Чорну п’ятницю:</p>
+        <label class="amount-box pulse" for="amount" id="amountBox">
+          <input class="amount" id="amount" type="text" inputmode="numeric" autocomplete="off" value="5 000" aria-label="Сума на покупки, гривень">
+          <span class="cur">₴</span>
+          <svg class="pen" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>
+        </label>
+        <div class="chips" id="amountChips" aria-label="Швидкий вибір суми">
+          <button type="button" class="chip" data-v="2000">2 000 ₴</button>
+          <button type="button" class="chip" data-v="5000">5 000 ₴</button>
+          <button type="button" class="chip" data-v="10000">10 000 ₴</button>
+          <button type="button" class="chip" data-v="25000">25 000 ₴</button>
+        </div>
+      </div>
+      <p class="sentence">
+        А якщо інвестувати цю суму
+        <select class="fill" id="mode" aria-label="Як інвестувати">
+          <option value="once">один раз</option>
+          <option value="yearly" selected>щороку</option>
+        </select>
+        <span class="nw">під <select class="fill" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12" selected>12%</option><option value="13">13%</option><option value="14">14%</option><option value="15">15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select> річних</span>
+        <span class="nw">на <select class="fill" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5">5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10" selected>10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span>, то ви можете отримати:
+      </p>
+    </div>
+  </section>
+
+  <section aria-label="Результат" aria-live="polite">
+    <div class="receipt-zone">
+      <div class="receipt-wrap">
+        <div class="receipt">
+          <div class="r-head">
+            <strong>АЛЬТЕРНАТИВА ЧОРНІЙ П’ЯТНИЦІ</strong>
+            <span id="rDate">Чорна п’ятниця</span>
+          </div>
+          <hr class="dash">
+          <dl class="rows">
+            <div class="row"><dt id="rBuyLabel">Покупки на розпродажі</dt><i class="dots"></i><dd><span class="struck" id="rBuy">5 000 ₴</span></dd></div>
+            <div class="row"><dt>Натомість інвестовано</dt><i class="dots"></i><dd id="rInv">5 000 ₴</dd></div>
+            <div class="row"><dt id="rGainLabel">Дохід за 10 років</dt><i class="dots"></i><dd class="gain" id="rGain">+10 529 ₴</dd></div>
+          </dl>
+          <hr class="dash">
+          <div class="total-row"><span>РАЗОМ</span><span class="tag" id="badge">+211%</span></div>
+          <div class="total" id="total">15 529 ₴</div>
+          <div class="barcode">
+            <div id="barcode" role="img" aria-label="Ріст суми по роках"></div>
+            <div class="barcode-cap"><span id="capFrom">2026</span><span>ріст суми по роках</span><span id="capTo">2036</span></div>
+          </div>
+          <hr class="dash">
+          <div class="r-foot"><b>Дякуємо за спокійні інвестиції!</b><span>Дохід у майбутньому не є гарантованим.</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="summary" id="summary"></p>
+  </section>
+
+  <section class="share" aria-label="Поділитися результатом">
+    <img class="preview" id="preview" alt="Картинка з твоїм чеком для соцмереж">
+    <div class="share-side">
+      <h2>Поділись своїм чеком</h2>
+      <p>Картинка оновлюється разом із розрахунком. Збережи її й опублікуй у сторіз або дописі.</p>
+      <div class="seg" role="group" aria-label="Формат картинки" id="fmtSeg">
+        <button type="button" data-fmt="post" aria-pressed="true">Допис 4:5</button>
+        <button type="button" data-fmt="story" aria-pressed="false">Сторіз 9:16</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="shareBtn">Поділитися картинкою</button>
+        <button type="button" class="btn ghost" id="saveBtn">Зберегти</button>
+      </div>
+      <div class="socials" role="group" aria-label="Поділитися в соцмережі">
+        <span>Або одразу в:</span>
+        <button type="button" class="soc" data-net="instagram">Instagram</button>
+        <button type="button" class="soc" data-net="facebook">Facebook</button>
+        <button type="button" class="soc" data-net="threads">Threads</button>
+      </div>
+      <button type="button" class="linkbtn" id="copyBtn">Скопіювати текст для підпису</button>
+      <span class="status" id="status" role="status"></span>
+    </div>
+  </section>
+
+  <section class="icu" aria-labelledby="icuTitle">
+    <div class="icu-head">
+      <h2 id="icuTitle">Спокійні інвестиції з ICU</h2>
+      <p>Розпродаж закінчиться за вихідні, а гроші можуть працювати роками. Ось три способи почати без зайвих хвилювань.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="badge">ICU Trade</span>
+        <h3>ОВДП у застосунку</h3>
+        <p>Державні облігації онлайн з будь-якого пристрою. Дохід за ОВДП не оподатковується.</p>
+        <a href="https://online.icu/">Детальніше →</a>
+      </article>
+      <article class="card">
+        <span class="badge">Дивідендний фонд</span>
+        <h3>Дивіденди щомісяця</h3>
+        <p>Інвестуй від 100 гривень в український бізнес та отримуй щомісячні дивіденди.</p>
+        <a href="https://divofund.com.ua/">Детальніше →</a>
+      </article>
+      <article class="card">
+        <span class="badge">НПФ Династія</span>
+        <h3>Капітал на пенсію</h3>
+        <p>Відкладаєш зручну суму регулярно, а професійна команда інвестує її в низькоризикові інструменти.</p>
+        <a href="https://dynasty.icu/">Детальніше →</a>
+      </article>
+    </div>
+    <div class="icu-foot">
+      <a class="btn primary" href="https://online.icu/investments/">Стати інвестором ICU</a>
+      <p class="note">Закон зобов’язує, а ми нагадуємо: дохід у майбутньому не є гарантованим.</p>
+    </div>
+  </section>
+
+  <p class="fine">Розрахунок ілюстративний і не є інвестиційною порадою. Дохід не є гарантованим, минулі результати не гарантують майбутньої дохідності. Формула: складний відсоток зі щорічним реінвестуванням доходу, без урахування податків і комісій.</p>
+</main>
+
+<script>
+(function(){
+  const C = {ink:'#0B253B', text:'#586276', hint:'#D0D0D0', g0:'#02182D', g1:'#204E7A', turq:'#74BBB8', orange:'#E25603', yellow:'#FBEB50', red:'#E0352B', gain:'#2E7B77', white:'#FFFFFF'};
+  const CUR = '₴';
+  const FONT = '"e-Ukraine", system-ui, sans-serif';
+  const state = {amount:5000, mode:'yearly', years:10, rate:12, fmt:'post'};
+  const $ = id => document.getElementById(id);
+
+  /* ---------- helpers ---------- */
+  function plural(n, one, few, many){
+    const a = Math.abs(n) % 100, b = a % 10;
+    if (a > 10 && a < 20) return many;
+    if (b > 1 && b < 5) return few;
+    if (b === 1) return one;
+    return many;
+  }
+  const yearsWord = n => plural(n, 'рік', 'роки', 'років');
+  const yearsGen = n => plural(n, 'рік', 'роки', 'років');
+  const fridays = n => plural(n, 'чорну п’ятницю', 'чорні п’ятниці', 'чорних п’ятниць');
+  function num(x, sep){ return Math.round(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep || ' '); }
+  function money(x, sep){ return num(x, sep) + (sep || ' ') + CUR; }
+  function pct(x){ return (Math.round(x * 10) / 10).toString().replace('.', ','); }
+  function badgeText(R){ return '+' + num(Math.round(R.pct), ' ') + '%'; }
+
+  /* ---------- Black Friday: the day after the 4th Thursday of November ---------- */
+  function bfDate(y){
+    const d = new Date(y, 10, 1);
+    const firstThu = 1 + ((4 - d.getDay() + 7) % 7);
+    return new Date(y, 10, firstThu + 22);
+  }
+  const today = new Date(); today.setHours(0,0,0,0);
+  let bf = bfDate(today.getFullYear());
+  if (today > bf) bf = bfDate(today.getFullYear() + 1);
+  const bfYear = bf.getFullYear();
+  const bfStr = String(bf.getDate()).padStart(2, '0') + '.' + String(bf.getMonth() + 1).padStart(2, '0') + '.' + bfYear;
+  const daysLeft = Math.round((bf - today) / 864e5);
+  $('countdown').textContent = daysLeft === 0 ? 'Чорна п’ятниця сьогодні' : 'До Чорної п’ятниці ' + daysLeft + ' ' + plural(daysLeft, 'день', 'дні', 'днів');
+  $('rDate').textContent = bfStr;
+
+  /* ---------- the math ---------- */
+  function compute(s){
+    const r = s.rate / 100;
+    let t = s.amount, c = s.amount;
+    const totals = [t], contrib = [c];
+    for (let y = 1; y <= s.years; y++){
+      t *= (1 + r);
+      if (s.mode === 'yearly' && y < s.years){ t += s.amount; c += s.amount; }
+      totals.push(t); contrib.push(c);
+    }
+    return {totals, contrib, total:t, invested:c, gain:t - c, pct: c > 0 ? (t / c - 1) * 100 : 0};
+  }
+
+  /* ---------- page ---------- */
+  // fields size themselves to a hidden mirror of their text; a ResizeObserver re-runs this
+  // whenever the mirror changes width, including when the web font finishes loading
+  function attachSizer(el, getText, extraEm){
+    const m = document.createElement('span');
+    m.className = 'measure'; m.setAttribute('aria-hidden', 'true');
+    el.after(m);
+    const apply = () => {
+      const t = getText() || '0';
+      if (m.textContent !== t) m.textContent = t;
+      const em = parseFloat(getComputedStyle(el).fontSize) || 16;
+      el.style.width = Math.ceil(m.getBoundingClientRect().width + em * extraEm + (el.classList.contains('bare') ? 1 : 4)) + 'px';
+    };
+    if ('ResizeObserver' in window) new ResizeObserver(apply).observe(m);
+    el._size = apply; apply();
+  }
+  function sizeFill(el){ if (el._size) el._size(); }
+  function setRangeFill(el){ const p = (el.value - el.min) / (el.max - el.min) * 100; el.style.setProperty('--p', p + '%'); }
+
+  function barcodeSVG(R){
+    const n = R.totals.length, W = 400, H = 70, gap = n > 30 ? 2 : 4;
+    const bw = (W - gap * (n - 1)) / n, max = Math.max(...R.totals) || 1;
+    let out = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">';
+    R.totals.forEach((v, i) => {
+      const h = Math.max(6, v / max * H);
+      out += '<rect x="' + (i * (bw + gap)).toFixed(2) + '" y="' + (H - h).toFixed(2) + '" width="' + bw.toFixed(2) + '" height="' + h.toFixed(2) + '" fill="' + (i === n - 1 ? C.turq : C.ink) + '"/>';
+    });
+    return out + '</svg>';
+  }
+
+  function renderPage(R){
+    const s = state, yw = yearsWord(s.years);
+    $('rBuyLabel').textContent = s.mode === 'yearly' && s.years > 1 ? 'Покупки за ' + s.years + ' ' + fridays(s.years) : 'Покупки на розпродажі';
+    $('rBuy').textContent = money(R.invested);
+    $('rInv').textContent = money(R.invested);
+    $('rGainLabel').textContent = 'Дохід за ' + s.years + ' ' + yw + ', ' + pct(s.rate) + '%';
+    $('rGain').textContent = '+' + money(R.gain);
+    $('badge').textContent = badgeText(R);
+    $('total').textContent = money(R.total);
+    $('barcode').innerHTML = barcodeSVG(R);
+    $('capFrom').textContent = bfYear;
+    $('capTo').textContent = bfYear + s.years;
+    $('summary').innerHTML = s.mode === 'yearly'
+      ? 'Якщо щороку на Чорну п’ятницю інвестувати <b>' + money(s.amount) + '</b> замість покупок, за ' + s.years + ' ' + yw + ' під ' + pct(s.rate) + '% можна отримати <b>' + money(R.total) + '</b>.'
+      : 'Якщо замість покупок на Чорну п’ятницю інвестувати <b>' + money(s.amount) + '</b>, через ' + s.years + ' ' + yw + ' під ' + pct(s.rate) + '% можна отримати <b>' + money(R.total) + '</b>.';
+  }
+
+  /* ---------- share card: a receipt drawn on canvas in ICU style ---------- */
+  const cv = document.createElement('canvas');
+  const LOGO_PATHS = [
+    'M189.2,713.9h-92.7v-347h92.7v347Z',
+    'M590.7,633.1v80.8h-277.4c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-227c0-16.5,6.8-30.6,20.3-42.4,13.5-11.7,29.8-17.6,48.9-17.6h277.4v80.3h-229.9c-6.5,0-12,2-16.6,5.9-4.6,4-7.1,8.8-7.4,14.4v145.2c.4,5.6,2.9,10.4,7.4,14.4,4.6,4,10.1,5.9,16.6,5.9h229.9Z',
+    'M914.5,713.9h-208.2c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-287h92.7v245.9c0,5.6,2.3,10.4,6.9,14.4,4.6,4,10.1,5.9,16.6,5.9h113.8c6.5,0,12-2,16.6-5.9,4.6-4,6.9-8.8,6.9-14.4v-245.9h93.2v287c-.4,16.5-7.2,30.7-20.6,42.4-13.4,11.7-29.6,17.6-48.6,17.6Z'
+  ].map(d => new Path2D(d));
+  function drawLogo(c, x, y, h){
+    const k = h / 347;
+    c.save(); c.translate(x, y); c.scale(k, k); c.translate(-96.5, -366.9);
+    c.fillStyle = C.white; LOGO_PATHS.forEach(p => c.fill(p));
+    c.fillStyle = '#0057B8'; c.fillRect(664.6, 468.1, 38.1, 54.4);
+    c.fillStyle = '#FFD700'; c.fillRect(664.6, 522.6, 38.1, 54.4);
+    c.restore();
+  }
+  function rrect(c, x, y, w, h, r){
+    c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
+    c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
+  }
+  function fit(c, text, weight, maxW, maxSize, minSize){
+    let size = maxSize;
+    while (size > (minSize || 24)){
+      c.font = weight + ' ' + size + 'px ' + FONT;
+      if (c.measureText(text).width <= maxW) break;
+      size -= 4;
+    }
+    c.font = weight + ' ' + size + 'px ' + FONT;
+    return size;
+  }
+  function dashLine(c, x1, x2, y){
+    c.save(); c.setLineDash([14, 10]); c.strokeStyle = C.hint; c.lineWidth = 3;
+    c.beginPath(); c.moveTo(x1, y); c.lineTo(x2, y); c.stroke(); c.restore();
+  }
+  function rowLine(c, x1, x2, y, label, value, opts){
+    opts = opts || {};
+    c.font = '400 34px ' + FONT; c.fillStyle = C.text; c.textAlign = 'left';
+    c.fillText(label, x1, y);
+    const lw = c.measureText(label).width;
+    c.font = '700 34px ' + FONT; c.textAlign = 'right'; c.fillStyle = opts.color || C.ink;
+    c.fillText(value, x2, y);
+    const vw = c.measureText(value).width;
+    // dotted leader
+    c.save(); c.setLineDash([3, 9]); c.lineCap = 'round'; c.strokeStyle = C.hint; c.lineWidth = 4;
+    c.beginPath(); c.moveTo(x1 + lw + 16, y - 6); c.lineTo(x2 - vw - 16, y - 6); c.stroke(); c.restore();
+    if (opts.struck){
+      c.strokeStyle = C.orange; c.lineWidth = 6; c.lineCap = 'round';
+      c.beginPath(); c.moveTo(x2 - vw - 6, y - 6); c.lineTo(x2 + 6, y - 18); c.stroke();
+    }
+    c.textAlign = 'left';
+  }
+  function drawTag(c, right, cy, text){
+    c.font = '700 44px ' + FONT;
+    const w = c.measureText(text).width + 86, h = 84, cx = right - w / 2;
+    c.save(); c.translate(cx, cy); c.rotate(-0.1);
+    c.beginPath();
+    c.moveTo(-w / 2, 0); c.lineTo(-w / 2 + 30, -h / 2); c.lineTo(w / 2, -h / 2); c.lineTo(w / 2, h / 2); c.lineTo(-w / 2 + 30, h / 2); c.closePath();
+    c.fillStyle = C.yellow; c.fill();
+    c.beginPath(); c.arc(-w / 2 + 28, 0, 9, 0, Math.PI * 2); c.fillStyle = C.white; c.fill();
+    c.fillStyle = C.ink; c.textBaseline = 'middle'; c.fillText(text, -w / 2 + 54, 3);
+    c.restore(); c.textBaseline = 'alphabetic';
+  }
+
+  function drawCard(R){
+    const s = state, story = s.fmt === 'story';
+    const W = 1080, H = story ? 1920 : 1350, M = 72, yw = yearsWord(s.years);
+    const g = story ? 1.25 : 1;
+    cv.width = W; cv.height = H;
+    const c = cv.getContext('2d');
+    const bg = c.createLinearGradient(0, H, W, 0);
+    bg.addColorStop(0, C.g0); bg.addColorStop(1, C.g1);
+    c.fillStyle = bg; c.fillRect(0, 0, W, H);
+    c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+
+    // story safe zones: nothing in the top 250px or bottom 340px
+    const top = story ? 250 : M;
+    drawLogo(c, M, top, 56);
+
+    // headline with the highlight block
+    let y = top + 56 + 92 * g;
+    c.font = '700 60px ' + FONT; c.fillStyle = C.white;
+    c.fillText('Інвестувати чи', M, y);
+    y += 86;
+    const im = c.measureText('витрачати?'), iw = im.width;
+    const ia = im.actualBoundingBoxAscent || 44, id = im.actualBoundingBoxDescent || 12, ip = 12;
+    rrect(c, M - 4, y - ia - ip, iw + 32, ia + id + ip * 2, 14); c.fillStyle = C.red; c.fill();
+    c.fillStyle = C.white; c.fillText('витрачати?', M + 12, y);
+
+    // receipt paper
+    const rx = M, rw = W - 2 * M, ry = y + 56 * g;
+    const rb = story ? 1600 : H - M;              // bottom edge (zigzag)
+    const tooth = 30, th = 16;
+    c.save();
+    c.shadowColor = 'rgba(0,0,0,.28)'; c.shadowBlur = 40; c.shadowOffsetY = 16;
+    c.beginPath(); c.moveTo(rx, ry); c.lineTo(rx + rw, ry); c.lineTo(rx + rw, rb - th);
+    const teeth = Math.round(rw / tooth), tw = rw / teeth;
+    for (let i = teeth; i > 0; i--){ c.lineTo(rx + (i - 0.5) * tw, rb); c.lineTo(rx + (i - 1) * tw, rb - th); }
+    c.closePath(); c.fillStyle = C.white; c.fill();
+    c.restore();
+
+    const P = 56, x1 = rx + P, x2 = rx + rw - P;
+    let ty = ry + 70 * g;
+    c.textAlign = 'center'; c.fillStyle = C.ink; c.font = '700 30px ' + FONT;
+    c.fillText('АЛЬТЕРНАТИВА ЧОРНІЙ П’ЯТНИЦІ', W / 2, ty);
+    ty += 44; c.fillStyle = C.text; c.font = '400 26px ' + FONT;
+    c.fillText(bfStr, W / 2, ty);
+    c.textAlign = 'left';
+    ty += 40 * g; dashLine(c, x1, x2, ty);
+
+    ty += 70 * g;
+    rowLine(c, x1, x2, ty, s.mode === 'yearly' && s.years > 1 ? 'Покупки за ' + s.years + ' ' + fridays(s.years) : 'Покупки на розпродажі', money(R.invested, ' '), {struck:true, color:C.text});
+    ty += 62 * g;
+    rowLine(c, x1, x2, ty, 'Натомість інвестовано', money(R.invested, ' '));
+    ty += 62 * g;
+    rowLine(c, x1, x2, ty, 'Дохід за ' + s.years + ' ' + yw + ', ' + pct(s.rate) + '%', '+' + money(R.gain, ' '), {color:C.gain});
+    ty += 44 * g; dashLine(c, x1, x2, ty);
+
+    ty += 76 * g;
+    c.fillStyle = C.ink; c.font = '700 32px ' + FONT;
+    c.fillText('Р А З О М', x1, ty);
+    drawTag(c, x2, ty - 14, badgeText(R));
+    const totTxt = money(R.total, ' ');
+    const ts = fit(c, totTxt, '700', x2 - x1, story ? 150 : 132, 56);
+    ty += Math.round(ts * 1.02) + 14;
+    c.fillStyle = C.ink; c.fillText(totTxt, x1 - 4, ty);
+
+    // barcode = growth by year
+    const footY = rb - th - 50 * g;                // last text baseline inside receipt
+    const bTop = ty + 40 * g, bBot = footY - 140 * g;
+    if (bBot - bTop > 40){
+      const n = R.totals.length, gap = n > 30 ? 3 : 6, bw = ((x2 - x1) - gap * (n - 1)) / n, max = Math.max(...R.totals) || 1;
+      R.totals.forEach((v, i) => {
+        const h = Math.max(8, v / max * (bBot - bTop));
+        c.fillStyle = i === n - 1 ? C.turq : C.ink;
+        c.fillRect(x1 + i * (bw + gap), bBot - h, bw, h);
+      });
+      c.fillStyle = C.text; c.font = '400 24px ' + FONT;
+      c.fillText(String(bfYear), x1, bBot + 34);
+      c.textAlign = 'right'; c.fillText(String(bfYear + s.years), x2, bBot + 34); c.textAlign = 'left';
+    }
+
+    c.textAlign = 'center';
+    c.fillStyle = C.ink; c.font = '500 28px ' + FONT;
+    c.fillText('Порахуй свою Чорну п’ятницю', W / 2, footY - 36);
+    c.fillStyle = C.text; c.font = '400 22px ' + FONT;
+    c.fillText('Дохід у майбутньому не є гарантованим.', W / 2, footY);
+    c.textAlign = 'left';
+  }
+
+  let cardTimer = 0;
+  function scheduleCard(R){
+    clearTimeout(cardTimer);
+    cardTimer = setTimeout(() => {
+      drawCard(R);
+      const img = $('preview');
+      img.src = cv.toDataURL('image/png');
+      img.classList.toggle('story', state.fmt === 'story');
+    }, 140);
+  }
+
+  /* ---------- update loop ---------- */
+  let last = null;
+  function update(){
+    const R = compute(state); last = R;
+    renderPage(R); scheduleCard(R); if (typeof markChips === 'function') markChips();
+  }
+
+  /* ---------- controls ---------- */
+  const amountEl = $('amount'), modeEl = $('mode'), rateIn = $('rateIn'), yearsIn = $('yearsIn');
+
+  amountEl.addEventListener('input', () => {
+    const digits = amountEl.value.replace(/\D/g, '').slice(0, 10);
+    state.amount = Math.min(+digits || 0, 1e9);
+    amountEl.value = digits ? num(state.amount, ' ') : '';
+    sizeFill(amountEl); update();
+  });
+  const amountBox = $('amountBox');
+  function stopPulse(){ amountBox.classList.remove('pulse'); }
+  amountEl.addEventListener('focus', stopPulse);
+  function markChips(){ document.querySelectorAll('#amountChips .chip').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.v === state.amount))); }
+  $('amountChips').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    stopPulse(); state.amount = +b.dataset.v; amountEl.value = num(state.amount, ' '); sizeFill(amountEl); update();
+  });
+  amountEl.addEventListener('blur', () => { if (!amountEl.value){ amountEl.value = '0'; sizeFill(amountEl); } });
+
+  modeEl.addEventListener('change', () => { state.mode = modeEl.value; sizeSelect(); update(); });
+  function sizeSelect(){ if (modeEl._size) modeEl._size(); }
+
+  rateIn.addEventListener('change', () => { state.rate = +rateIn.value; sizeFill(rateIn); update(); });
+  yearsIn.addEventListener('change', () => { state.years = +yearsIn.value; sizeFill(yearsIn); update(); });
+
+
+  $('fmtSeg').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    state.fmt = b.dataset.fmt;
+    $('fmtSeg').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    update();
+  });
+
+  attachSizer(amountEl, () => amountEl.value, 0.05);
+  attachSizer(rateIn, () => rateIn.options[rateIn.selectedIndex].text, 1.4);
+  attachSizer(yearsIn, () => yearsIn.options[yearsIn.selectedIndex].text, 1.4);
+  attachSizer(modeEl, () => modeEl.options[modeEl.selectedIndex].text, 1.4);
+  if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { [amountEl, rateIn, yearsIn].forEach(sizeFill); sizeSelect(); });
+
+  /* ---------- save & copy ---------- */
+  let downloads = null;
+  try {
+    if (window.claude && typeof window.claude.use === 'function'){
+      window.claude.use('downloads').then(ns => { downloads = ns; }).catch(() => {});
+    }
+  } catch (e) {}
+
+  const status = $('status');
+  function say(t){ status.textContent = t; clearTimeout(say.t); say.t = setTimeout(() => status.textContent = '', 5000); }
+
+  function shareText(withUrl){
+    const s = state, R = last, yw = yearsWord(s.years);
+    const body = s.mode === 'yearly'
+      ? 'Якщо щороку на Чорну п’ятницю інвестувати ' + money(s.amount, ' ') + ' замість покупок, за ' + s.years + ' ' + yw + ' під ' + pct(s.rate) + '% можна отримати ' + money(R.total, ' ') + '.'
+      : 'Якщо замість покупок на Чорну п’ятницю інвестувати ' + money(s.amount, ' ') + ', через ' + s.years + ' ' + yw + ' під ' + pct(s.rate) + '% можна отримати ' + money(R.total, ' ') + '.';
+    return body + ' Порахуй свою інвестиційну Чорну п’ятницю:' + (withUrl ? ' ' + siteUrl() : '');
+  }
+
+  /* ---------- share & save ---------- */
+  async function cardFile(){
+    clearTimeout(cardTimer); drawCard(last);
+    const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+    if (!blob) return null;
+    const name = 'icu-chek-chorna-pyatnytsia-' + state.fmt + '.png';
+    return { blob, name, file: new File([blob], name, {type:'image/png'}) };
+  }
+  function canShareFiles(f){
+    try { return !!(navigator.canShare && navigator.share && navigator.canShare({files:[f]})); } catch (e) { return false; }
+  }
+  async function download(c){
+    if (downloads){
+      try { await downloads.save({filename: c.name, data: c.blob}); say('Картинку збережено.'); return true; }
+      catch (e) { if (e && e.code === 'declined') return true; }
+    }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(c.blob); a.download = c.name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    return false;
+  }
+  // opens the phone's share sheet with the image only (some apps drop the file when text is attached)
+  async function shareSheet(c){
+    if (!canShareFiles(c.file)) return 'unsupported';
+    try { await navigator.share({files:[c.file]}); return 'shared'; }
+    catch (e) { return e && e.name === 'AbortError' ? 'cancelled' : 'unsupported'; }
+  }
+  function siteUrl(){
+    const can = document.querySelector('link[rel=canonical]');
+    return can ? can.href : location.origin + location.pathname;
+  }
+  function openUrl(u){
+    const a = document.createElement('a');
+    a.href = u; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  $('shareBtn').addEventListener('click', async () => {
+    const c = await cardFile(); if (!c){ say('Не вдалося створити картинку. Спробуй ще раз.'); return; }
+    const r = await shareSheet(c);
+    if (r === 'unsupported'){ await download(c); say('Тут меню «Поділитися» недоступне, тож картинку завантажено. Опублікуй її з галереї.'); }
+  });
+
+  $('saveBtn').addEventListener('click', async () => {
+    const c = await cardFile(); if (!c){ say('Не вдалося створити картинку. Спробуй ще раз.'); return; }
+    const done = await download(c);
+    if (!done) say('Якщо файл не завантажився, утримуй картинку, щоб зберегти її.');
+  });
+
+  document.querySelector('.socials').addEventListener('click', async e => {
+    const b = e.target.closest('.soc'); if (!b) return;
+    const net = b.dataset.net;
+    const c = await cardFile(); if (!c){ say('Не вдалося створити картинку. Спробуй ще раз.'); return; }
+    const names = {instagram:'Instagram', facebook:'Facebook', threads:'Threads'};
+    // phones: the share sheet attaches the image; the person picks the app there
+    if (canShareFiles(c.file)){
+      say('Оберіть ' + names[net] + ' у меню, що відкриється.');
+      const r = await shareSheet(c);
+      if (r !== 'unsupported') return;
+    }
+    // computers and browsers without file sharing
+    if (net === 'instagram'){
+      await download(c);
+      say('Картинку завантажено. Instagram публікує лише з телефона: перешли її собі й додай у сторіз або допис.');
+    } else if (net === 'threads'){
+      openUrl('https://www.threads.com/intent/post?text=' + encodeURIComponent(shareText()) + '&url=' + encodeURIComponent(siteUrl()));
+      say('Відкрили Threads з готовим текстом. Картинку можна додати вручну, вона збережеться кнопкою «Зберегти».');
+    } else {
+      openUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(siteUrl()));
+      say('Відкрили Facebook з посиланням на калькулятор.');
+    }
+  });
+
+  $('copyBtn').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(shareText(true)); say('Текст скопійовано.'); }
+    catch (e) { say('Не вдалося скопіювати. Виділи текст під чеком вручну.'); }
+  });
+
+  /* ---------- fit the heading highlight to the real glyph bounds ---------- */
+  const markEl = document.querySelector('.hero h1 mark');
+  const mctx = document.createElement('canvas').getContext('2d');
+  function fitMark(){
+    if (!markEl) return;
+    const size = parseFloat(getComputedStyle(markEl).fontSize);
+    mctx.font = '700 ' + size + 'px ' + FONT;
+    const m = mctx.measureText(markEl.textContent);
+    if (!m.fontBoundingBoxAscent || !m.actualBoundingBoxAscent) return;
+    const pad = size * 0.1;
+    markEl.style.setProperty('--t', (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent - pad) + 'px');
+    markEl.style.setProperty('--b', (m.fontBoundingBoxDescent - m.actualBoundingBoxDescent - pad) + 'px');
+  }
+  window.addEventListener('resize', fitMark);
+
+  /* ---------- start ---------- */
+  update(); fitMark();
+  const sample = 'Чорна п’ятниця чи інвестиція? КАСОВИЙ ЧЕК РАЗОМ 0123456789 ₴%+·';
+  if (document.fonts && document.fonts.load){
+    Promise.all(['400','500','700'].map(w => document.fonts.load(w + ' 40px "e-Ukraine"', sample)))
+      .catch(() => {}).then(() => { [amountEl, rateIn, yearsIn].forEach(sizeFill); sizeSelect(); fitMark(); scheduleCard(last); });
+  }
+})();
+</script>
+</body>
+</html>
