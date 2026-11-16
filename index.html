@@ -154,7 +154,10 @@ select.fill option{color:var(--ink);background:var(--white)}
 
 /* ---------- giveaway ---------- */
 .giveaway{background:var(--white);border-radius:var(--r-lg);padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;border:2px solid var(--turq)}
-@media (max-width:860px){.giveaway{grid-template-columns:1fr}}
+@media (max-width:860px){.giveaway{grid-template-columns:minmax(0,1fr)}}
+.gw-main,.gw-prizes,.prize{min-width:0}
+.prize-big{overflow-wrap:normal}
+@media (max-width:480px){.giveaway .prize-book{gap:14px}.giveaway .prize-book img{width:64px}.giveaway .prize{padding:18px}.giveaway .prize-book .prize-big{font-size:20px}}
 .gw-main{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
 .gw-badge{background:var(--yellow);color:var(--ink);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:var(--r-sm)}
 .gw-lead{margin:0;color:var(--text);font-size:17px;max-width:46ch}
@@ -166,6 +169,13 @@ select.fill option{color:var(--ink);background:var(--white)}
 .prize-big{font-weight:700;font-size:clamp(30px,3.6vw,42px);line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
 .prize p{margin:0;color:var(--text);font-size:15px}
 .prize a{color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
+.prize-count{align-self:flex-start;background:var(--ink);color:var(--white);font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;margin-bottom:4px}
+.prize-book{flex-direction:row;align-items:center;gap:20px}
+.prize-book img{width:96px;height:auto;flex:none;border-radius:8px;box-shadow:0 8px 18px rgba(11,37,59,.18)}
+.prize-text{display:flex;flex-direction:column;gap:6px;min-width:0}
+.prize-book .prize-big{font-size:clamp(24px,2.6vw,30px)}
+.gw-steps li a{color:var(--ink);font-weight:700}
+.gw-lead b{color:var(--ink)}
 .prize a:hover{text-decoration:underline}
 
 /* ---------- ICU block ---------- */
@@ -262,24 +272,29 @@ select.fill option{color:var(--ink);background:var(--white)}
 
   <section class="giveaway" aria-labelledby="gwTitle">
     <div class="gw-main">
-      <span class="gw-badge">Розіграш</span>
+      <span class="gw-badge">Розіграш · 6 переможців</span>
       <h2 id="gwTitle">Поділись чеком і вигравай</h2>
-      <p class="gw-lead">Серед тих, хто поширить свій чек і відзначить ICU, ми оберемо трьох переможців.</p>
+      <p class="gw-lead">Серед тих, хто поширить свій чек і відзначить ICU, оберемо шістьох переможців. Результати оголосимо <b>4&nbsp;грудня</b>.</p>
       <ol class="gw-steps">
         <li>Порахуй свою інвестиційну Чорну п’ятницю</li>
         <li>Поділись чеком у сторіз або дописі</li>
-        <li>Відзнач ICU</li>
+        <li><span>Відзнач <b>@icukraine</b> в <a href="https://www.instagram.com/icukraine/">Instagram</a>, <a href="https://www.threads.com/@icukraine">Threads</a> або <a href="https://www.facebook.com/pages/ICU/148699395242028">Facebook</a></span></li>
       </ol>
       <a class="btn primary" href="#share">Поділитися чеком</a>
     </div>
     <div class="gw-prizes">
       <div class="prize">
-        <span class="prize-big">+0,25</span>
-        <p>до будь-якого котирування в ICU&nbsp;Trade</p>
+        <span class="prize-count">3 переможці</span>
+        <span class="prize-big">+0,25%</span>
+        <p>до дохідності будь-якого котирування в ICU&nbsp;Trade</p>
       </div>
-      <div class="prize">
-        <span class="prize-big">3 книжки</span>
-        <p>«Мемономіка» від спільноти «Останній Капіталіст» і видавництва «Капітал» <a href="https://kapitalbooks.com.ua/">Про книжку →</a></p>
+      <div class="prize prize-book">
+        <img src="img/memonomika.jpg" width="461" height="700" alt="Обкладинка книжки «Мемономіка»" loading="lazy">
+        <div class="prize-text">
+          <span class="prize-count">3 переможці</span>
+          <span class="prize-big">«Мемономіка»</span>
+          <p>Книжка від спільноти «Останній Капіталіст» і видавництва «Капітал» <a href="https://kapitalbooks.com.ua/">Про книжку →</a></p>
+        </div>
       </div>
     </div>
   </section>
