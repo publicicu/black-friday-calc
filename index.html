@@ -54,20 +54,19 @@ h3{font-size:18px;line-height:1.3}
 .page{max-width:1160px;margin:0 auto;padding:16px 16px 56px;display:flex;flex-direction:column;gap:40px}
 
 /* ---------- hero: the sentence ---------- */
-.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--gradient-main);color:var(--white);border-radius:var(--r-lg);padding:28px clamp(22px,5vw,64px) 150px;display:flex;flex-direction:column;gap:clamp(28px,4vw,44px)}
+.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--gradient-main);color:var(--white);border-radius:var(--r-lg);padding:28px clamp(22px,5vw,64px) clamp(36px,5vw,64px);display:flex;flex-direction:column;gap:clamp(28px,4vw,44px)}
 .hero>*{position:relative;z-index:1;max-width:100%;min-width:0}
 .hero>.deco{position:absolute;z-index:0;top:0;width:min(400px,30%);height:640px;max-height:100%;pointer-events:none}
 .hero>.deco-r{right:0}
-.hero>.deco-l{left:0}
 @media (max-width:760px){.hero>.deco{opacity:.4;width:46%}}
-.hero{text-align:center;align-items:center}
+.hero{text-align:left}
 .bar{align-self:stretch;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .logo{display:block;width:102px;height:46px;overflow:visible}
 .pill{display:inline-flex;align-items:center;background:var(--turq);color:var(--ink);font-weight:500;font-size:13px;padding:7px 14px;border-radius:999px}
-.hero h1{font-size:clamp(34px,6vw,72px);line-height:1.08;letter-spacing:-.01em}
+.hero h1{font-size:clamp(34px,4.6vw,62px);line-height:1.08;letter-spacing:-.01em}
 .hero h1 mark{position:relative;z-index:0;background:none;color:var(--white);padding:0 .22em;white-space:nowrap;--t:.14em;--b:.06em}
 .hero h1 mark::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:var(--t);bottom:var(--b);background:var(--red);border-radius:var(--r-sm)}
-.subtitle{margin:-12px auto 0;font-size:clamp(18px,2.1vw,24px);line-height:1.4;color:rgba(255,255,255,.82);max-width:60ch}
+.subtitle{margin:-12px 0 0;font-size:clamp(18px,2.1vw,24px);line-height:1.4;color:rgba(255,255,255,.82);max-width:60ch}
 .nw{white-space:nowrap}
 .fillbox{display:inline-flex;align-items:baseline;gap:.08em;font-weight:700;background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;padding:0 .24em;margin:0 .06em;line-height:1.3;cursor:text;vertical-align:baseline}
 .fillbox:hover{background:rgba(255,255,255,.16)}
@@ -77,10 +76,10 @@ h3{font-size:18px;line-height:1.3}
 .fill.bare.center{text-align:center}
 .measure{position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:normal;pointer-events:none}
 .sentences{display:flex;flex-direction:column;gap:6px}
-.sentence{font-size:clamp(19px,2.9vw,34px);line-height:1.9;font-weight:400;max-width:30em;margin:0 auto}
-.ask{display:flex;flex-direction:column;align-items:center;gap:18px}
-.question{margin:0;font-size:clamp(19px,2.9vw,34px);line-height:1.3;font-weight:500}
-.amount-box{display:inline-flex;align-items:center;gap:.22em;background:var(--white);color:var(--ink);border-radius:var(--r-md);padding:.12em .42em .12em .5em;font-size:clamp(46px,8vw,88px);font-weight:700;line-height:1.15;cursor:text;box-shadow:0 0 0 6px rgba(116,187,184,.4),0 22px 44px rgba(0,0,0,.28);transition:transform .15s ease,box-shadow .15s ease}
+.sentence{font-size:clamp(19px,2.1vw,27px);line-height:1.9;font-weight:400;max-width:30em;margin:0}
+.ask{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.question{margin:0;font-size:clamp(19px,2.1vw,27px);line-height:1.3;font-weight:500}
+.amount-box{display:inline-flex;align-items:center;gap:.22em;background:var(--white);color:var(--ink);border-radius:var(--r-md);padding:.12em .42em .12em .5em;font-size:clamp(44px,5.6vw,76px);font-weight:700;line-height:1.15;cursor:text;box-shadow:0 0 0 6px rgba(116,187,184,.4),0 22px 44px rgba(0,0,0,.28);transition:transform .15s ease,box-shadow .15s ease}
 .amount-box:hover{transform:translateY(-2px);box-shadow:0 0 0 9px rgba(116,187,184,.55),0 26px 48px rgba(0,0,0,.3)}
 .amount-box:focus-within{box-shadow:0 0 0 9px var(--turq),0 26px 48px rgba(0,0,0,.3)}
 .amount-box.pulse{animation:ring 2.2s ease-in-out infinite}
@@ -88,7 +87,7 @@ h3{font-size:18px;line-height:1.3}
 .amount{font:inherit;color:inherit;background:transparent;border:0;padding:0;margin:0;text-align:center;outline:none;font-variant-numeric:tabular-nums;min-width:1ch}
 .amount-box .cur{color:var(--text)}
 .amount-box .pen{width:.36em;height:.36em;flex:none;margin-left:.08em;stroke:#638D91}
-.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.chips{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:8px}
 .chip{appearance:none;background:transparent;border:1px solid rgba(255,255,255,.35);color:var(--white);font:inherit;font-weight:500;font-size:14px;padding:7px 14px;border-radius:999px;cursor:pointer;font-variant-numeric:tabular-nums}
 .chip:hover{border-color:var(--white)}
 .chip[aria-pressed="true"]{background:var(--turq);border-color:var(--turq);color:var(--ink)}
@@ -99,9 +98,12 @@ select.fill{-webkit-appearance:none;appearance:none;cursor:pointer;padding-right
 select.fill option{color:var(--ink);background:var(--white)}
 
 /* ---------- the receipt ---------- */
-.receipt-zone{display:flex;justify-content:center;margin-top:-150px;position:relative}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,430px);gap:clamp(32px,5vw,72px);align-items:center}
+.hero-main{display:flex;flex-direction:column;gap:clamp(22px,2.8vw,34px);min-width:0}
+.hero-side{display:flex;flex-direction:column;align-items:center;gap:28px;min-width:0}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-side{padding-top:8px}}
 .receipt-wrap{width:min(460px,100%);filter:drop-shadow(0 18px 30px rgba(2,24,45,.22));transform:rotate(-1.2deg)}
-.receipt{background:var(--white);padding:30px 30px 22px;border-radius:6px 6px 0 0;display:flex;flex-direction:column;gap:16px;position:relative}
+.receipt{color:var(--ink);text-align:left;background:var(--white);padding:30px 30px 22px;border-radius:6px 6px 0 0;display:flex;flex-direction:column;gap:16px;position:relative}
 .receipt::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:12px;background:linear-gradient(135deg,var(--white) 50%,transparent 50%) 0 0/18px 12px repeat-x,linear-gradient(225deg,var(--white) 50%,transparent 50%) 0 0/18px 12px repeat-x}
 .r-head{text-align:center;display:flex;flex-direction:column;gap:2px}
 .r-head strong{font-size:15px;letter-spacing:.1em}
@@ -124,8 +126,8 @@ select.fill option{color:var(--ink);background:var(--white)}
 .barcode-cap{display:flex;justify-content:space-between;color:var(--text);font-size:12px;font-variant-numeric:tabular-nums;margin-top:4px}
 .r-foot{text-align:center;color:var(--text);font-size:13px;display:flex;flex-direction:column;gap:2px}
 .r-foot b{color:var(--ink);font-weight:500}
-.summary{max-width:560px;margin:36px auto 0;background:var(--white);border-radius:var(--r-md);padding:14px 22px;text-align:center;color:var(--text);font-size:16px}
-.summary b{color:var(--ink)}
+.summary{max-width:40ch;margin:0;text-align:center;color:rgba(255,255,255,.82);font-size:15px;line-height:1.5}
+.summary b{color:var(--white)}
 
 /* ---------- share ---------- */
 .share{background:var(--white);border-radius:var(--r-md);padding:28px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center;max-width:900px;margin:0 auto;width:100%}
@@ -149,6 +151,22 @@ select.fill option{color:var(--ink);background:var(--white)}
 .soc:hover{border-color:var(--ink);background:var(--white)}
 .linkbtn{appearance:none;align-self:flex-start;background:none;border:0;padding:0;font:inherit;font-size:14px;font-weight:500;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .status{min-height:1.5em;font-size:14px;color:var(--ink);font-weight:500}
+
+/* ---------- giveaway ---------- */
+.giveaway{background:var(--white);border-radius:var(--r-lg);padding:clamp(28px,4vw,48px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center;border:2px solid var(--turq)}
+@media (max-width:860px){.giveaway{grid-template-columns:1fr}}
+.gw-main{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.gw-badge{background:var(--yellow);color:var(--ink);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:var(--r-sm)}
+.gw-lead{margin:0;color:var(--text);font-size:17px;max-width:46ch}
+.gw-steps{margin:4px 0 8px;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+.gw-steps li{counter-increment:s;display:flex;align-items:center;gap:12px;font-weight:500}
+.gw-steps li::before{content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--white);font-weight:700;font-size:14px;display:grid;place-items:center}
+.gw-prizes{display:flex;flex-direction:column;gap:14px}
+.prize{background:var(--surface);border-radius:var(--r-md);padding:22px 24px;display:flex;flex-direction:column;gap:6px}
+.prize-big{font-weight:700;font-size:clamp(30px,3.6vw,42px);line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+.prize p{margin:0;color:var(--text);font-size:15px}
+.prize a{color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
+.prize a:hover{text-decoration:underline}
 
 /* ---------- ICU block ---------- */
 .icu{background:var(--white);border-radius:var(--r-lg);padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:28px}
@@ -175,11 +193,6 @@ select.fill option{color:var(--ink);background:var(--white)}
 <g transform="translate(320.0,480.0) rotate(9.0) scale(5.000) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.26)" stroke-width="0.28" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><rect x="7.5" y="5.5" width="9" height="3.5" rx="1"/><path d="M8.5 12.5h.01M12 12.5h.01M15.5 12.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h.01M12 18.5h.01M15.5 18.5h.01"/></g>
 <g transform="translate(200.0,380.0) rotate(-12.0) scale(2.667) translate(-12,-12)" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="0.53" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 7.6c-.9-1.4-2.5-2.1-4.1-2.1-2.1 0-3.7 1.1-3.7 2.9 0 4.1 8 2.5 8 6.9 0 1.9-1.7 3.1-4 3.1-1.7 0-3.3-.7-4.3-2.1M11.7 3v18"/></g>
     </svg>
-    <svg class="deco deco-l" viewBox="0 0 400 640" preserveAspectRatio="xMinYMin meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-<g transform="translate(90.0,230.0) rotate(10.0) scale(5.000) translate(-12,-12)" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="0.28" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="7.5" r="2.6"/><circle cx="16.5" cy="16.5" r="2.6"/><path d="M18.5 5.5L5.5 18.5"/></g>
-<g transform="translate(190.0,110.0) rotate(0.0) scale(2.667) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.32)" stroke-width="0.53" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 17.5l5.5-5.5 4 3.5 7.5-8M15.5 7.5h5v5"/></g>
-<g transform="translate(100.0,490.0) rotate(-10.0) scale(5.833) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.24)" stroke-width="0.24" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 7.6c-.9-1.4-2.5-2.1-4.1-2.1-2.1 0-3.7 1.1-3.7 2.9 0 4.1 8 2.5 8 6.9 0 1.9-1.7 3.1-4 3.1-1.7 0-3.3-.7-4.3-2.1M11.7 3v18"/></g>
-    </svg>
     <div class="bar">
       <a href="https://online.icu/" aria-label="ICU">
         <svg class="logo" width="102" height="46" viewBox="56 326 899 428" preserveAspectRatio="xMinYMid meet" overflow="visible" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ICU"><path fill="#fff" d="M189.2,713.9h-92.7v-347h92.7v347Z"/><path fill="#fff" d="M590.7,633.1v80.8h-277.4c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-227c0-16.5,6.8-30.6,20.3-42.4,13.5-11.7,29.8-17.6,48.9-17.6h277.4v80.3h-229.9c-6.5,0-12,2-16.6,5.9-4.6,4-7.1,8.8-7.4,14.4v145.2c.4,5.6,2.9,10.4,7.4,14.4,4.6,4,10.1,5.9,16.6,5.9h229.9Z"/><path fill="#fff" d="M914.5,713.9h-208.2c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-287h92.7v245.9c0,5.6,2.3,10.4,6.9,14.4,4.6,4,10.1,5.9,16.6,5.9h113.8c6.5,0,12-2,16.6-5.9,4.6-4,6.9-8.8,6.9-14.4v-245.9h93.2v287c-.4,16.5-7.2,30.7-20.6,42.4-13.4,11.7-29.6,17.6-48.6,17.6Z"/><rect fill="#0057b8" x="664.6" y="468.1" width="38.1" height="54.4"/><rect fill="#ffd700" x="664.6" y="522.6" width="38.1" height="54.4"/></svg>
@@ -187,38 +200,38 @@ select.fill option{color:var(--ink);background:var(--white)}
       <span class="pill" id="countdown">Чорна п’ятниця</span>
     </div>
 
-    <h1>Інвестувати чи <mark>витрачати?</mark></h1>
-    <p class="subtitle">Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції</p>
-
-    <div class="sentences">
-      <div class="ask">
-        <p class="question">Я планую витратити на Чорну п’ятницю:</p>
-        <label class="amount-box pulse" for="amount" id="amountBox">
-          <input class="amount" id="amount" type="text" inputmode="numeric" autocomplete="off" value="5 000" aria-label="Сума на покупки, гривень">
-          <span class="cur">₴</span>
-          <svg class="pen" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>
-        </label>
-        <div class="chips" id="amountChips" aria-label="Швидкий вибір суми">
-          <button type="button" class="chip" data-v="2000">2 000 ₴</button>
-          <button type="button" class="chip" data-v="5000">5 000 ₴</button>
-          <button type="button" class="chip" data-v="10000">10 000 ₴</button>
-          <button type="button" class="chip" data-v="25000">25 000 ₴</button>
+    <div class="hero-grid">
+      <div class="hero-main">
+      <h1>Інвестувати чи <mark>витрачати?</mark></h1>
+      <p class="subtitle">Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції</p>
+  
+      <div class="sentences">
+        <div class="ask">
+          <p class="question">Я планую витратити на Чорну п’ятницю:</p>
+          <label class="amount-box pulse" for="amount" id="amountBox">
+            <input class="amount" id="amount" type="text" inputmode="numeric" autocomplete="off" value="5 000" aria-label="Сума на покупки, гривень">
+            <span class="cur">₴</span>
+            <svg class="pen" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>
+          </label>
+          <div class="chips" id="amountChips" aria-label="Швидкий вибір суми">
+            <button type="button" class="chip" data-v="2000">2 000 ₴</button>
+            <button type="button" class="chip" data-v="5000">5 000 ₴</button>
+            <button type="button" class="chip" data-v="10000">10 000 ₴</button>
+            <button type="button" class="chip" data-v="25000">25 000 ₴</button>
+          </div>
         </div>
+        <p class="sentence">
+          А якщо інвестувати цю суму
+          <select class="fill" id="mode" aria-label="Як інвестувати">
+            <option value="once">один раз</option>
+            <option value="yearly" selected>щороку</option>
+          </select>
+          <span class="nw">під <select class="fill" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12" selected>12%</option><option value="13">13%</option><option value="14">14%</option><option value="15">15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select> річних</span>
+          <span class="nw">на <select class="fill" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5">5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10" selected>10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span>, то ви можете отримати:
+        </p>
       </div>
-      <p class="sentence">
-        А якщо інвестувати цю суму
-        <select class="fill" id="mode" aria-label="Як інвестувати">
-          <option value="once">один раз</option>
-          <option value="yearly" selected>щороку</option>
-        </select>
-        <span class="nw">під <select class="fill" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12" selected>12%</option><option value="13">13%</option><option value="14">14%</option><option value="15">15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select> річних</span>
-        <span class="nw">на <select class="fill" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5">5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10" selected>10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span>, то ви можете отримати:
-      </p>
-    </div>
-  </section>
-
-  <section aria-label="Результат" aria-live="polite">
-    <div class="receipt-zone">
+      </div>
+      <div class="hero-side" aria-live="polite" aria-label="Результат">
       <div class="receipt-wrap">
         <div class="receipt">
           <div class="r-head">
@@ -242,11 +255,36 @@ select.fill option{color:var(--ink);background:var(--white)}
           <div class="r-foot"><b>Дякуємо за спокійні інвестиції!</b><span>Дохід у майбутньому не є гарантованим.</span></div>
         </div>
       </div>
+        <p class="summary" id="summary"></p>
+      </div>
     </div>
-    <p class="summary" id="summary"></p>
   </section>
 
-  <section class="share" aria-label="Поділитися результатом">
+  <section class="giveaway" aria-labelledby="gwTitle">
+    <div class="gw-main">
+      <span class="gw-badge">Розіграш</span>
+      <h2 id="gwTitle">Поділись чеком і вигравай</h2>
+      <p class="gw-lead">Серед тих, хто поширить свій чек і відзначить ICU, ми оберемо трьох переможців.</p>
+      <ol class="gw-steps">
+        <li>Порахуй свою інвестиційну Чорну п’ятницю</li>
+        <li>Поділись чеком у сторіз або дописі</li>
+        <li>Відзнач ICU</li>
+      </ol>
+      <a class="btn primary" href="#share">Поділитися чеком</a>
+    </div>
+    <div class="gw-prizes">
+      <div class="prize">
+        <span class="prize-big">+0,25</span>
+        <p>до будь-якого котирування в ICU&nbsp;Trade</p>
+      </div>
+      <div class="prize">
+        <span class="prize-big">3 книжки</span>
+        <p>«Мемономіка» від спільноти «Останній Капіталіст» і видавництва «Капітал» <a href="https://kapitalbooks.com.ua/">Про книжку →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="share" id="share" aria-label="Поділитися результатом">
     <img class="preview" id="preview" alt="Картинка з твоїм чеком для соцмереж">
     <div class="share-side">
       <h2>Поділись своїм чеком</h2>
