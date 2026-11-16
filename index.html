@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Інвестувати VS витрачати? Калькулятор Чорної п’ятниці від ICU</title>
+<title>Інвестувати чи витрачати? Калькулятор Чорної п’ятниці від ICU</title>
 <meta name="description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції. Порахуй і поділися своїм чеком.">
-<meta property="og:title" content="Інвестувати VS витрачати?">
+<meta property="og:title" content="Інвестувати чи витрачати?">
 <meta property="og:description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://publicicu.github.io/black-friday-calc/">
 <meta property="og:url" content="https://publicicu.github.io/black-friday-calc/">
 <meta property="og:site_name" content="ICU">
 <meta property="og:locale" content="uk_UA">
-<meta property="og:image" content="https://publicicu.github.io/black-friday-calc/og-image-v3.png">
+<meta property="og:image" content="https://publicicu.github.io/black-friday-calc/og-image-v4.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Інвестувати VS витрачати? Чек з прикладом: 5 000 ₴ щороку протягом 10 років під 12% можуть стати 98 273 ₴">
+<meta property="og:image:alt" content="Інвестувати чи витрачати? Чек з прикладом: 5 000 ₴ щороку протягом 10 років під 12% можуть стати 98 273 ₴">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Інвестувати VS витрачати?">
+<meta name="twitter:title" content="Інвестувати чи витрачати?">
 <meta name="twitter:description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції">
-<meta name="twitter:image" content="https://publicicu.github.io/black-friday-calc/og-image-v3.png">
+<meta name="twitter:image" content="https://publicicu.github.io/black-friday-calc/og-image-v4.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0B253B">
@@ -62,14 +62,16 @@ h3{font-size:18px;line-height:1.3}
 .hero{text-align:left}
 .bar{align-self:stretch;margin-bottom:-16px;padding:4px clamp(6px,2vw,24px) 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .logo{display:block;width:102px;height:46px;overflow:visible}
-.pill{display:inline-flex;align-items:center;background:var(--turq);color:var(--ink);font-weight:500;font-size:13px;padding:7px 14px;border-radius:999px}
-.hero h1{font-size:clamp(32px,4vw,52px);line-height:1.3;letter-spacing:-.01em}
-.hero h1 .hl{position:relative;z-index:0;padding:0 .2em;white-space:nowrap;--t:.14em;--b:.06em}
-.hero h1 .hl::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:var(--t);bottom:var(--b);border-radius:var(--r-sm)}
-.hero h1 .good{color:var(--ink)}.hero h1 .good::before{background:var(--turq)}
-.hero h1 .bad{color:var(--white)}.hero h1 .bad::before{background:var(--red)}
-.hero h1 .vs{display:inline-block;margin:0 .14em;font-size:1.12em;font-weight:700;letter-spacing:-.02em;transform:skewX(-12deg);background:linear-gradient(180deg,#FFF6A8 0%,#FBEB50 38%,#E25603 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.5px rgba(2,24,45,.55);filter:drop-shadow(0 3px 0 rgba(2,24,45,.55));vertical-align:-.04em}
-.subtitle{margin:-14px 0 0;font-size:clamp(17px,1.7vw,20px);line-height:1.4;color:rgba(255,255,255,.82);max-width:60ch}
+.pill b{font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.pill{font-size:12px;white-space:nowrap;padding:7px 12px}}
+.pill{display:inline-block;background:var(--turq);color:var(--ink);font-weight:500;font-size:13px;padding:7px 14px;border-radius:999px}
+.page-head{display:flex;flex-direction:column;gap:12px;padding:0 clamp(6px,2vw,24px);margin-top:-8px}
+.page-head h1{font-size:clamp(32px,4.6vw,60px);line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+.page-head h1 .hl{position:relative;z-index:0;padding:0 .2em;white-space:nowrap;--t:.14em;--b:.06em}
+.page-head h1 .hl::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:var(--t);bottom:var(--b);border-radius:var(--r-sm)}
+.page-head h1 .good{color:var(--ink)}.page-head h1 .good::before{background:var(--turq)}
+.page-head h1 .bad{color:var(--white)}.page-head h1 .bad::before{background:var(--red)}
+.subtitle{margin:0;font-size:clamp(17px,1.8vw,22px);line-height:1.4;color:var(--text);max-width:60ch}
 .nw{white-space:nowrap}
 .fillbox{display:inline-flex;align-items:baseline;gap:.08em;font-weight:700;background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;padding:0 .24em;margin:0 .06em;line-height:1.3;cursor:text;vertical-align:baseline}
 .fillbox:hover{background:rgba(255,255,255,.16)}
@@ -215,6 +217,11 @@ select.fill option{color:var(--ink);background:var(--white)}
       <span class="pill" id="countdown">Чорна п’ятниця</span>
   </div>
 
+  <header class="page-head">
+    <h1><span class="hl good">Інвестувати</span> чи <span class="hl bad">витрачати?</span></h1>
+    <p class="subtitle">Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції</p>
+  </header>
+
   <section class="hero" aria-label="Калькулятор">
     <svg class="deco deco-r" viewBox="0 0 400 640" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
 <g transform="translate(280.0,190.0) rotate(-8.0) scale(9.167) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.34)" stroke-width="0.17" stroke-linecap="round" stroke-linejoin="round"><path d="M7.6 7.4c.8-1.5 2.4-2.4 4.4-2.4 2.4 0 4 1.3 4 3.2 0 2.5-2.7 3.5-5.2 4.8-2.3 1.2-3.6 2.2-3.6 3.9 0 1.7 1.5 2.6 3.5 2.6 1.9 0 3.4-.7 4.4-2.1M5 10.2h14M5 13.8h14"/></g>
@@ -224,9 +231,6 @@ select.fill option{color:var(--ink);background:var(--white)}
 
     <div class="hero-grid">
       <div class="hero-main">
-      <h1><span class="nw"><span class="hl good">Інвестувати</span> <span class="vs" aria-label="чи">VS</span></span> <span class="hl bad">витрачати?</span></h1>
-      <p class="subtitle">Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції</p>
-  
       <div class="sentences">
         <div class="ask">
           <p class="question">Я планую витратити на Чорну п’ятницю:</p>
@@ -277,7 +281,6 @@ select.fill option{color:var(--ink);background:var(--white)}
           <div class="r-foot"><b>Дякуємо за спокійні інвестиції!</b><span>Дохід у майбутньому не є гарантованим.</span></div>
         </div>
       </div>
-        <p class="summary" id="summary"></p>
         <button type="button" class="btn primary" data-open-share>Поділитися чеком</button>
       </div>
     </div>
@@ -411,7 +414,24 @@ select.fill option{color:var(--ink);background:var(--white)}
   const bfYear = bf.getFullYear();
   const bfStr = String(bf.getDate()).padStart(2, '0') + '.' + String(bf.getMonth() + 1).padStart(2, '0') + '.' + bfYear;
   const daysLeft = Math.round((bf - today) / 864e5);
-  $('countdown').textContent = daysLeft === 0 ? 'Чорна п’ятниця сьогодні' : 'До Чорної п’ятниці ' + daysLeft + ' ' + plural(daysLeft, 'день', 'дні', 'днів');
+  const cdEl = $('countdown');
+  const pad2 = n => String(n).padStart(2, '0');
+  function tickCountdown(){
+    const now = new Date();
+    let target = bfDate(now.getFullYear());
+    const end = new Date(target); end.setDate(end.getDate() + 1);
+    if (now >= end){ target = bfDate(now.getFullYear() + 1); }
+    if (now >= target && now < end){ cdEl.textContent = 'Чорна п’ятниця вже сьогодні'; return; }
+    let t = Math.max(0, Math.floor((target - now) / 1000));
+    const d = Math.floor(t / 86400); t -= d * 86400;
+    const h = Math.floor(t / 3600); t -= h * 3600;
+    const m = Math.floor(t / 60), sec = t - m * 60;
+    cdEl.innerHTML = window.innerWidth < 420
+      ? 'До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') + ' <b>' + pad2(h) + ':' + pad2(m) + ':' + pad2(sec) + '</b>'
+      : 'До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') +
+        ' <b>' + pad2(h) + '</b>&nbsp;год <b>' + pad2(m) + '</b>&nbsp;хв <b>' + pad2(sec) + '</b>&nbsp;с';
+  }
+  tickCountdown(); setInterval(tickCountdown, 1000);
   $('rDate').textContent = bfStr;
 
   /* ---------- the math ---------- */
@@ -469,9 +489,6 @@ select.fill option{color:var(--ink);background:var(--white)}
     $('barcode').innerHTML = barcodeSVG(R);
     $('capFrom').textContent = bfYear;
     $('capTo').textContent = bfYear + s.years;
-    $('summary').innerHTML = s.mode === 'yearly'
-      ? 'Якщо щороку на Чорну п’ятницю інвестувати <b>' + money(s.amount) + '</b> замість покупок, за ' + s.years + ' ' + yw + ' під ' + pct(s.rate) + '% можна отримати <b>' + money(R.total) + '</b>.'
-      : 'Якщо замість покупок на Чорну п’ятницю інвестувати <b>' + money(s.amount) + '</b>, через ' + s.years + ' ' + yw + ' під ' + pct(s.rate) + '% можна отримати <b>' + money(R.total) + '</b>.';
   }
 
   /* ---------- share card: a receipt drawn on canvas in ICU style ---------- */
@@ -559,16 +576,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     const w1 = c.measureText('Інвестувати').width;
     rrect(c, M - 4, y - ha - hp, w1 + 32, ha + hd + hp * 2, 14); c.fillStyle = C.turq; c.fill();
     c.fillStyle = C.ink; c.fillText('Інвестувати', M + 12, y);
-    // VS, fight-screen style
-    c.save();
-    c.translate(M + w1 + 58, y); c.transform(1, 0, -0.21, 1, 0, 0);
-    c.font = '700 66px ' + FONT;
-    const vg = c.createLinearGradient(0, -50, 0, 4);
-    vg.addColorStop(0, '#FFF6A8'); vg.addColorStop(0.38, C.yellow); vg.addColorStop(1, C.orange);
-    c.shadowColor = 'rgba(2,24,45,.6)'; c.shadowOffsetY = 4;
-    c.fillStyle = vg; c.fillText('VS', 0, 0);
-    c.shadowColor = 'transparent'; c.lineWidth = 2; c.strokeStyle = 'rgba(2,24,45,.55)'; c.strokeText('VS', 0, 0);
-    c.restore();
+    c.fillStyle = C.white; c.fillText('чи', M + w1 + 46, y);
     y += 92;
     c.font = '700 58px ' + FONT;
     const w2 = c.measureText('витрачати?').width;
@@ -803,7 +811,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   });
 
   /* ---------- fit the heading highlight to the real glyph bounds ---------- */
-  const hlEls = document.querySelectorAll('.hero h1 .hl');
+  const hlEls = document.querySelectorAll('.page-head h1 .hl');
   const mctx = document.createElement('canvas').getContext('2d');
   function fitMark(){
     if (!hlEls.length) return;
