@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Інвестувати чи витрачати? Калькулятор Чорної п’ятниці від ICU</title>
+<title>Інвестувати VS витрачати? Калькулятор Чорної п’ятниці від ICU</title>
 <meta name="description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції. Порахуй і поділися своїм чеком.">
-<meta property="og:title" content="Інвестувати чи витрачати?">
+<meta property="og:title" content="Інвестувати VS витрачати?">
 <meta property="og:description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://publicicu.github.io/black-friday-calc/">
 <meta property="og:url" content="https://publicicu.github.io/black-friday-calc/">
 <meta property="og:site_name" content="ICU">
 <meta property="og:locale" content="uk_UA">
-<meta property="og:image" content="https://publicicu.github.io/black-friday-calc/og-image-v2.png">
+<meta property="og:image" content="https://publicicu.github.io/black-friday-calc/og-image-v3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Інвестувати чи витрачати? Чек з прикладом: 5 000 ₴ щороку протягом 10 років під 12% можуть стати 98 273 ₴">
+<meta property="og:image:alt" content="Інвестувати VS витрачати? Чек з прикладом: 5 000 ₴ щороку протягом 10 років під 12% можуть стати 98 273 ₴">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Інвестувати чи витрачати?">
+<meta name="twitter:title" content="Інвестувати VS витрачати?">
 <meta name="twitter:description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції">
-<meta name="twitter:image" content="https://publicicu.github.io/black-friday-calc/og-image-v2.png">
+<meta name="twitter:image" content="https://publicicu.github.io/black-friday-calc/og-image-v3.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0B253B">
@@ -60,13 +60,16 @@ h3{font-size:18px;line-height:1.3}
 .hero>.deco-r{right:0}
 @media (max-width:760px){.hero>.deco{opacity:.4;width:46%}}
 .hero{text-align:left}
-.bar{align-self:stretch;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bar{align-self:stretch;margin-bottom:-16px;padding:4px clamp(6px,2vw,24px) 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .logo{display:block;width:102px;height:46px;overflow:visible}
 .pill{display:inline-flex;align-items:center;background:var(--turq);color:var(--ink);font-weight:500;font-size:13px;padding:7px 14px;border-radius:999px}
-.hero h1{font-size:clamp(34px,4.6vw,62px);line-height:1.08;letter-spacing:-.01em}
-.hero h1 mark{position:relative;z-index:0;background:none;color:var(--white);padding:0 .22em;white-space:nowrap;--t:.14em;--b:.06em}
-.hero h1 mark::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:var(--t);bottom:var(--b);background:var(--red);border-radius:var(--r-sm)}
-.subtitle{margin:-12px 0 0;font-size:clamp(18px,2.1vw,24px);line-height:1.4;color:rgba(255,255,255,.82);max-width:60ch}
+.hero h1{font-size:clamp(32px,4vw,52px);line-height:1.3;letter-spacing:-.01em}
+.hero h1 .hl{position:relative;z-index:0;padding:0 .2em;white-space:nowrap;--t:.14em;--b:.06em}
+.hero h1 .hl::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:var(--t);bottom:var(--b);border-radius:var(--r-sm)}
+.hero h1 .good{color:var(--ink)}.hero h1 .good::before{background:var(--turq)}
+.hero h1 .bad{color:var(--white)}.hero h1 .bad::before{background:var(--red)}
+.hero h1 .vs{display:inline-block;margin:0 .14em;font-size:1.12em;font-weight:700;letter-spacing:-.02em;transform:skewX(-12deg);background:linear-gradient(180deg,#FFF6A8 0%,#FBEB50 38%,#E25603 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.5px rgba(2,24,45,.55);filter:drop-shadow(0 3px 0 rgba(2,24,45,.55));vertical-align:-.04em}
+.subtitle{margin:-14px 0 0;font-size:clamp(17px,1.7vw,20px);line-height:1.4;color:rgba(255,255,255,.82);max-width:60ch}
 .nw{white-space:nowrap}
 .fillbox{display:inline-flex;align-items:baseline;gap:.08em;font-weight:700;background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;padding:0 .24em;margin:0 .06em;line-height:1.3;cursor:text;vertical-align:baseline}
 .fillbox:hover{background:rgba(255,255,255,.16)}
@@ -76,10 +79,10 @@ h3{font-size:18px;line-height:1.3}
 .fill.bare.center{text-align:center}
 .measure{position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:normal;pointer-events:none}
 .sentences{display:flex;flex-direction:column;gap:6px}
-.sentence{font-size:clamp(19px,2.1vw,27px);line-height:1.9;font-weight:400;max-width:30em;margin:0}
+.sentence{font-size:clamp(18px,1.8vw,22px);line-height:2;font-weight:400;max-width:30em;margin:0}
 .ask{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
-.question{margin:0;font-size:clamp(19px,2.1vw,27px);line-height:1.3;font-weight:500}
-.amount-box{display:inline-flex;align-items:center;gap:.22em;background:var(--white);color:var(--ink);border-radius:var(--r-md);padding:.12em .42em .12em .5em;font-size:clamp(44px,5.6vw,76px);font-weight:700;line-height:1.15;cursor:text;box-shadow:0 0 0 6px rgba(116,187,184,.4),0 22px 44px rgba(0,0,0,.28);transition:transform .15s ease,box-shadow .15s ease}
+.question{margin:0;font-size:clamp(18px,1.8vw,22px);line-height:1.3;font-weight:500}
+.amount-box{display:inline-flex;align-items:center;gap:.22em;background:var(--white);color:var(--ink);border-radius:var(--r-md);padding:.12em .42em .12em .5em;font-size:clamp(42px,4.8vw,62px);font-weight:700;line-height:1.15;cursor:text;box-shadow:0 0 0 6px rgba(116,187,184,.4),0 22px 44px rgba(0,0,0,.28);transition:transform .15s ease,box-shadow .15s ease}
 .amount-box:hover{transform:translateY(-2px);box-shadow:0 0 0 9px rgba(116,187,184,.55),0 26px 48px rgba(0,0,0,.3)}
 .amount-box:focus-within{box-shadow:0 0 0 9px var(--turq),0 26px 48px rgba(0,0,0,.3)}
 .amount-box.pulse{animation:ring 2.2s ease-in-out infinite}
@@ -132,6 +135,14 @@ select.fill option{color:var(--ink);background:var(--white)}
 /* ---------- share ---------- */
 .share{background:var(--white);border-radius:var(--r-md);padding:28px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:center;max-width:900px;margin:0 auto;width:100%}
 @media (max-width:700px){.share{grid-template-columns:1fr;justify-items:start}}
+.share-modal{border:0;padding:0;margin:auto;width:min(880px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;border-radius:var(--r-md);background:var(--white);color:var(--ink);box-shadow:0 30px 80px rgba(2,24,45,.45)}
+.share-modal::backdrop{background:rgba(2,24,45,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.share-modal[open]{animation:pop .18s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.share-modal .share{max-width:none;margin:0;border-radius:0;padding:clamp(22px,4vw,36px);padding-right:clamp(22px,4vw,56px)}
+.modal-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.modal-close:hover{background:var(--hint)}
+@media (max-width:700px){.share-modal .preview{width:min(240px,70vw)}.share-modal .preview.story{width:min(190px,55vw)}}
 .preview{display:block;width:290px;max-width:100%;border-radius:16px;background:#0B253B;box-shadow:0 0 0 1px var(--hint)}
 .preview.story{width:230px}
 .share-side{display:flex;flex-direction:column;gap:18px}
@@ -197,22 +208,23 @@ select.fill option{color:var(--ink);background:var(--white)}
 </head>
 <body>
 <main class="page">
+  <div class="bar">
+      <a href="https://online.icu/" aria-label="ICU">
+        <svg class="logo" width="102" height="46" viewBox="56 326 899 428" preserveAspectRatio="xMinYMid meet" overflow="visible" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ICU"><path fill="#00263d" d="M189.2,713.9h-92.7v-347h92.7v347Z"/><path fill="#00263d" d="M590.7,633.1v80.8h-277.4c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-227c0-16.5,6.8-30.6,20.3-42.4,13.5-11.7,29.8-17.6,48.9-17.6h277.4v80.3h-229.9c-6.5,0-12,2-16.6,5.9-4.6,4-7.1,8.8-7.4,14.4v145.2c.4,5.6,2.9,10.4,7.4,14.4,4.6,4,10.1,5.9,16.6,5.9h229.9Z"/><path fill="#00263d" d="M914.5,713.9h-208.2c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-287h92.7v245.9c0,5.6,2.3,10.4,6.9,14.4,4.6,4,10.1,5.9,16.6,5.9h113.8c6.5,0,12-2,16.6-5.9,4.6-4,6.9-8.8,6.9-14.4v-245.9h93.2v287c-.4,16.5-7.2,30.7-20.6,42.4-13.4,11.7-29.6,17.6-48.6,17.6Z"/><rect fill="#0057b8" x="664.6" y="468.1" width="38.1" height="54.4"/><rect fill="#ffd700" x="664.6" y="522.6" width="38.1" height="54.4"/></svg>
+      </a>
+      <span class="pill" id="countdown">Чорна п’ятниця</span>
+  </div>
+
   <section class="hero" aria-label="Калькулятор">
     <svg class="deco deco-r" viewBox="0 0 400 640" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
 <g transform="translate(280.0,190.0) rotate(-8.0) scale(9.167) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.34)" stroke-width="0.17" stroke-linecap="round" stroke-linejoin="round"><path d="M7.6 7.4c.8-1.5 2.4-2.4 4.4-2.4 2.4 0 4 1.3 4 3.2 0 2.5-2.7 3.5-5.2 4.8-2.3 1.2-3.6 2.2-3.6 3.9 0 1.7 1.5 2.6 3.5 2.6 1.9 0 3.4-.7 4.4-2.1M5 10.2h14M5 13.8h14"/></g>
 <g transform="translate(320.0,480.0) rotate(9.0) scale(5.000) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.26)" stroke-width="0.28" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><rect x="7.5" y="5.5" width="9" height="3.5" rx="1"/><path d="M8.5 12.5h.01M12 12.5h.01M15.5 12.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h.01M12 18.5h.01M15.5 18.5h.01"/></g>
 <g transform="translate(200.0,380.0) rotate(-12.0) scale(2.667) translate(-12,-12)" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="0.53" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 7.6c-.9-1.4-2.5-2.1-4.1-2.1-2.1 0-3.7 1.1-3.7 2.9 0 4.1 8 2.5 8 6.9 0 1.9-1.7 3.1-4 3.1-1.7 0-3.3-.7-4.3-2.1M11.7 3v18"/></g>
     </svg>
-    <div class="bar">
-      <a href="https://online.icu/" aria-label="ICU">
-        <svg class="logo" width="102" height="46" viewBox="56 326 899 428" preserveAspectRatio="xMinYMid meet" overflow="visible" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ICU"><path fill="#fff" d="M189.2,713.9h-92.7v-347h92.7v347Z"/><path fill="#fff" d="M590.7,633.1v80.8h-277.4c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-227c0-16.5,6.8-30.6,20.3-42.4,13.5-11.7,29.8-17.6,48.9-17.6h277.4v80.3h-229.9c-6.5,0-12,2-16.6,5.9-4.6,4-7.1,8.8-7.4,14.4v145.2c.4,5.6,2.9,10.4,7.4,14.4,4.6,4,10.1,5.9,16.6,5.9h229.9Z"/><path fill="#fff" d="M914.5,713.9h-208.2c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-287h92.7v245.9c0,5.6,2.3,10.4,6.9,14.4,4.6,4,10.1,5.9,16.6,5.9h113.8c6.5,0,12-2,16.6-5.9,4.6-4,6.9-8.8,6.9-14.4v-245.9h93.2v287c-.4,16.5-7.2,30.7-20.6,42.4-13.4,11.7-29.6,17.6-48.6,17.6Z"/><rect fill="#0057b8" x="664.6" y="468.1" width="38.1" height="54.4"/><rect fill="#ffd700" x="664.6" y="522.6" width="38.1" height="54.4"/></svg>
-      </a>
-      <span class="pill" id="countdown">Чорна п’ятниця</span>
-    </div>
 
     <div class="hero-grid">
       <div class="hero-main">
-      <h1>Інвестувати чи <mark>витрачати?</mark></h1>
+      <h1><span class="nw"><span class="hl good">Інвестувати</span> <span class="vs" aria-label="чи">VS</span></span> <span class="hl bad">витрачати?</span></h1>
       <p class="subtitle">Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції</p>
   
       <div class="sentences">
@@ -266,6 +278,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         </div>
       </div>
         <p class="summary" id="summary"></p>
+        <button type="button" class="btn primary" data-open-share>Поділитися чеком</button>
       </div>
     </div>
   </section>
@@ -280,7 +293,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         <li>Поділись чеком у сторіз або дописі</li>
         <li><span>Відзнач <b>@icukraine</b> в <a href="https://www.instagram.com/icukraine/">Instagram</a>, <a href="https://www.threads.com/@icukraine">Threads</a> або <a href="https://www.facebook.com/pages/ICU/148699395242028">Facebook</a></span></li>
       </ol>
-      <a class="btn primary" href="#share">Поділитися чеком</a>
+      <button type="button" class="btn primary" data-open-share>Поділитися чеком</button>
     </div>
     <div class="gw-prizes">
       <div class="prize">
@@ -299,29 +312,34 @@ select.fill option{color:var(--ink);background:var(--white)}
     </div>
   </section>
 
-  <section class="share" id="share" aria-label="Поділитися результатом">
-    <img class="preview" id="preview" alt="Картинка з твоїм чеком для соцмереж">
-    <div class="share-side">
-      <h2>Поділись своїм чеком</h2>
-      <p>Картинка оновлюється разом із розрахунком. Збережи її й опублікуй у сторіз або дописі.</p>
-      <div class="seg" role="group" aria-label="Формат картинки" id="fmtSeg">
-        <button type="button" data-fmt="post" aria-pressed="true">Допис 4:5</button>
-        <button type="button" data-fmt="story" aria-pressed="false">Сторіз 9:16</button>
-      </div>
-      <div class="actions">
-        <button type="button" class="btn primary" id="shareBtn">Поділитися картинкою</button>
-        <button type="button" class="btn ghost" id="saveBtn">Зберегти</button>
-      </div>
-      <div class="socials" role="group" aria-label="Поділитися в соцмережі">
-        <span>Або одразу в:</span>
-        <button type="button" class="soc" data-net="instagram">Instagram</button>
-        <button type="button" class="soc" data-net="facebook">Facebook</button>
-        <button type="button" class="soc" data-net="threads">Threads</button>
-      </div>
-      <button type="button" class="linkbtn" id="copyBtn">Скопіювати текст для підпису</button>
-      <span class="status" id="status" role="status"></span>
+  <dialog class="share-modal" id="shareModal" aria-labelledby="shareTitle">
+    <div class="share">
+      <img class="preview" id="preview" alt="Картинка з твоїм чеком для соцмереж">
+      <div class="share-side">
+        <h2 id="shareTitle">Поділись своїм чеком</h2>
+        <p>Картинка оновлюється разом із розрахунком. Збережи її й опублікуй у сторіз або дописі.</p>
+        <div class="seg" role="group" aria-label="Формат картинки" id="fmtSeg">
+          <button type="button" data-fmt="post" aria-pressed="true">Допис 4:5</button>
+          <button type="button" data-fmt="story" aria-pressed="false">Сторіз 9:16</button>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn primary" id="shareBtn">Поділитися картинкою</button>
+          <button type="button" class="btn ghost" id="saveBtn">Зберегти</button>
+        </div>
+        <div class="socials" role="group" aria-label="Поділитися в соцмережі">
+          <span>Або одразу в:</span>
+          <button type="button" class="soc" data-net="instagram">Instagram</button>
+          <button type="button" class="soc" data-net="facebook">Facebook</button>
+          <button type="button" class="soc" data-net="threads">Threads</button>
+        </div>
+        <button type="button" class="linkbtn" id="copyBtn">Скопіювати текст для підпису</button>
+        <span class="status" id="status" role="status"></span>
     </div>
-  </section>
+    </div>
+    <button type="button" class="modal-close" id="shareClose" aria-label="Закрити">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </dialog>
 
   <section class="icu" aria-labelledby="icuTitle">
     <div class="icu-head">
@@ -535,12 +553,26 @@ select.fill option{color:var(--ink);background:var(--white)}
 
     // headline with the highlight block
     let y = top + 56 + 92 * g;
-    c.font = '700 60px ' + FONT; c.fillStyle = C.white;
-    c.fillText('Інвестувати чи', M, y);
-    y += 86;
-    const im = c.measureText('витрачати?'), iw = im.width;
-    const ia = im.actualBoundingBoxAscent || 44, id = im.actualBoundingBoxDescent || 12, ip = 12;
-    rrect(c, M - 4, y - ia - ip, iw + 32, ia + id + ip * 2, 14); c.fillStyle = C.red; c.fill();
+    c.font = '700 58px ' + FONT;
+    const hm = c.measureText('Інвестувати витрачати?');
+    const ha = hm.actualBoundingBoxAscent || 42, hd = hm.actualBoundingBoxDescent || 12, hp = 12;
+    const w1 = c.measureText('Інвестувати').width;
+    rrect(c, M - 4, y - ha - hp, w1 + 32, ha + hd + hp * 2, 14); c.fillStyle = C.turq; c.fill();
+    c.fillStyle = C.ink; c.fillText('Інвестувати', M + 12, y);
+    // VS, fight-screen style
+    c.save();
+    c.translate(M + w1 + 58, y); c.transform(1, 0, -0.21, 1, 0, 0);
+    c.font = '700 66px ' + FONT;
+    const vg = c.createLinearGradient(0, -50, 0, 4);
+    vg.addColorStop(0, '#FFF6A8'); vg.addColorStop(0.38, C.yellow); vg.addColorStop(1, C.orange);
+    c.shadowColor = 'rgba(2,24,45,.6)'; c.shadowOffsetY = 4;
+    c.fillStyle = vg; c.fillText('VS', 0, 0);
+    c.shadowColor = 'transparent'; c.lineWidth = 2; c.strokeStyle = 'rgba(2,24,45,.55)'; c.strokeText('VS', 0, 0);
+    c.restore();
+    y += 92;
+    c.font = '700 58px ' + FONT;
+    const w2 = c.measureText('витрачати?').width;
+    rrect(c, M - 4, y - ha - hp, w2 + 32, ha + hd + hp * 2, 14); c.fillStyle = C.red; c.fill();
     c.fillStyle = C.white; c.fillText('витрачати?', M + 12, y);
 
     // receipt paper
@@ -680,6 +712,19 @@ select.fill option{color:var(--ink);background:var(--white)}
     return body + ' Порахуй свою інвестиційну Чорну п’ятницю:' + (withUrl ? ' ' + siteUrl() : '');
   }
 
+  /* ---------- share popup ---------- */
+  const modal = $('shareModal');
+  function openShare(){
+    scheduleCard(last);
+    if (modal.showModal) modal.showModal(); else modal.setAttribute('open', '');
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function closeShare(){ if (modal.close) modal.close(); else modal.removeAttribute('open'); }
+  modal.addEventListener('close', () => { document.documentElement.style.overflow = ''; });
+  modal.addEventListener('click', e => { if (e.target === modal) closeShare(); });   // click on the dimmed backdrop
+  $('shareClose').addEventListener('click', closeShare);
+  document.querySelectorAll('[data-open-share]').forEach(b => b.addEventListener('click', openShare));
+
   /* ---------- share & save ---------- */
   async function cardFile(){
     clearTimeout(cardTimer); drawCard(last);
@@ -758,17 +803,20 @@ select.fill option{color:var(--ink);background:var(--white)}
   });
 
   /* ---------- fit the heading highlight to the real glyph bounds ---------- */
-  const markEl = document.querySelector('.hero h1 mark');
+  const hlEls = document.querySelectorAll('.hero h1 .hl');
   const mctx = document.createElement('canvas').getContext('2d');
   function fitMark(){
-    if (!markEl) return;
-    const size = parseFloat(getComputedStyle(markEl).fontSize);
+    if (!hlEls.length) return;
+    const size = parseFloat(getComputedStyle(hlEls[0]).fontSize);
     mctx.font = '700 ' + size + 'px ' + FONT;
-    const m = mctx.measureText(markEl.textContent);
+    // measure both words together so the two blocks share one height
+    const m = mctx.measureText(Array.from(hlEls, e => e.textContent).join(' '));
     if (!m.fontBoundingBoxAscent || !m.actualBoundingBoxAscent) return;
     const pad = size * 0.1;
-    markEl.style.setProperty('--t', (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent - pad) + 'px');
-    markEl.style.setProperty('--b', (m.fontBoundingBoxDescent - m.actualBoundingBoxDescent - pad) + 'px');
+    hlEls.forEach(e => {
+      e.style.setProperty('--t', (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent - pad) + 'px');
+      e.style.setProperty('--b', (m.fontBoundingBoxDescent - m.actualBoundingBoxDescent - pad) + 'px');
+    });
   }
   window.addEventListener('resize', fitMark);
 
