@@ -296,8 +296,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         <div class="receipt-wrap spend">
           <div class="receipt">
             <div class="r-head">
-              <strong>ЧЕК · ЧОРНА П’ЯТНИЦЯ</strong>
-              <span id="sDate">Чорна п’ятниця</span>
+              <strong>ЧОРНА П’ЯТНИЦЯ</strong>
             </div>
             <hr class="dash">
             <dl class="rows" id="sItems"></dl>
@@ -311,7 +310,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         </div>
       </div>
       <div class="duel-col big">
-        <span class="duel-tag good">Інвестувати</span>
+        <span class="duel-tag good">Інвестувати в ОВДП</span>
           <p class="sentence duel-sentence">
             <select class="fill" id="mode" aria-label="Як інвестувати">
                   <option value="once">один раз</option>
@@ -323,8 +322,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         <div class="receipt-wrap">
           <div class="receipt">
             <div class="r-head">
-              <strong>АЛЬТЕРНАТИВА ЧОРНІЙ П’ЯТНИЦІ</strong>
-              <span id="rDate">Чорна п’ятниця</span>
+              <strong>ДЕРЖАВНІ ОБЛІГАЦІЇ</strong>
             </div>
             <hr class="dash">
             <dl class="rows">
@@ -339,7 +337,7 @@ select.fill option{color:var(--ink);background:var(--white)}
               <div class="barcode-cap"><span id="capFrom">2026</span><span>ріст суми по роках</span><span id="capTo">2036</span></div>
             </div>
             <hr class="dash">
-            <div class="r-foot"><span>Дохід у майбутньому не є гарантованим.</span></div>
+            <div class="r-foot"><span>Приблизні розрахунки</span></div>
           </div>
         </div>
       </div>
@@ -351,7 +349,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   <section class="giveaway" aria-labelledby="gwTitle">
     <div class="gw-main">
       <span class="gw-badge">Розіграш · 6 переможців</span>
-      <h2 id="gwTitle">Поділись чеком і вигравай</h2>
+      <h2 id="gwTitle">Поділися чеком та отримуй корисні інвестиційні призи</h2>
       <p class="gw-lead">Серед тих, хто поширить свій чек і затегає ICU, оберемо шістьох переможців. Результати оголосимо <b>4&nbsp;грудня</b>.</p>
       <ol class="gw-steps">
         <li>Порахуй свою інвестиційну Чорну п’ятницю</li>
@@ -494,8 +492,6 @@ select.fill option{color:var(--ink);background:var(--white)}
         ' <b>' + pad2(h) + '</b>&nbsp;год <b>' + pad2(m) + '</b>&nbsp;хв <b>' + pad2(sec) + '</b>&nbsp;с';
   }
   tickCountdown(); setInterval(tickCountdown, 1000);
-  $('rDate').textContent = bfStr;
-  $('sDate').textContent = bfStr;
 
   /* ---------- the math ---------- */
   function compute(s){
@@ -705,9 +701,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     const P = 56, x1 = rx + P, x2 = rx + rw - P;
     let ty = ry + 70 * g;
     c.textAlign = 'center'; c.fillStyle = C.ink; c.font = '700 30px ' + FONT;
-    c.fillText('АЛЬТЕРНАТИВА ЧОРНІЙ П’ЯТНИЦІ', W / 2, ty);
-    ty += 44; c.fillStyle = C.text; c.font = '400 26px ' + FONT;
-    c.fillText(bfStr, W / 2, ty);
+    c.fillText('ДЕРЖАВНІ ОБЛІГАЦІЇ', W / 2, ty);
     c.textAlign = 'left';
     ty += 40 * g; dashLine(c, x1, x2, ty);
 
@@ -747,7 +741,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     c.fillStyle = C.ink; c.font = '500 28px ' + FONT;
     c.fillText('Порахуй свою Чорну п’ятницю', W / 2, footY - 36);
     c.fillStyle = C.text; c.font = '400 22px ' + FONT;
-    c.fillText('Дохід у майбутньому не є гарантованим.', W / 2, footY);
+    c.fillText('Приблизні розрахунки', W / 2, footY);
     c.textAlign = 'left';
   }
 
