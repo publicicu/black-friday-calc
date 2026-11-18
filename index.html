@@ -369,7 +369,6 @@ select.fill option{color:var(--ink);background:var(--white)}
 #shareCta{background:var(--yellow);color:var(--ink);font-size:clamp(17px,1.7vw,20px);padding:20px 38px;animation:glow 2.2s ease-out infinite;transition:transform .15s,background .15s}
 #shareCta:hover{filter:none;background:#FFF28A;transform:translateY(-2px)}
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(251,235,80,.6)}70%,100%{box-shadow:0 0 0 20px rgba(251,235,80,0)}}
-.contest-prizes{font-size:14px;line-height:1.45;color:rgba(255,255,255,.82);max-width:34em}
 .again{appearance:none;background:none;border:0;font:inherit;font-size:15px;font-weight:500;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px 8px}
 .again:hover{color:var(--white)}
 .icu[hidden]{display:none}
@@ -384,6 +383,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   .page[data-stage="intro"] .hero>.fine{position:static}
   .page[data-stage="choose"] .duel:not([data-chosen]){gap:20px}
   .hero-cta .btn-big{width:100%}
+  #shareCta{font-size:17px;padding-left:14px;padding-right:14px;white-space:nowrap}
   .duel[data-chosen]{grid-template-columns:minmax(0,380px)}
   .invest-stack.locked-stack .duel-sentence{white-space:nowrap;font-size:15px!important;line-height:1.9!important;padding:2px 12px}
 }
@@ -490,8 +490,7 @@ select.fill option{color:var(--ink);background:var(--white)}
       <button type="button" class="btn primary btn-big" id="tryInvest" hidden>А якщо інвестувати? <span aria-hidden="true">→</span></button>
       <div class="contest" id="contest" hidden>
         <span class="contest-kicker"><span aria-hidden="true">🎁</span> Розіграш · 9 переможців</span>
-        <button type="button" class="btn primary btn-big" id="shareCta" data-open-share>Поділитися чеком і виграти</button>
-        <span class="contest-prizes">+0,25% дохідності в ICU Trade · книга «Мемономіка» · Power bank</span>
+        <button type="button" class="btn primary btn-big" id="shareCta" data-open-share>Поділися чеком і виграй приз</button>
       </div>
       <button type="button" class="again" id="again" hidden>Обрати ще раз</button>
     </div>
