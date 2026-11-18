@@ -384,6 +384,14 @@ select.fill option{color:var(--ink);background:var(--white)}
 .duel[data-chosen="invest"]{grid-template-columns:minmax(0,480px)}
 .duel[data-chosen]{animation:rise2 .5s cubic-bezier(.2,.8,.2,1) both}
 @keyframes rise2{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.contest{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.contest[hidden]{display:none}
+.contest-kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+.contest-kicker span{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;letter-spacing:0}
+#shareCta{background:var(--yellow);color:var(--ink);font-size:clamp(17px,1.7vw,20px);padding:20px 38px;animation:glow 2.2s ease-out infinite;transition:transform .15s,background .15s}
+#shareCta:hover{filter:none;background:#FFF28A;transform:translateY(-2px)}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(251,235,80,.6)}70%,100%{box-shadow:0 0 0 20px rgba(251,235,80,0)}}
+.contest-prizes{font-size:14px;line-height:1.45;color:rgba(255,255,255,.82);max-width:34em}
 .again{appearance:none;background:none;border:0;font:inherit;font-size:15px;font-weight:500;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px 8px}
 .again:hover{color:var(--white)}
 .icu[hidden]{display:none}
@@ -401,7 +409,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   .duel-col:first-child .chosen-tag{grid-area:tl;justify-self:center}
   .duel[data-chosen="invest"]{grid-template-columns:minmax(0,340px);grid-template-areas:"rr"}
 }
-@media (prefers-reduced-motion:reduce){.receipt-wrap.locked .pick-btn,.page[data-stage="choose"] .duel,.duel[data-chosen],.icu{animation:none}}
+@media (prefers-reduced-motion:reduce){.receipt-wrap.locked .pick-btn,.page[data-stage="choose"] .duel,.duel[data-chosen],.icu,#shareCta{animation:none}}
 </style>
 </head>
 <body>
@@ -500,7 +508,11 @@ select.fill option{color:var(--ink);background:var(--white)}
     <div class="hero-cta" id="heroCta">
       <p class="choose-hint" id="hint" hidden></p>
       <button type="button" class="btn primary btn-big" id="tryInvest" hidden>А якщо інвестувати? <span aria-hidden="true">→</span></button>
-      <button type="button" class="btn primary btn-big" id="shareCta" data-open-share hidden>Поділитися чеком і взяти участь у розіграші</button>
+      <div class="contest" id="contest" hidden>
+        <span class="contest-kicker"><span aria-hidden="true">🎁</span> Розіграш · 9 переможців</span>
+        <button type="button" class="btn primary btn-big" id="shareCta" data-open-share>Поділитися чеком і виграти</button>
+        <span class="contest-prizes">+0,25% дохідності в ICU Trade · книга «Мемономіка» · Power bank</span>
+      </div>
       <button type="button" class="again" id="again" hidden>Обрати ще раз</button>
     </div>
     <p class="fine">Розрахунок ілюстративний і не є інвестиційною порадою. Формула: складний відсоток зі щорічним реінвестуванням доходу, без урахування податків і комісій.</p>
@@ -1127,7 +1139,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     if (chosen) duel.dataset.chosen = chosen; else delete duel.dataset.chosen;
     $('stackInvest').classList.toggle('locked-stack', chosen !== 'invest' || hold === 'invest');
     $('tryInvest').hidden = chosen !== 'spend';
-    $('shareCta').hidden = chosen !== 'invest';
+    $('contest').hidden = chosen !== 'invest';
     $('again').hidden = chosen !== 'invest';
     $('hint').hidden = chosen !== 'spend';
     $('hint').textContent = 'Ось і все: розпродаж закінчився, а разом із ним і гроші. Спробуємо інакше?';
