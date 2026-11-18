@@ -361,6 +361,8 @@ select.fill option{color:var(--ink);background:var(--white)}
 .duel[data-chosen="spend"] .duel-col.big,.duel[data-chosen="invest"] .duel-col:first-child{display:none}
 .duel[data-chosen="spend"]{grid-template-columns:minmax(0,350px)}
 .duel[data-chosen="invest"]{grid-template-columns:minmax(0,480px)}
+.duel[data-only="invest"] .duel-col:first-child{display:none}
+.duel[data-only="invest"]{grid-template-columns:minmax(0,480px);animation:rise2 .5s cubic-bezier(.2,.8,.2,1) both}
 .duel[data-chosen]{animation:rise2 .5s cubic-bezier(.2,.8,.2,1) both}
 @keyframes rise2{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .contest{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
@@ -385,7 +387,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   .page[data-stage="choose"] .duel:not([data-chosen]){gap:20px}
   .hero-cta .btn-big{width:100%}
   #shareCta{font-size:17px;padding-left:14px;padding-right:14px;white-space:nowrap}
-  .duel[data-chosen]{grid-template-columns:minmax(0,380px)}
+  .duel[data-chosen],.duel[data-only]{grid-template-columns:minmax(0,380px)}
   .invest-stack.locked-stack .duel-sentence{white-space:nowrap;font-size:15px!important;line-height:1.9!important;padding:2px 12px}
 }
 @media (prefers-reduced-motion:reduce){.pick-btn,.page[data-stage="choose"] .duel,.duel[data-chosen],.icu,#shareCta{animation:none}}
@@ -1110,6 +1112,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   /* ---------- choose your adventure ---------- */
   const page = document.querySelector('.page'), duel = document.querySelector('.duel');
   let chosen = null;                       // null | 'spend' | 'invest'
+  let retry = false;                       // came back from «Витратити» to look at the investment first, blurred
   function syncAdventure(hold){
     // hold: keep the just-picked receipt blurred for one frame so it un-blurs with a transition
     $('wrapSpend').classList.toggle('locked', chosen !== 'spend' || hold === 'spend');
@@ -1117,6 +1120,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     $('wrapSpend').querySelector('.receipt').setAttribute('aria-hidden', String(chosen !== 'spend'));
     $('wrapInvest').querySelector('.receipt').setAttribute('aria-hidden', String(chosen !== 'invest'));
     if (chosen) duel.dataset.chosen = chosen; else delete duel.dataset.chosen;
+    if (retry && !chosen) duel.dataset.only = 'invest'; else delete duel.dataset.only;
     $('stackInvest').classList.toggle('locked-stack', chosen !== 'invest' || hold === 'invest');
     $('stackSpend').classList.toggle('locked-stack', chosen !== 'spend' || hold === 'spend');
     $('tryInvest').hidden = chosen !== 'spend';
@@ -1145,8 +1149,12 @@ select.fill option{color:var(--ink);background:var(--white)}
     if (el.classList.contains('receipt-wrap') && !el.classList.contains('locked')) return;
     e.stopPropagation(); choose(el.dataset.pick);
   }));
-  $('tryInvest').addEventListener('click', () => choose('invest'));
-  $('again').addEventListener('click', () => { chosen = null; syncAdventure(); });
+  $('tryInvest').addEventListener('click', () => {
+    chosen = null; retry = true; syncAdventure();
+    const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(() => window.scrollTo({top: document.querySelector('.hero .budget').getBoundingClientRect().top + scrollY - 20, behavior: calm ? 'auto' : 'smooth'}));
+  });
+  $('again').addEventListener('click', () => { chosen = null; retry = false; syncAdventure(); });
   syncAdventure();
 
   const sample = 'Чорна п’ятниця чи інвестиція? КАСОВИЙ ЧЕК РАЗОМ 0123456789 ₴%+·';
