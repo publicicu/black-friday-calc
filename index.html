@@ -351,7 +351,10 @@ select.fill option{color:var(--ink);background:var(--white)}
 .hero .page-head h1{color:var(--white)}
 .page[data-stage="intro"] .hero{min-height:calc(100svh - 150px);justify-content:center}
 .page[data-stage="intro"] .duel{display:none}
-.hero .duel{margin-top:clamp(22px,3.4vw,40px)}
+.hero{gap:clamp(30px,3.4vw,44px)}
+.hero>.fine{margin:0 auto;max-width:72ch;text-align:center;font-size:12px;line-height:1.5;color:rgba(255,255,255,.55)}
+.page[data-stage="intro"] .hero>.fine{position:absolute;left:var(--pad-x);right:var(--pad-x);bottom:clamp(16px,2vw,26px)}
+.hero .duel{margin-top:0}
 .page[data-stage="choose"] .duel{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 .budget .go{margin-top:8px}
@@ -370,13 +373,13 @@ select.fill option{color:var(--ink);background:var(--white)}
 @keyframes bob{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 7px))}}
 .chosen-tag{display:none;font-size:clamp(17px,1.6vw,20px);padding:12px 26px;border-radius:999px}
 .duel[data-chosen="spend"] .chosen-tag.bad,.duel[data-chosen="invest"] .chosen-tag.good{display:block}
-.duel[data-chosen="spend"] .duel-col:first-child{gap:22px}
+.duel[data-chosen="spend"] .duel-col:first-child{gap:18px}
 .invest-stack{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;min-width:0}
 .invest-stack .receipt-wrap{flex:1}
 /* while the receipt is blurred, the rate / term line sits right under the «Інвестувати» button */
 .invest-stack.locked-stack .duel-sentence{position:absolute;z-index:2;left:50%;top:calc(46% + 36px);transform:translateX(-50%);width:max-content;max-width:94%;margin:0!important;padding:2px 14px;border-radius:14px;background:rgba(2,24,45,.92);box-shadow:0 10px 24px rgba(2,24,45,.35)}
 /* once a receipt is picked the other one leaves */
-.duel[data-chosen="spend"] .duel-col.big>*,.duel[data-chosen="invest"] .duel-col:first-child>*{display:none}
+.duel[data-chosen="spend"] .duel-col.big,.duel[data-chosen="invest"] .duel-col:first-child{display:none}
 .duel[data-chosen="spend"]{grid-template-columns:minmax(0,350px)}
 .duel[data-chosen="invest"]{grid-template-columns:minmax(0,480px)}
 .duel[data-chosen]{animation:rise2 .5s cubic-bezier(.2,.8,.2,1) both}
@@ -393,7 +396,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   .invest-stack.locked-stack .duel-sentence{top:calc(46% + 30px);padding:0 8px;line-height:1.9!important;font-size:13px!important}
   .receipt-wrap.locked .receipt{filter:blur(6px)}
   .hero-cta .btn-big{width:100%}
-  .duel[data-chosen]{--rf:14px;grid-template-areas:none;justify-content:center;margin-inline:0}
+  .duel[data-chosen]{--rf:14px;grid-template-areas:none;justify-content:center;margin-inline:0;row-gap:18px}
   .duel[data-chosen="spend"]{grid-template-columns:minmax(0,320px);grid-template-areas:"tl" "rl"}
   .duel-col:first-child .chosen-tag{grid-area:tl;justify-self:center}
   .duel[data-chosen="invest"]{grid-template-columns:minmax(0,340px);grid-template-areas:"rr"}
@@ -500,6 +503,7 @@ select.fill option{color:var(--ink);background:var(--white)}
       <button type="button" class="btn primary btn-big" id="shareCta" data-open-share hidden>Поділитися чеком і взяти участь у розіграші</button>
       <button type="button" class="again" id="again" hidden>Обрати ще раз</button>
     </div>
+    <p class="fine">Розрахунок ілюстративний і не є інвестиційною порадою. Формула: складний відсоток зі щорічним реінвестуванням доходу, без урахування податків і комісій.</p>
   </section>
 
   <dialog class="share-modal" id="shareModal" aria-labelledby="shareTitle">
@@ -607,7 +611,6 @@ select.fill option{color:var(--ink);background:var(--white)}
     </div>
   </section>
 
-  <p class="fine">Розрахунок ілюстративний і не є інвестиційною порадою. Формула: складний відсоток зі щорічним реінвестуванням доходу, без урахування податків і комісій.</p>
 </main>
 
 <script>
