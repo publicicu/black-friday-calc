@@ -218,6 +218,8 @@ select.fill option{color:var(--ink);background:var(--white)}
 .prize-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .pz{background:var(--surface);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;min-width:0}
 .pz-vis{flex:none;width:86px;display:grid;place-items:center}
+.pz-emoji{font-size:44px;line-height:1;transform:rotate(-8deg);font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.pz-wide{grid-column:1/-1}
 .pz-vis img{width:56px;height:auto;filter:drop-shadow(0 6px 10px rgba(11,37,59,.22))}
 .pz-tag{position:relative;display:inline-block;background:var(--yellow);color:var(--ink);font-weight:700;font-size:15px;padding:8px 10px 8px 22px;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%);transform:rotate(-8deg);white-space:nowrap;font-variant-numeric:tabular-nums}
 .pz-tag::before{content:"";position:absolute;left:10px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--surface)}
@@ -390,9 +392,9 @@ select.fill option{color:var(--ink);background:var(--white)}
   <dialog class="share-modal" id="shareModal" aria-labelledby="shareTitle">
     <div class="sm">
       <header class="sm-head">
-        <span class="gw-badge">Розіграш · 6 переможців</span>
+        <span class="gw-badge">Розіграш · 9 переможців</span>
         <h2 id="shareTitle">Поділися чеком та отримуй корисні інвестиційні призи</h2>
-        <p class="gw-lead">Серед тих, хто поширить свій чек і затегає ICU, оберемо шістьох переможців. Результати оголосимо <b>4&nbsp;грудня</b>.</p>
+        <p class="gw-lead">Серед тих, хто поширить свій чек і затегає ICU, оберемо дев’ятьох переможців. Результати оголосимо <b>4&nbsp;грудня</b>.</p>
       </header>
 
       <div class="sm-visual">
@@ -445,6 +447,13 @@ select.fill option{color:var(--ink);background:var(--white)}
               <span class="prize-count">3 переможці</span>
               <b>Книжка «Мемономіка»</b>
               <span>від «Останнього Капіталіста» та ICU. <a href="https://kapitalbooks.com.ua/">Про книжку →</a></span>
+            </div>
+          </div>
+          <div class="pz pz-wide">
+            <div class="pz-vis"><span class="pz-emoji" aria-hidden="true">🔋</span></div>
+            <div class="pz-text">
+              <span class="prize-count">3 переможці</span>
+              <b>Power bank</b>
             </div>
           </div>
         </div>
