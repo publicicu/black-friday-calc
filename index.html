@@ -77,12 +77,12 @@ h3{font-size:18px;line-height:1.3}
 .page-head h1 .bad{color:var(--white)}.page-head h1 .bad::before{background:var(--red)}
 .subtitle{margin:0;font-size:clamp(17px,1.8vw,22px);line-height:1.4;color:var(--text);max-width:60ch}
 .nw{white-space:nowrap}
-.selwrap{position:relative;display:inline-block;vertical-align:baseline;margin:0}
-.selwrap::before{content:"";position:absolute;left:0;top:0;bottom:0;right:.8em;background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;pointer-events:none;transition:background .15s}
-.selwrap::after{content:"";position:absolute;right:0;top:50%;width:.5em;height:.5em;margin-top:-.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374BBB8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
-.selwrap:hover::before{background:rgba(255,255,255,.16)}
-.selwrap:focus-within::before{background:rgba(116,187,184,.25)}
-select.fill.sel{position:relative;background:none!important;border:0!important;border-radius:0;margin:0;padding:0 1.04em 0 .24em;text-align:left}
+.selwrap{position:relative;display:inline-block;vertical-align:baseline;margin:0 .1em;font-size:.84em}
+.selwrap::before{content:"";position:absolute;left:0;right:0;top:-.04em;bottom:-.04em;background:rgba(116,187,184,.16);border:1.5px solid rgba(116,187,184,.55);border-radius:999px;pointer-events:none;transition:background .15s,border-color .15s}
+.selwrap::after{content:"";position:absolute;right:.62em;top:50%;width:.5em;height:.5em;margin-top:-.22em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374BBB8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+.selwrap:hover::before{background:rgba(116,187,184,.26);border-color:var(--turq)}
+.selwrap:focus-within::before{background:rgba(116,187,184,.32);border-color:var(--turq)}
+select.fill.sel{position:relative;background:none!important;border:0!important;border-radius:999px;margin:0;padding:0 1.5em 0 .8em;text-align:left;line-height:1.55}
 select.fill.sel:focus{outline:none}
 .arrow{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.95em}
 .arrow .a-d{display:none}
@@ -975,8 +975,8 @@ select.fill option{color:var(--ink);background:var(--white)}
   });
 
   attachSizer(amountEl, () => amountEl.value, 0.12);
-  attachSizer(rateIn, () => rateIn.options[rateIn.selectedIndex].text, 1.28);
-  attachSizer(yearsIn, () => yearsIn.options[yearsIn.selectedIndex].text, 1.28);
+  attachSizer(rateIn, () => rateIn.options[rateIn.selectedIndex].text, 2.3);
+  attachSizer(yearsIn, () => yearsIn.options[yearsIn.selectedIndex].text, 2.3);
   if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { [amountEl, rateIn, yearsIn].forEach(sizeFill); sizeSelect(); });
 
   /* ---------- save & copy ---------- */
