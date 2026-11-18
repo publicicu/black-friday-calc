@@ -117,15 +117,16 @@ select.fill.sel:focus{outline:none}
 select.fill{-webkit-appearance:none;appearance:none;cursor:pointer;padding-right:1.1em;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374BBB8' stroke-width='2.2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .3em center;background-size:.42em auto;text-align:left}
 select.fill option{color:var(--ink);background:var(--white)}
 
-/* ---------- compact option picker (replaces the long native list) ---------- */
-.pm{position:fixed;z-index:1000;box-sizing:border-box;background:var(--ink);color:var(--white);border:1px solid rgba(116,187,184,.45);border-radius:16px;padding:12px 12px 12px;box-shadow:0 18px 44px rgba(2,24,45,.55);font-family:inherit;animation:pm-in .14s ease-out both}
+/* ---------- dropdown list for rate / years ---------- */
+.pm{position:fixed;z-index:1000;box-sizing:border-box;background:var(--ink);color:var(--white);border:1px solid rgba(116,187,184,.4);border-radius:14px;padding:6px;box-shadow:0 18px 40px rgba(2,24,45,.5);font-family:inherit;animation:pm-in .14s ease-out both}
 .pm[hidden]{display:none}
-.pm-title{margin:0 2px 8px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--turq)}
-.pm-grid{display:grid;grid-template-columns:repeat(var(--pc,6),38px);gap:4px}
-.pm-opt{appearance:none;border:0;font:inherit;font-size:14px;font-weight:700;line-height:1;height:34px;border-radius:10px;background:transparent;color:var(--white);cursor:pointer;font-variant-numeric:tabular-nums}
-.pm-opt:hover,.pm-opt:focus-visible{background:rgba(116,187,184,.24);outline:none}
-.pm-opt[aria-selected="true"]{background:var(--turq);color:var(--ink)}
-@keyframes pm-in{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
+.pm-list{max-height:222px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(116,187,184,.55) transparent;display:flex;flex-direction:column;gap:2px}
+.pm-list::-webkit-scrollbar{width:6px}.pm-list::-webkit-scrollbar-thumb{background:rgba(116,187,184,.5);border-radius:6px}
+.pm-opt{appearance:none;border:0;font:inherit;font-size:15px;font-weight:500;line-height:1;display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;min-height:36px;padding:0 10px 0 12px;border-radius:9px;background:transparent;color:var(--white);cursor:pointer;text-align:left;font-variant-numeric:tabular-nums;flex:none}
+.pm-opt:hover,.pm-opt:focus-visible{background:rgba(255,255,255,.1);outline:none}
+.pm-opt[aria-selected="true"]{background:rgba(116,187,184,.2);color:var(--turq);font-weight:700}
+.pm-opt[aria-selected="true"]::after{content:"";flex:none;width:14px;height:10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='M1.5 5.2l3.6 3.4L12.5 1.4' fill='none' stroke='%2374BBB8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+@keyframes pm-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.pm{animation:none}}
 /* ---------- budget + two receipts ---------- */
 .hero{gap:clamp(30px,4vw,48px)}
@@ -988,12 +989,13 @@ select.fill option{color:var(--ink);background:var(--white)}
   attachSizer(rateIn, () => rateIn.options[rateIn.selectedIndex].text, 2.3);
   attachSizer(yearsIn, () => yearsIn.options[yearsIn.selectedIndex].text, 2.3);
 
-  /* ---------- compact picker instead of the native dropdown ---------- */
+  /* ---------- styled dropdown instead of the native list ---------- */
   const pm = document.createElement('div');
-  pm.className = 'pm'; pm.hidden = true; pm.setAttribute('role', 'listbox');
-  pm.innerHTML = '<p class="pm-title"></p><div class="pm-grid"></div>';
+  pm.className = 'pm'; pm.hidden = true;
+  pm.innerHTML = '<div class="pm-list" role="listbox"></div>';
   document.body.appendChild(pm);
-  let pmFor = null;
+  const pmList = pm.firstChild;
+  let pmFor = null, pmBuf = '', pmTimer = 0;
   function pmClose(refocus){
     if (pm.hidden) return;
     pm.hidden = true;
@@ -1003,30 +1005,26 @@ select.fill option{color:var(--ink);background:var(--white)}
   function pmOpen(sel){
     if (pmFor === sel){ pmClose(true); return; }
     pmFor = sel;
-    const isRate = sel === rateIn;
-    const opts = Array.from(sel.options);
-    const cols = isRate ? 6 : 8;
-    pm.querySelector('.pm-title').textContent = isRate ? 'Дохідність, % річних' : 'Строк, років';
-    const grid = pm.querySelector('.pm-grid');
-    grid.style.setProperty('--pc', cols);
-    grid.innerHTML = '';
-    opts.forEach((o, i) => {
+    pmList.setAttribute('aria-label', sel.getAttribute('aria-label') || '');
+    pmList.innerHTML = '';
+    Array.from(sel.options).forEach((o, i) => {
       const b = document.createElement('button');
-      b.type = 'button'; b.className = 'pm-opt'; b.textContent = o.value;
-      b.setAttribute('role', 'option'); b.setAttribute('aria-label', o.text);
-      b.setAttribute('aria-selected', String(o.value === sel.value));
-      b.dataset.i = i;
-      grid.appendChild(b);
+      b.type = 'button'; b.className = 'pm-opt'; b.textContent = o.text;
+      b.setAttribute('role', 'option'); b.setAttribute('aria-selected', String(o.value === sel.value));
+      b.dataset.i = i; b.dataset.v = o.value;
+      pmList.appendChild(b);
     });
-    pm.hidden = false;
     const wrap = sel.closest('.selwrap').getBoundingClientRect();
+    pm.style.minWidth = Math.max(wrap.width, 124) + 'px';
+    pm.hidden = false;
     const mw = pm.offsetWidth, mh = pm.offsetHeight, vw = document.documentElement.clientWidth, vh = window.innerHeight;
-    let left = Math.min(Math.max(8, wrap.left + wrap.width / 2 - mw / 2), vw - mw - 8);
+    const left = Math.min(Math.max(8, wrap.left + wrap.width / 2 - mw / 2), vw - mw - 8);
     let top = wrap.bottom + 8;
     if (top + mh > vh - 8 && wrap.top - 8 - mh > 8) top = wrap.top - 8 - mh;
     pm.style.left = left + 'px'; pm.style.top = Math.max(8, top) + 'px';
-    const cur = grid.querySelector('[aria-selected="true"]') || grid.firstChild;
+    const cur = pmList.querySelector('[aria-selected="true"]') || pmList.firstChild;
     cur.focus({preventScroll:true});
+    pmList.scrollTop = Math.max(0, cur.offsetTop - (pmList.clientHeight - cur.offsetHeight) / 2);
   }
   pm.addEventListener('click', e => {
     const b = e.target.closest('.pm-opt'); if (!b || !pmFor) return;
@@ -1036,17 +1034,20 @@ select.fill option{color:var(--ink);background:var(--white)}
     pmClose(true);
   });
   pm.addEventListener('keydown', e => {
-    const opts = Array.from(pm.querySelectorAll('.pm-opt')), i = opts.indexOf(document.activeElement);
-    const cols = +pm.querySelector('.pm-grid').style.getPropertyValue('--pc') || 6;
-    const go = n => { e.preventDefault(); const t = opts[Math.min(opts.length - 1, Math.max(0, n))]; if (t) t.focus({preventScroll:true}); };
+    const opts = Array.from(pmList.children), i = opts.indexOf(document.activeElement);
+    const go = n => { e.preventDefault(); const t = opts[Math.min(opts.length - 1, Math.max(0, n))]; if (t){ t.focus({preventScroll:true}); t.scrollIntoView({block:'nearest'}); } };
     if (e.key === 'Escape'){ e.preventDefault(); pmClose(true); }
-    else if (e.key === 'ArrowRight') go(i + 1);
-    else if (e.key === 'ArrowLeft') go(i - 1);
-    else if (e.key === 'ArrowDown') go(i + cols);
-    else if (e.key === 'ArrowUp') go(i - cols);
+    else if (e.key === 'ArrowDown') go(i + 1);
+    else if (e.key === 'ArrowUp') go(i - 1);
+    else if (e.key === 'PageDown') go(i + 5);
+    else if (e.key === 'PageUp') go(i - 5);
     else if (e.key === 'Home') go(0);
     else if (e.key === 'End') go(opts.length - 1);
     else if (e.key === 'Tab') pmClose(false);
+    else if (/^[0-9]$/.test(e.key)){   // type a number to jump to it
+      clearTimeout(pmTimer); pmBuf += e.key; pmTimer = setTimeout(() => pmBuf = '', 700);
+      const t = opts.findIndex(o => o.dataset.v.startsWith(pmBuf)); if (t >= 0) go(t);
+    }
   });
   document.addEventListener('pointerdown', e => { if (!pm.hidden && !pm.contains(e.target) && !(e.target.closest && e.target.closest('.selwrap'))) pmClose(false); });
   window.addEventListener('resize', () => pmClose(false));
