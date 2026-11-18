@@ -349,10 +349,40 @@ select.fill option{color:var(--ink);background:var(--white)}
 .icu-foot .note{color:var(--text);font-size:13px;margin:0;max-width:52ch}
 .fine{color:var(--text);font-size:13px;max-width:80ch;margin:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- choose your adventure: budget → pick a receipt → the invest receipt opens the share popup ---------- */
+.page[data-stage="intro"] .hero{display:none}
+.page[data-stage="choose"] .hero{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.budget .go{margin-top:8px}
+.btn{gap:.5em}
+.page[data-stage="choose"] .budget .go{display:none}
+button.duel-tag.pick{appearance:none;border:0;font:inherit;font-weight:700;font-size:clamp(16px,1.5vw,19px);line-height:1;padding:16px 30px;border-radius:999px;cursor:pointer;box-shadow:0 12px 26px rgba(0,0,0,.28);transition:transform .15s,box-shadow .15s,filter .15s}
+button.duel-tag.pick:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.34);filter:brightness(1.06)}
+button.duel-tag.pick:active{transform:none}
+button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
+.receipt-wrap{position:relative}
+.receipt-wrap .receipt{transition:filter .7s ease}
+.receipt-wrap .veil{display:none}
+.receipt-wrap.locked{cursor:pointer}
+.receipt-wrap.locked .receipt{filter:blur(7px);pointer-events:none;user-select:none}
+.receipt-wrap.locked:hover .receipt{filter:blur(4.5px)}
+.receipt-wrap.locked .veil{display:grid;place-items:center;position:absolute;z-index:2;left:50%;top:44%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:var(--white);color:var(--ink);font-size:36px;font-weight:700;line-height:1;box-shadow:0 14px 28px rgba(2,24,45,.35);animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-cta{flex-direction:column;align-items:center;gap:16px;text-align:center}
+.hero-cta[hidden],.hero-cta [hidden]{display:none}
+.choose-hint{margin:0;max-width:34em;font-size:clamp(16px,1.6vw,19px);line-height:1.4;color:rgba(255,255,255,.88)}
+@media (max-width:820px){
+  button.duel-tag.pick{justify-self:stretch;font-size:14px;padding:13px 6px;box-shadow:0 8px 18px rgba(0,0,0,.28)}
+  .receipt-wrap.locked .veil{width:46px;height:46px;margin:-23px 0 0 -23px;font-size:26px}
+  .receipt-wrap.locked .receipt{filter:blur(5px)}
+  .hero-cta .btn-big{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.receipt-wrap.locked .veil,.page[data-stage="choose"] .hero{animation:none}}
 </style>
 </head>
 <body>
-<main class="page">
+<main class="page" data-stage="intro">
   <div class="bar">
       <a href="https://online.icu/" aria-label="ICU">
         <svg class="logo" width="102" height="46" viewBox="56 326 899 428" preserveAspectRatio="xMinYMid meet" overflow="visible" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ICU"><path fill="#00263d" d="M189.2,713.9h-92.7v-347h92.7v347Z"/><path fill="#00263d" d="M590.7,633.1v80.8h-277.4c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-227c0-16.5,6.8-30.6,20.3-42.4,13.5-11.7,29.8-17.6,48.9-17.6h277.4v80.3h-229.9c-6.5,0-12,2-16.6,5.9-4.6,4-7.1,8.8-7.4,14.4v145.2c.4,5.6,2.9,10.4,7.4,14.4,4.6,4,10.1,5.9,16.6,5.9h229.9Z"/><path fill="#00263d" d="M914.5,713.9h-208.2c-19.1,0-35.4-5.9-48.9-17.6-13.5-11.7-20.3-25.9-20.3-42.4v-287h92.7v245.9c0,5.6,2.3,10.4,6.9,14.4,4.6,4,10.1,5.9,16.6,5.9h113.8c6.5,0,12-2,16.6-5.9,4.6-4,6.9-8.8,6.9-14.4v-245.9h93.2v287c-.4,16.5-7.2,30.7-20.6,42.4-13.4,11.7-29.6,17.6-48.6,17.6Z"/><rect fill="#0057b8" x="664.6" y="468.1" width="38.1" height="54.4"/><rect fill="#ffd700" x="664.6" y="522.6" width="38.1" height="54.4"/></svg>
@@ -361,8 +391,8 @@ select.fill option{color:var(--ink);background:var(--white)}
   </div>
 
   <header class="page-head">
-    <h1><span class="hl good">Інвестувати</span> чи <span class="hl bad">витрачати?</span></h1>
-    <p class="subtitle">Що оберете ви?</p>
+    <h1><span class="hl bad">Витрачати</span> чи <span class="hl good">інвестувати?</span></h1>
+    <p class="subtitle" id="sub">Введіть бюджет на Чорну п’ятницю, а далі оберіть, що з ним зробити</p>
   </header>
 
   <section class="budget" aria-label="Бюджет">
@@ -378,9 +408,10 @@ select.fill option{color:var(--ink);background:var(--white)}
         <button type="button" class="chip" data-v="10000">10 000 ₴</button>
         <button type="button" class="chip" data-v="25000">25 000 ₴</button>
       </div>
+      <button type="button" class="btn primary btn-big go" id="startBtn">Далі <span aria-hidden="true">→</span></button>
   </section>
 
-  <section class="hero" aria-label="Калькулятор">
+  <section class="hero" id="hero" aria-label="Оберіть: витратити чи інвестувати">
     <svg class="deco deco-r" viewBox="0 0 400 640" preserveAspectRatio="xMaxYMin meet" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
 <g transform="translate(280.0,190.0) rotate(-8.0) scale(9.167) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.34)" stroke-width="0.17" stroke-linecap="round" stroke-linejoin="round"><path d="M7.6 7.4c.8-1.5 2.4-2.4 4.4-2.4 2.4 0 4 1.3 4 3.2 0 2.5-2.7 3.5-5.2 4.8-2.3 1.2-3.6 2.2-3.6 3.9 0 1.7 1.5 2.6 3.5 2.6 1.9 0 3.4-.7 4.4-2.1M5 10.2h14M5 13.8h14"/></g>
 <g transform="translate(320.0,480.0) rotate(9.0) scale(5.000) translate(-12,-12)" fill="none" stroke="rgba(116,187,184,.26)" stroke-width="0.28" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><rect x="7.5" y="5.5" width="9" height="3.5" rx="1"/><path d="M8.5 12.5h.01M12 12.5h.01M15.5 12.5h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01M8.5 18.5h.01M12 18.5h.01M15.5 18.5h.01"/></g>
@@ -390,8 +421,9 @@ select.fill option{color:var(--ink);background:var(--white)}
 
     <div class="duel" aria-live="polite" aria-label="Порівняння">
       <div class="duel-col">
-        <span class="duel-tag bad">Витратити</span>
-        <div class="receipt-wrap spend">
+        <button type="button" class="duel-tag bad pick" data-pick="spend" aria-pressed="false">Витратити</button>
+        <div class="receipt-wrap spend locked" id="wrapSpend" data-pick="spend">
+          <span class="veil" aria-hidden="true">?</span>
           <div class="receipt">
             <div class="r-head">
               <strong>ЧОРНА П’ЯТНИЦЯ</strong>
@@ -408,12 +440,13 @@ select.fill option{color:var(--ink);background:var(--white)}
         </div>
       </div>
       <div class="duel-col big">
-        <span class="duel-tag good">Інвестувати<span class="m-hide"> в ОВДП</span></span>
+        <button type="button" class="duel-tag good pick" data-pick="invest" aria-pressed="false">Інвестувати<span class="m-hide"> в ОВДП</span></button>
           <p class="sentence duel-sentence">
-            <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12" selected>12%</option><option value="13">13%</option><option value="14">14%</option><option value="15">15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select></span> річних</span>
-            <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5">5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10" selected>10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span></span>
+            <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12">12%</option><option value="13">13%</option><option value="14">14%</option><option value="15" selected>15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select></span> річних</span>
+            <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5" selected>5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10">10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span></span>
           </p>
-        <div class="receipt-wrap">
+        <div class="receipt-wrap locked" id="wrapInvest" data-pick="invest">
+          <span class="veil" aria-hidden="true">?</span>
           <div class="receipt">
             <div class="r-head">
               <strong>ДЕРЖАВНІ ОБЛІГАЦІЇ</strong>
@@ -439,7 +472,11 @@ select.fill option{color:var(--ink);background:var(--white)}
       </div>
     </div>
 
-    <div class="hero-cta"><button type="button" class="btn primary btn-big" data-open-share>Поділитися чеком і взяти участь у розіграші</button></div>
+    <div class="hero-cta" id="heroCta">
+      <p class="choose-hint" id="hint">Натисніть на чек або на кнопку, щоб побачити, що буде з вашими грошима</p>
+      <button type="button" class="btn primary btn-big" id="tryInvest" hidden>А якщо інвестувати? <span aria-hidden="true">→</span></button>
+      <button type="button" class="btn primary btn-big" id="shareCta" data-open-share hidden>Поділитися чеком і взяти участь у розіграші</button>
+    </div>
   </section>
 
   <dialog class="share-modal" id="shareModal" aria-labelledby="shareTitle">
@@ -555,7 +592,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   const C = {ink:'#0B253B', text:'#586276', hint:'#D0D0D0', g0:'#02182D', g1:'#204E7A', turq:'#74BBB8', orange:'#E25603', yellow:'#FBEB50', red:'#E0352B', gain:'#2E7B77', white:'#FFFFFF'};
   const CUR = '₴';
   const FONT = '"e-Ukraine", system-ui, sans-serif';
-  const state = {amount:5000, mode:'once', years:10, rate:12, fmt:'post'};
+  const state = {amount:5000, mode:'once', years:5, rate:15, fmt:'post'};
   const $ = id => document.getElementById(id);
 
   /* ---------- helpers ---------- */
@@ -1052,6 +1089,46 @@ select.fill option{color:var(--ink);background:var(--white)}
 
   /* ---------- start ---------- */
   update(); fitMark();
+  /* ---------- choose your adventure ---------- */
+  const page = document.querySelector('.page');
+  const seen = {spend:false, invest:false};
+  function syncAdventure(){
+    $('wrapSpend').classList.toggle('locked', !seen.spend);
+    $('wrapInvest').classList.toggle('locked', !seen.invest);
+    $('wrapSpend').querySelector('.receipt').setAttribute('aria-hidden', String(!seen.spend));
+    $('wrapInvest').querySelector('.receipt').setAttribute('aria-hidden', String(!seen.invest));
+    document.querySelectorAll('.pick').forEach(b => b.setAttribute('aria-pressed', String(!!seen[b.dataset.pick])));
+    $('tryInvest').hidden = !(seen.spend && !seen.invest);
+    $('shareCta').hidden = !seen.invest;
+    $('hint').hidden = seen.invest;
+    $('hint').textContent = seen.spend
+      ? 'Ось і все: розпродаж закінчився, а разом із ним і гроші. Спробуємо інакше?'
+      : 'Натисніть на чек або на кнопку, щоб побачити, що буде з вашими грошима';
+    $('sub').textContent = page.dataset.stage === 'intro' ? 'Введіть бюджет на Чорну п’ятницю, а далі оберіть, що з ним зробити' : seen.invest ? 'Гарний вибір! Ваш чек готовий, його можна поширити' : 'Оберіть чек, який хочете побачити';
+  }
+  function startAdventure(){
+    if (!state.amount){ amountEl.focus(); return; }
+    stopPulse(); amountEl.blur();
+    page.dataset.stage = 'choose'; syncAdventure();
+    const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(() => $('hero').scrollIntoView({behavior: calm ? 'auto' : 'smooth', block: 'start'}));
+  }
+  function choose(kind){
+    if (kind === 'spend'){ seen.spend = true; syncAdventure(); return; }
+    const first = !seen.invest;
+    seen.invest = true; syncAdventure();
+    setTimeout(openShare, first ? 750 : 0);          // let the receipt un-blur first
+  }
+  $('startBtn').addEventListener('click', startAdventure);
+  amountEl.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); if (page.dataset.stage === 'intro') startAdventure(); else amountEl.blur(); } });
+  document.querySelectorAll('[data-pick]').forEach(el => el.addEventListener('click', e => {
+    if (e.target.closest('select')) return;
+    if (el.classList.contains('receipt-wrap') && !el.classList.contains('locked')){ if (el.id === 'wrapInvest') openShare(); return; }
+    choose(el.dataset.pick);
+  }));
+  $('tryInvest').addEventListener('click', () => choose('invest'));
+  syncAdventure();
+
   const sample = 'Чорна п’ятниця чи інвестиція? КАСОВИЙ ЧЕК РАЗОМ 0123456789 ₴%+·';
   if (document.fonts && document.fonts.load){
     Promise.all(['400','500','700'].map(w => document.fonts.load(w + ' 40px "e-Ukraine"', sample)))
