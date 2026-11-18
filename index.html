@@ -164,45 +164,15 @@ select.fill option{color:var(--ink);background:var(--white)}
 .total-loss{color:var(--red)}
 .barcode.fake svg{display:block;width:100%;height:56px}
 .hero-cta{display:flex;justify-content:center}
-/* ---------- phones & small tablets: the two receipts stand side by side, at one level ---------- */
+/* ---------- phones & small tablets: the two receipts are stacked, each full width ---------- */
 @media (max-width:820px){
-  .duel{--rf:clamp(11.5px,1.5vw + 5.6px,14px);--rh:calc(2.9 * var(--rf) + 2px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"tl tl" "rl rr" "br br" "sent sent";gap:14px 12px;align-items:stretch;justify-content:stretch;margin-inline:-8px}
-  .duel-col{display:contents}
-  .spend-stack,.invest-stack{display:contents}
-  .spend-stack .receipt-wrap{grid-area:rl}
-  .invest-stack .receipt-wrap{grid-area:rr}
-  .pick-layer,.pick-layer[style]{display:none!important}
-  .locked-stack .pick-top,.locked-stack .pick-bottom{display:block;width:100%;font-size:15px;padding:14px 6px}
-  .spend-stack .pick-top{grid-area:tl}.invest-stack .pick-bottom{grid-area:br}
-  .locked-stack.spend-stack .pick-bottom,.locked-stack.invest-stack .pick-top{display:none}
-  .chosen-tag{grid-area:ctag;justify-self:center}
-  .m-hide,.d-only{display:none}
-  .duel .row.m-only{display:block}
+  .duel{grid-template-columns:minmax(0,380px);justify-content:center;align-items:start;gap:28px;margin-inline:0}
+  .duel .receipt,.duel-col.big .receipt{padding:24px 22px 18px;gap:14px}
   .duel .receipt-wrap.spend{transform:rotate(.6deg)}
   .duel .receipt-wrap:not(.spend){transform:rotate(-.6deg)}
-  .duel .receipt,.duel-col.big .receipt{padding:14px 12px 12px;gap:9px}
-  .duel .r-head{min-height:2.7em;justify-content:center}
-  .duel .r-head strong,.duel-col.big .r-head strong{display:block;max-width:7.6em;margin:0 auto;font-size:clamp(11px,1.3vw + 6px,14px);letter-spacing:.08em;line-height:1.3}
-  .duel .rows{gap:8px}
-  #sItems{min-height:calc(4 * var(--rh) + 3 * 8px)}
-  .duel .row,.duel-col.big .row{display:block;min-height:var(--rh);font-size:var(--rf);line-height:1.3}
-  .duel .row dt{display:block}
-  .duel .row .dots{display:none}
-  .duel .row dd{display:block;font-size:calc(1.2 * var(--rf));line-height:1.3;margin-top:1px}
-  .duel .row .off{font-size:max(9px,.8 * var(--rf));padding:1px 4px;border-radius:5px}
-  .duel .row .off.off-d{display:none}
-  .duel .row .off.off-m{display:inline-block;margin-left:6px;vertical-align:1px}
-  .duel .total-row{flex-wrap:wrap;gap:4px 6px;min-height:44px;align-content:flex-start;align-items:flex-start;justify-content:flex-start}
-  .duel .total-row span{font-size:clamp(10.5px,1.2vw + 5.8px,13px);letter-spacing:.07em}
-  .duel .total-row .tag{font-size:clamp(12px,1.2vw + 7.4px,15px);letter-spacing:0;padding:3px 8px 3px 20px;clip-path:polygon(9px 0,100% 0,100% 100%,9px 100%,0 50%)}
-  .duel .total-row .tag::before{left:7px;width:6px;height:6px;margin-top:-3px}
-  .duel .total,#total{font-size:min(clamp(30px,3.2vw + 17px,40px),calc(100cqw / (var(--len,8) * .6)));letter-spacing:-.03em}
-  #total,.duel .total-loss{min-height:calc(clamp(30px,3.2vw + 17px,40px) * 1.1)}
-  .duel .barcode.fake svg{height:58px}
-  .duel #barcode svg{height:46px}
-  .duel .barcode-cap{font-size:9.5px}
-  .duel .barcode-cap span:nth-child(2){display:none}
-  .duel .r-foot{font-size:clamp(10px,.9vw + 6.4px,12px)}
+  .duel-col.big .row,.duel .row{font-size:15px}
+  .duel-col.big .total{font-size:clamp(38px,11vw,48px)}
+  .duel-col.big .r-head strong{font-size:15px}
 }
 
 
@@ -372,7 +342,6 @@ select.fill option{color:var(--ink);background:var(--white)}
 .receipt-wrap.locked .receipt{filter:blur(8px);pointer-events:none;user-select:none}
 .receipt-wrap.locked .receipt *{color:transparent!important;text-shadow:0 0 14px rgba(11,37,59,.5)}
 .pick-btn{appearance:none;border:0;font:inherit;font-weight:700;font-size:clamp(17px,1.7vw,21px);line-height:1;white-space:nowrap;padding:17px 30px;border-radius:999px;cursor:pointer;box-shadow:0 14px 30px rgba(2,24,45,.4);--gc:255,255,255}
-.pick-top,.pick-bottom{display:none}
 .pick-layer{display:none;position:absolute;z-index:2;left:0;right:0;top:46%;height:0;align-items:center;justify-content:center;pointer-events:none}
 .pick-layer .pick-btn{pointer-events:auto}
 .receipt-wrap.locked + .pick-layer{display:flex}
@@ -409,14 +378,11 @@ select.fill option{color:var(--ink);background:var(--white)}
 .hero-cta[hidden],.hero-cta [hidden]{display:none}
 .choose-hint{margin:0;max-width:34em;font-size:clamp(16px,1.6vw,19px);line-height:1.4;color:rgba(255,255,255,.88)}
 @media (max-width:820px){
-  .pick-btn{font-size:14px;padding:13px 16px}
-  .spend-stack,.invest-stack{display:contents}
-  .invest-stack .duel-sentence,.invest-stack.locked-stack .duel-sentence{grid-area:sent;position:static;transform:none;width:auto;max-width:none;justify-self:center;padding:0;background:none;box-shadow:none;border-radius:0;font-size:15px!important;line-height:2!important;text-align:center;margin:2px 0 0!important}
+  .pick-btn{font-size:17px;padding:15px 26px}
   .receipt-wrap.locked .receipt{filter:blur(6px)}
   .hero-cta .btn-big{width:100%}
-  .duel[data-chosen]{--rf:14px;grid-template-areas:none;justify-content:center;margin-inline:0;row-gap:18px}
-  .duel[data-chosen="spend"]{grid-template-columns:minmax(0,320px);grid-template-areas:"ctag" "rl"}
-  .duel[data-chosen="invest"]{grid-template-columns:minmax(0,340px);grid-template-areas:"ctag" "sent" "rr"}
+  .duel[data-chosen]{grid-template-columns:minmax(0,380px)}
+  .invest-stack.locked-stack .duel-sentence{white-space:nowrap;font-size:15px!important;line-height:1.9!important;padding:2px 12px}
 }
 @media (prefers-reduced-motion:reduce){.pick-btn,.page[data-stage="choose"] .duel,.duel[data-chosen],.icu,#shareCta{animation:none}}
 </style>
@@ -463,7 +429,6 @@ select.fill option{color:var(--ink);background:var(--white)}
       <div class="duel-col">
         <div class="spend-stack locked-stack" id="stackSpend">
         <span class="duel-tag bad chosen-tag">Витратити</span>
-        <button type="button" class="pick-btn bad pick-top" data-pick="spend">Витратити</button>
         <div class="receipt-wrap spend locked" id="wrapSpend" data-pick="spend">
           <div class="receipt">
             <div class="r-head">
@@ -480,13 +445,11 @@ select.fill option{color:var(--ink);background:var(--white)}
           </div>
         </div>
         <div class="pick-layer"><button type="button" class="pick-btn bad" data-pick="spend">Витратити</button></div>
-        <button type="button" class="pick-btn bad pick-bottom" data-pick="spend">Витратити</button>
         </div>
       </div>
       <div class="duel-col big">
         <div class="invest-stack locked-stack" id="stackInvest">
           <span class="duel-tag good chosen-tag">Інвестувати</span>
-          <button type="button" class="pick-btn good pick-top" data-pick="invest">Інвестувати</button>
           <p class="sentence duel-sentence">
             <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12">12%</option><option value="13">13%</option><option value="14">14%</option><option value="15" selected>15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select></span> річних</span>
             <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5" selected>5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10">10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span></span>
@@ -515,7 +478,6 @@ select.fill option{color:var(--ink);background:var(--white)}
           </div>
         </div>
         <div class="pick-layer"><button type="button" class="pick-btn good" data-pick="invest">Інвестувати</button></div>
-        <button type="button" class="pick-btn good pick-bottom" data-pick="invest">Інвестувати</button>
         </div>
       </div>
     </div>
