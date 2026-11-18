@@ -76,12 +76,12 @@ h3{font-size:18px;line-height:1.3}
 .page-head h1 .bad{color:var(--white)}.page-head h1 .bad::before{background:var(--red)}
 .subtitle{margin:0;font-size:clamp(17px,1.8vw,22px);line-height:1.4;color:var(--text);max-width:60ch}
 .nw{white-space:nowrap}
-.selwrap{position:relative;display:inline-block;vertical-align:baseline;margin:0 .06em}
-.selwrap::before{content:"";position:absolute;left:0;top:0;bottom:0;right:calc(.88em + 5px);background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;pointer-events:none;transition:background .15s}
+.selwrap{position:relative;display:inline-block;vertical-align:baseline;margin:0}
+.selwrap::before{content:"";position:absolute;left:0;top:0;bottom:0;right:.8em;background:rgba(255,255,255,.1);border-bottom:3px solid var(--turq);border-radius:10px 10px 0 0;pointer-events:none;transition:background .15s}
 .selwrap::after{content:"";position:absolute;right:0;top:50%;width:.5em;height:.5em;margin-top:-.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2374BBB8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
 .selwrap:hover::before{background:rgba(255,255,255,.16)}
 .selwrap:focus-within::before{background:rgba(116,187,184,.25)}
-select.fill.sel{position:relative;background:none!important;border:0!important;border-radius:0;margin:0;padding:0 1.07em 0 .22em;text-align:left}
+select.fill.sel{position:relative;background:none!important;border:0!important;border-radius:0;margin:0;padding:0 1.04em 0 .24em;text-align:left}
 select.fill.sel:focus{outline:none}
 .arrow{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:.95em}
 .arrow .a-d{display:none}
@@ -132,7 +132,19 @@ select.fill option{color:var(--ink);background:var(--white)}
 @media (min-width:900px){.duel-sentence{white-space:nowrap}}
 .hero .sentence{text-align:center;max-width:36em;margin:0 auto}
 .duel{display:grid;grid-template-columns:minmax(0,340px) minmax(0,470px);justify-content:center;align-items:end;gap:clamp(28px,5vw,72px);margin-top:4px}
-@media (max-width:820px){.duel{grid-template-columns:minmax(0,420px)}}
+@media (max-width:820px){.duel{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(18px,3.4vw,30px)}}
+/* the receipts keep one size whatever the budget: four fixed slots, single-line rows, a total that shrinks to fit */
+.duel .receipt{container-type:inline-size}
+#sItems{min-height:calc(4 * 22px + 3 * 10px);justify-content:space-between}
+.duel .row{min-width:0}
+.duel .row dt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.duel .row .dots{min-width:10px}
+#total{font-size:min(clamp(44px,5.4vw,64px),calc(100cqw / (var(--len,8) * .6)))}
+#total,.duel .total-loss{display:flex;align-items:center;min-height:calc(clamp(44px,5.4vw,64px) * 1.05)}
+.duel .total-row{flex-wrap:nowrap}
+.m-hide{display:inline}
+.row.m-only{display:none}
+.row .off.off-m{display:none}
 .duel-col{display:flex;flex-direction:column;align-items:center;gap:18px;min-width:0}
 .duel-tag{font-weight:700;font-size:15px;line-height:1;padding:9px 18px;border-radius:var(--r-sm)}
 .duel-tag.bad{background:var(--red);color:var(--white)}
@@ -152,6 +164,45 @@ select.fill option{color:var(--ink);background:var(--white)}
 .total-loss{color:var(--red)}
 .barcode.fake svg{display:block;width:100%;height:56px}
 .hero-cta{display:flex;justify-content:center}
+/* ---------- phones & small tablets: the two receipts stand side by side, at one level ---------- */
+@media (max-width:820px){
+  .duel{--rf:clamp(11.5px,1.5vw + 5.6px,14px);--rh:calc(2.9 * var(--rf) + 2px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"tl tr" "sent sent" "rl rr";gap:14px 12px;align-items:stretch;justify-content:stretch;margin-inline:-8px}
+  .duel-col{display:contents}
+  .duel-col:first-child .duel-tag{grid-area:tl}
+  .duel-col:first-child .receipt-wrap{grid-area:rl}
+  .duel-col.big .duel-tag{grid-area:tr}
+  .duel-col.big .duel-sentence{grid-area:sent;justify-self:center;text-align:center}
+  .duel-col.big .receipt-wrap{grid-area:rr}
+  .duel-tag{justify-self:center;align-self:end;font-size:13px;padding:8px 14px}
+  .m-hide,.d-only{display:none}
+  .duel .row.m-only{display:block}
+  .duel .receipt-wrap.spend{transform:rotate(.6deg)}
+  .duel .receipt-wrap:not(.spend){transform:rotate(-.6deg)}
+  .duel .receipt,.duel-col.big .receipt{padding:14px 12px 12px;gap:9px}
+  .duel .r-head{min-height:2.7em;justify-content:center}
+  .duel .r-head strong,.duel-col.big .r-head strong{display:block;max-width:7.6em;margin:0 auto;font-size:clamp(11px,1.3vw + 6px,14px);letter-spacing:.08em;line-height:1.3}
+  .duel .rows{gap:8px}
+  #sItems{min-height:calc(4 * var(--rh) + 3 * 8px)}
+  .duel .row,.duel-col.big .row{display:block;min-height:var(--rh);font-size:var(--rf);line-height:1.3}
+  .duel .row dt{display:block}
+  .duel .row .dots{display:none}
+  .duel .row dd{display:block;font-size:calc(1.2 * var(--rf));line-height:1.3;margin-top:1px}
+  .duel .row .off{font-size:max(9px,.8 * var(--rf));padding:1px 4px;border-radius:5px}
+  .duel .row .off.off-d{display:none}
+  .duel .row .off.off-m{display:inline-block;margin-left:6px;vertical-align:1px}
+  .duel .total-row{flex-wrap:wrap;gap:4px 6px;min-height:44px;align-content:flex-start;align-items:flex-start;justify-content:flex-start}
+  .duel .total-row span{font-size:clamp(10.5px,1.2vw + 5.8px,13px);letter-spacing:.07em}
+  .duel .total-row .tag{font-size:clamp(12px,1.2vw + 7.4px,15px);letter-spacing:0;padding:3px 8px 3px 20px;clip-path:polygon(9px 0,100% 0,100% 100%,9px 100%,0 50%)}
+  .duel .total-row .tag::before{left:7px;width:6px;height:6px;margin-top:-3px}
+  .duel .total,#total{font-size:min(clamp(30px,3.2vw + 17px,40px),calc(100cqw / (var(--len,8) * .6)));letter-spacing:-.03em}
+  #total,.duel .total-loss{min-height:calc(clamp(30px,3.2vw + 17px,40px) * 1.1)}
+  .duel .barcode.fake svg{height:58px}
+  .duel #barcode svg{height:46px}
+  .duel .barcode-cap{font-size:9.5px}
+  .duel .barcode-cap span:nth-child(2){display:none}
+  .duel .r-foot{font-size:clamp(10px,.9vw + 6.4px,12px)}
+}
+
 
 /* ---------- the receipt ---------- */
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,420px);gap:clamp(36px,6vw,96px);align-items:center}
@@ -357,7 +408,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         </div>
       </div>
       <div class="duel-col big">
-        <span class="duel-tag good">Інвестувати в ОВДП</span>
+        <span class="duel-tag good">Інвестувати<span class="m-hide"> в ОВДП</span></span>
           <p class="sentence duel-sentence">
             <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12" selected>12%</option><option value="13">13%</option><option value="14">14%</option><option value="15">15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select></span> річних</span>
             <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5">5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10" selected>10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span></span>
@@ -370,7 +421,9 @@ select.fill option{color:var(--ink);background:var(--white)}
             <hr class="dash">
             <dl class="rows">
               <div class="row"><dt id="rInvLabel">Інвестовано</dt><i class="dots"></i><dd id="rInv">5 000 ₴</dd></div>
-              <div class="row"><dt id="rGainLabel">Дохід, 12% річних</dt><i class="dots"></i><dd class="gain" id="rGain">+10 529 ₴</dd></div>
+              <div class="row m-only"><dt>Ставка</dt><i class="dots"></i><dd id="rRate">12% річних</dd></div>
+              <div class="row m-only"><dt>Термін</dt><i class="dots"></i><dd id="rTerm">10 років</dd></div>
+              <div class="row"><dt><span id="rGainLabel">Дохід</span><span class="d-only" id="rGainRate">, 12% річних</span></dt><i class="dots"></i><dd class="gain" id="rGain">+10 529 ₴</dd></div>
             </dl>
             <hr class="dash">
             <div class="total-row"><span id="rTotalLabel">ЧЕРЕЗ 10 РОКІВ</span><span class="tag" id="badge">+211%</span></div>
@@ -576,7 +629,7 @@ select.fill option{color:var(--ink);background:var(--white)}
       const t = getText() || '0';
       if (m.textContent !== t) m.textContent = t;
       const em = parseFloat(getComputedStyle(el).fontSize) || 16;
-      el.style.width = Math.ceil(m.getBoundingClientRect().width + em * extraEm + (el.classList.contains('bare') ? 1 : 4)) + 'px';
+      el.style.width = Math.ceil(m.getBoundingClientRect().width + em * extraEm + (el.classList.contains('bare') || el.classList.contains('sel') ? 1 : 4)) + 'px';
     };
     if ('ResizeObserver' in window) new ResizeObserver(apply).observe(m);
     el._size = apply; apply();
@@ -597,18 +650,18 @@ select.fill option{color:var(--ink);background:var(--white)}
 
   // the spending receipt: the budget turns into a different basket of typical Black Friday buys
   const CATALOG = [
-    ['Вживане авто', 380000], ['Відпустка на Мальдівах', 180000], ['Шуба', 90000], ['MacBook Pro', 85000], ['Електровелосипед', 45000], ['Ноутбук', 32000], ['Кондиціонер', 27000], ['Телевізор 55″', 24000], ['Ігрова консоль', 21000], ['Пральна машина', 19000], ['Смартфон', 17000], ['Електросамокат', 14000],
-    ['Робот-пилосос', 11000], ['Кавомашина', 8500], ['Пуховик', 6500], ['Розумний годинник', 5500],
+    ['Вживане авто', 380000], ['Тур на Балі', 180000], ['Шуба', 90000], ['MacBook Pro', 85000], ['Е-велосипед', 45000], ['Ноутбук', 32000], ['Кондиціонер', 27000], ['Телевізор 55″', 24000], ['Ігрова консоль', 21000], ['Пральна машина', 19000], ['Смартфон', 17000], ['Е-самокат', 14000],
+    ['Робот-пилосос', 11000], ['Кавомашина', 8500], ['Пуховик', 6500], ['Смарт-годинник', 5500],
     ['Аерогриль', 3900], ['Кросівки', 3400], ['Навушники', 2600], ['Парфуми', 2300],
-    ['Худі', 1700], ['Павербанк', 1200], ['Набір косметики', 900], ['Настільна гра', 750],
-    ['Чохол для телефону', 450], ['Свічка «бо знижка»', 350], ['Шкарпетки з оленями', 250]
+    ['Худі', 1700], ['Павербанк', 1200], ['Косметика', 900], ['Настільна гра', 750],
+    ['Чохол', 450], ['Свічка', 350], ['Шкарпетки', 250]
   ];
   const DISCOUNTS = ['−20%', '−25%', '−30%', '−40%', '−50%'];
   function basket(budget){
     let seed = (budget * 7919) % 233280 || 1;
     const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
     const picks = []; let left = budget;
-    for (let k = 0; k < 4 && left >= 250; k++){
+    for (let k = 0; k < 3 && left >= 250; k++){
       const cap = k === 0 ? (budget < 1500 ? budget : budget * 0.6) : left * 0.9;
       const fits = CATALOG.filter(([n, p]) => p <= cap && !picks.some(x => x[0] === n));
       if (!fits.length) break;
@@ -616,7 +669,7 @@ select.fill option{color:var(--ink);background:var(--white)}
       picks.push([it[0], it[1], DISCOUNTS[Math.floor(rnd() * DISCOUNTS.length)]]);
       left -= it[1];
     }
-    if (left >= 150 || !picks.length) picks.push(['Дрібниці в кошик', left, '']);
+    if (left >= 150 || !picks.length) picks.push(['Дрібниці', left, '']);
     else picks[picks.length - 1][1] += left;                                  // keep the total exact
     return picks;
   }
@@ -624,7 +677,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     const s = state, yw = yearsWord(s.years);
     let html = '';
     basket(s.amount).forEach(([name, price, off]) => {
-      html += '<div class="row"><dt>' + name + (off ? ' <span class="off">' + off + '</span>' : '') + '</dt><i class="dots"></i><dd>' + money(price) + '</dd></div>';
+      html += '<div class="row"><dt>' + name + (off ? ' <span class="off off-d">' + off + '</span>' : '') + '</dt><i class="dots"></i><dd>' + money(price) + (off ? '<span class="off off-m">' + off + '</span>' : '') + '</dd></div>';
     });
     if (s.mode === 'yearly' && s.years > 1)
       html += '<div class="row times"><dt>× ' + s.years + ' ' + plural(s.years, 'Чорна п’ятниця', 'Чорні п’ятниці', 'Чорних п’ятниць') + '</dt><i class="dots"></i><dd>' + money(R.invested) + '</dd></div>';
@@ -643,11 +696,12 @@ select.fill option{color:var(--ink);background:var(--white)}
     renderSpend(R);
     $('rInvLabel').textContent = s.mode === 'yearly' && s.years > 1 ? 'Інвестовано, ' + money(s.amount) + ' × ' + s.years : 'Інвестовано';
     $('rInv').textContent = money(R.invested);
-    $('rGainLabel').textContent = 'Дохід, ' + pct(s.rate) + '% річних';
+    $('rGainLabel').textContent = 'Дохід'; $('rGainRate').textContent = ', ' + pct(s.rate) + '% річних';
+    $('rRate').textContent = pct(s.rate) + '% річних'; $('rTerm').textContent = s.years + ' ' + yw;
     $('rGain').textContent = '+' + money(R.gain);
     $('rTotalLabel').textContent = ('Через ' + s.years + ' ' + yw).toUpperCase();
     $('badge').textContent = badgeText(R);
-    $('total').textContent = money(R.total);
+    $('total').textContent = money(R.total); $('total').style.setProperty('--len', String(money(R.total).length));
     $('barcode').innerHTML = barcodeSVG(R);
     $('capFrom').textContent = bfYear;
     $('capTo').textContent = bfYear + s.years;
@@ -865,8 +919,8 @@ select.fill option{color:var(--ink);background:var(--white)}
   });
 
   attachSizer(amountEl, () => amountEl.value, 0.12);
-  attachSizer(rateIn, () => rateIn.options[rateIn.selectedIndex].text, 1.32);
-  attachSizer(yearsIn, () => yearsIn.options[yearsIn.selectedIndex].text, 1.32);
+  attachSizer(rateIn, () => rateIn.options[rateIn.selectedIndex].text, 1.28);
+  attachSizer(yearsIn, () => yearsIn.options[yearsIn.selectedIndex].text, 1.28);
   if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', () => { [amountEl, rateIn, yearsIn].forEach(sizeFill); sizeSelect(); });
 
   /* ---------- save & copy ---------- */
