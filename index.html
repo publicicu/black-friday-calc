@@ -61,12 +61,13 @@ h3{font-size:18px;line-height:1.3}
 .hero>.deco-r{right:0}
 @media (max-width:760px){.hero>.deco{opacity:.4;width:46%}}
 .hero{text-align:left}
-.bar{align-self:stretch;margin-bottom:-8px;padding:0 var(--pad-x);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bar{align-self:stretch;margin-bottom:-26px;padding:0 var(--pad-x);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .logo{display:block;width:102px;height:46px;overflow:visible}
 .pill b{font-weight:700;font-variant-numeric:tabular-nums}
 @media (max-width:600px){.bar{flex-direction:column;justify-content:center;gap:12px;text-align:center}}
 @media (max-width:480px){.pill{font-size:12px}}
-.pill{display:inline-block;color:var(--ink);font-weight:500;font-size:15px;line-height:1.4}
+.pill{display:inline-block;white-space:nowrap;color:var(--ink);font-weight:500;font-size:15px;line-height:1.4}
+@media (max-width:400px){.pill{font-size:13px}}
 .pill .clock{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;margin-right:6px}
 .page-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;padding:0 var(--pad-x);margin-bottom:-8px}
 .page-head h1{font-size:clamp(32px,4.4vw,58px);line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
@@ -652,7 +653,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     const d = Math.floor(t / 86400); t -= d * 86400;
     const h = Math.floor(t / 3600); t -= h * 3600;
     const m = Math.floor(t / 60), sec = t - m * 60;
-    cdEl.innerHTML = window.innerWidth < 420
+    cdEl.innerHTML = window.innerWidth < 600
       ? '<span class="clock" aria-hidden="true">⏰</span>До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') + ' <b>' + pad2(h) + ':' + pad2(m) + ':' + pad2(sec) + '</b>'
       : '<span class="clock" aria-hidden="true">⏰</span>До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') +
         ' <b>' + pad2(h) + '</b>&nbsp;год <b>' + pad2(m) + '</b>&nbsp;хв <b>' + pad2(sec) + '</b>&nbsp;с';
