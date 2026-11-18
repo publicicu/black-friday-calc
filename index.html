@@ -519,10 +519,9 @@ select.fill option{color:var(--ink);background:var(--white)}
       <ol class="sm-steps">
         <li>
           <h3>Збережи свій чек</h3>
-          <p>Обери формат і поділись картинкою одразу або збережи її в галерею.</p>
+          <p>Обери формат і збережи картинку в галерею.</p>
           <div class="actions">
-            <button type="button" class="btn primary" id="shareBtn">Поділитися картинкою</button>
-            <button type="button" class="btn ghost" id="saveBtn">Зберегти</button>
+            <button type="button" class="btn primary" id="saveBtn">Зберегти</button>
           </div>
         </li>
         <li>
@@ -1047,12 +1046,6 @@ select.fill option{color:var(--ink);background:var(--white)}
     const a = document.createElement('a');
     a.href = u; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
   }
-
-  $('shareBtn').addEventListener('click', async () => {
-    const c = await cardFile(); if (!c){ say('Не вдалося створити картинку. Спробуй ще раз.'); return; }
-    const r = await shareSheet(c);
-    if (r === 'unsupported'){ await download(c); say('Тут меню «Поділитися» недоступне, тож картинку завантажено. Опублікуй її з галереї.'); }
-  });
 
   $('saveBtn').addEventListener('click', async () => {
     const c = await cardFile(); if (!c){ say('Не вдалося створити картинку. Спробуй ще раз.'); return; }
