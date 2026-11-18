@@ -166,14 +166,11 @@ select.fill option{color:var(--ink);background:var(--white)}
 .hero-cta{display:flex;justify-content:center}
 /* ---------- phones & small tablets: the two receipts stand side by side, at one level ---------- */
 @media (max-width:820px){
-  .duel{--rf:clamp(11.5px,1.5vw + 5.6px,14px);--rh:calc(2.9 * var(--rf) + 2px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"tl tr" "sent sent" "rl rr";gap:14px 12px;align-items:stretch;justify-content:stretch;margin-inline:-8px}
+  .duel{--rf:clamp(11.5px,1.5vw + 5.6px,14px);--rh:calc(2.9 * var(--rf) + 2px);grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"sent sent" "rl rr";gap:14px 12px;align-items:stretch;justify-content:stretch;margin-inline:-8px}
   .duel-col{display:contents}
-  .duel-col:first-child .duel-tag{grid-area:tl}
   .duel-col:first-child .receipt-wrap{grid-area:rl}
-  .duel-col.big .duel-tag{grid-area:tr}
   .duel-col.big .duel-sentence{grid-area:sent;justify-self:center;text-align:center}
   .duel-col.big .receipt-wrap{grid-area:rr}
-  .duel-tag{justify-self:center;align-self:end;font-size:13px;padding:8px 14px}
   .m-hide,.d-only{display:none}
   .duel .row.m-only{display:block}
   .duel .receipt-wrap.spend{transform:rotate(.6deg)}
@@ -357,28 +354,39 @@ select.fill option{color:var(--ink);background:var(--white)}
 .budget .go{margin-top:8px}
 .btn{gap:.5em}
 .page[data-stage="choose"] .budget .go{display:none}
-button.duel-tag.pick{appearance:none;border:0;font:inherit;font-weight:700;font-size:clamp(16px,1.5vw,19px);line-height:1;padding:16px 30px;border-radius:999px;cursor:pointer;box-shadow:0 12px 26px rgba(0,0,0,.28);transition:transform .15s,box-shadow .15s,filter .15s}
-button.duel-tag.pick:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.34);filter:brightness(1.06)}
-button.duel-tag.pick:active{transform:none}
-button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
 .receipt-wrap{position:relative}
 .receipt-wrap .receipt{transition:filter .7s ease}
-.receipt-wrap .veil{display:none}
 .receipt-wrap.locked{cursor:pointer}
 .receipt-wrap.locked .receipt{filter:blur(7px);pointer-events:none;user-select:none}
 .receipt-wrap.locked:hover .receipt{filter:blur(4.5px)}
-.receipt-wrap.locked .veil{display:grid;place-items:center;position:absolute;z-index:2;left:50%;top:44%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:var(--white);color:var(--ink);font-size:36px;font-weight:700;line-height:1;box-shadow:0 14px 28px rgba(2,24,45,.35);animation:bob 2.4s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.pick-btn{display:none;appearance:none;border:0;font:inherit;font-weight:700;font-size:clamp(17px,1.7vw,21px);line-height:1;white-space:nowrap;padding:17px 30px;border-radius:999px;cursor:pointer;position:absolute;z-index:2;left:50%;top:46%;transform:translate(-50%,-50%);box-shadow:0 14px 30px rgba(2,24,45,.4);transition:box-shadow .15s,filter .15s}
+.pick-btn.bad{background:var(--red);color:var(--white)}
+.pick-btn.good{background:var(--turq);color:var(--ink)}
+.receipt-wrap.locked .pick-btn{display:block;animation:bob 2.6s ease-in-out infinite}
+.receipt-wrap.locked:hover .pick-btn,.pick-btn:focus-visible{filter:brightness(1.07);box-shadow:0 18px 36px rgba(2,24,45,.5)}
+@keyframes bob{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 7px))}}
+/* once a receipt is picked the other one leaves */
+.duel[data-chosen="spend"] .duel-col.big>*,.duel[data-chosen="invest"] .duel-col:first-child>*{display:none}
+.duel[data-chosen="spend"]{grid-template-columns:minmax(0,350px)}
+.duel[data-chosen="invest"]{grid-template-columns:minmax(0,480px)}
+.duel[data-chosen]{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.page>.budget{margin-bottom:-26px}
+.again{appearance:none;background:none;border:0;font:inherit;font-size:15px;font-weight:500;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px 8px}
+.again:hover{color:var(--white)}
+.icu[hidden]{display:none}
+.icu:not([hidden]){animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
 .hero-cta{flex-direction:column;align-items:center;gap:16px;text-align:center}
 .hero-cta[hidden],.hero-cta [hidden]{display:none}
 .choose-hint{margin:0;max-width:34em;font-size:clamp(16px,1.6vw,19px);line-height:1.4;color:rgba(255,255,255,.88)}
 @media (max-width:820px){
-  button.duel-tag.pick{justify-self:stretch;font-size:14px;padding:13px 6px;box-shadow:0 8px 18px rgba(0,0,0,.28)}
-  .receipt-wrap.locked .veil{width:46px;height:46px;margin:-23px 0 0 -23px;font-size:26px}
+  .pick-btn{font-size:14px;padding:13px 16px}
   .receipt-wrap.locked .receipt{filter:blur(5px)}
   .hero-cta .btn-big{width:100%}
+  .duel[data-chosen]{--rf:14px;grid-template-areas:none;justify-content:center;margin-inline:0}
+  .duel[data-chosen="spend"]{grid-template-columns:minmax(0,320px);grid-template-areas:"rl"}
+  .duel[data-chosen="invest"]{grid-template-columns:minmax(0,340px);grid-template-areas:"sent" "rr"}
 }
-@media (prefers-reduced-motion:reduce){.receipt-wrap.locked .veil,.page[data-stage="choose"] .hero{animation:none}}
+@media (prefers-reduced-motion:reduce){.receipt-wrap.locked .pick-btn,.page[data-stage="choose"] .hero,.duel[data-chosen],.icu{animation:none}}
 </style>
 </head>
 <body>
@@ -392,8 +400,7 @@ button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
 
   <header class="page-head">
     <h1><span class="hl bad">Витрачати</span> чи <span class="hl good">інвестувати?</span></h1>
-    <p class="subtitle" id="sub">Введіть бюджет на Чорну п’ятницю, а далі оберіть, що з ним зробити</p>
-  </header>
+      </header>
 
   <section class="budget" aria-label="Бюджет">
     <p class="question">Ваш бюджет на Чорну п’ятницю</p>
@@ -421,9 +428,8 @@ button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
 
     <div class="duel" aria-live="polite" aria-label="Порівняння">
       <div class="duel-col">
-        <button type="button" class="duel-tag bad pick" data-pick="spend" aria-pressed="false">Витратити</button>
         <div class="receipt-wrap spend locked" id="wrapSpend" data-pick="spend">
-          <span class="veil" aria-hidden="true">?</span>
+          <button type="button" class="pick-btn bad" data-pick="spend">Витратити</button>
           <div class="receipt">
             <div class="r-head">
               <strong>ЧОРНА П’ЯТНИЦЯ</strong>
@@ -440,13 +446,12 @@ button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
         </div>
       </div>
       <div class="duel-col big">
-        <button type="button" class="duel-tag good pick" data-pick="invest" aria-pressed="false">Інвестувати<span class="m-hide"> в ОВДП</span></button>
           <p class="sentence duel-sentence">
             <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12">12%</option><option value="13">13%</option><option value="14">14%</option><option value="15" selected>15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select></span> річних</span>
             <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5" selected>5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10">10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span></span>
           </p>
         <div class="receipt-wrap locked" id="wrapInvest" data-pick="invest">
-          <span class="veil" aria-hidden="true">?</span>
+          <button type="button" class="pick-btn good" data-pick="invest">Інвестувати</button>
           <div class="receipt">
             <div class="r-head">
               <strong>ДЕРЖАВНІ ОБЛІГАЦІЇ</strong>
@@ -473,9 +478,10 @@ button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
     </div>
 
     <div class="hero-cta" id="heroCta">
-      <p class="choose-hint" id="hint">Натисніть на чек або на кнопку, щоб побачити, що буде з вашими грошима</p>
+      <p class="choose-hint" id="hint" hidden></p>
       <button type="button" class="btn primary btn-big" id="tryInvest" hidden>А якщо інвестувати? <span aria-hidden="true">→</span></button>
       <button type="button" class="btn primary btn-big" id="shareCta" data-open-share hidden>Поділитися чеком і взяти участь у розіграші</button>
+      <button type="button" class="again" id="again" hidden>Обрати ще раз</button>
     </div>
   </section>
 
@@ -554,9 +560,9 @@ button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
     </button>
   </dialog>
 
-  <section class="icu" aria-labelledby="icuTitle">
+  <section class="icu" id="icu" aria-labelledby="icuTitle" hidden>
     <div class="icu-head">
-      <h2 id="icuTitle">Спокійні інвестиції з ICU</h2>
+      <h2 id="icuTitle">Цікаво, куди можна інвестувати?</h2>
       <p>Розпродаж закінчиться за вихідні, а гроші можуть працювати роками. Ось три способи почати без зайвих хвилювань.</p>
     </div>
     <div class="cards">
@@ -1090,43 +1096,43 @@ button.duel-tag.pick[aria-pressed="true"]::after{content:" ✓"}
   /* ---------- start ---------- */
   update(); fitMark();
   /* ---------- choose your adventure ---------- */
-  const page = document.querySelector('.page');
-  const seen = {spend:false, invest:false};
-  function syncAdventure(){
-    $('wrapSpend').classList.toggle('locked', !seen.spend);
-    $('wrapInvest').classList.toggle('locked', !seen.invest);
-    $('wrapSpend').querySelector('.receipt').setAttribute('aria-hidden', String(!seen.spend));
-    $('wrapInvest').querySelector('.receipt').setAttribute('aria-hidden', String(!seen.invest));
-    document.querySelectorAll('.pick').forEach(b => b.setAttribute('aria-pressed', String(!!seen[b.dataset.pick])));
-    $('tryInvest').hidden = !(seen.spend && !seen.invest);
-    $('shareCta').hidden = !seen.invest;
-    $('hint').hidden = seen.invest;
-    $('hint').textContent = seen.spend
-      ? 'Ось і все: розпродаж закінчився, а разом із ним і гроші. Спробуємо інакше?'
-      : 'Натисніть на чек або на кнопку, щоб побачити, що буде з вашими грошима';
-    $('sub').textContent = page.dataset.stage === 'intro' ? 'Введіть бюджет на Чорну п’ятницю, а далі оберіть, що з ним зробити' : seen.invest ? 'Гарний вибір! Ваш чек готовий, його можна поширити' : 'Оберіть чек, який хочете побачити';
+  const page = document.querySelector('.page'), duel = document.querySelector('.duel');
+  let chosen = null;                       // null | 'spend' | 'invest'
+  function syncAdventure(hold){
+    // hold: keep the just-picked receipt blurred for one frame so it un-blurs with a transition
+    $('wrapSpend').classList.toggle('locked', chosen !== 'spend' || hold === 'spend');
+    $('wrapInvest').classList.toggle('locked', chosen !== 'invest' || hold === 'invest');
+    $('wrapSpend').querySelector('.receipt').setAttribute('aria-hidden', String(chosen !== 'spend'));
+    $('wrapInvest').querySelector('.receipt').setAttribute('aria-hidden', String(chosen !== 'invest'));
+    if (chosen) duel.dataset.chosen = chosen; else delete duel.dataset.chosen;
+    $('tryInvest').hidden = chosen !== 'spend';
+    $('shareCta').hidden = chosen !== 'invest';
+    $('again').hidden = chosen !== 'invest';
+    $('hint').hidden = chosen !== 'spend';
+    $('hint').textContent = 'Ось і все: розпродаж закінчився, а разом із ним і гроші. Спробуємо інакше?';
+    $('heroCta').hidden = !chosen;
+    $('icu').hidden = chosen !== 'invest';
+    [rateIn, yearsIn].forEach(sizeFill);
   }
   function startAdventure(){
     if (!state.amount){ amountEl.focus(); return; }
     stopPulse(); amountEl.blur();
     page.dataset.stage = 'choose'; syncAdventure();
     const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    requestAnimationFrame(() => $('hero').scrollIntoView({behavior: calm ? 'auto' : 'smooth', block: 'start'}));
+    requestAnimationFrame(() => window.scrollTo({top: document.querySelector('.page>.budget').getBoundingClientRect().top + scrollY - 20, behavior: calm ? 'auto' : 'smooth'}));
   }
   function choose(kind){
-    if (kind === 'spend'){ seen.spend = true; syncAdventure(); return; }
-    const first = !seen.invest;
-    seen.invest = true; syncAdventure();
-    setTimeout(openShare, first ? 750 : 0);          // let the receipt un-blur first
+    chosen = kind; syncAdventure(kind);
+    setTimeout(() => syncAdventure(), 80);
   }
   $('startBtn').addEventListener('click', startAdventure);
   amountEl.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); if (page.dataset.stage === 'intro') startAdventure(); else amountEl.blur(); } });
   document.querySelectorAll('[data-pick]').forEach(el => el.addEventListener('click', e => {
-    if (e.target.closest('select')) return;
-    if (el.classList.contains('receipt-wrap') && !el.classList.contains('locked')){ if (el.id === 'wrapInvest') openShare(); return; }
-    choose(el.dataset.pick);
+    if (el.classList.contains('receipt-wrap') && !el.classList.contains('locked')) return;
+    e.stopPropagation(); choose(el.dataset.pick);
   }));
   $('tryInvest').addEventListener('click', () => choose('invest'));
+  $('again').addEventListener('click', () => { chosen = null; syncAdventure(); });
   syncAdventure();
 
   const sample = 'Чорна п’ятниця чи інвестиція? КАСОВИЙ ЧЕК РАЗОМ 0123456789 ₴%+·';
