@@ -253,9 +253,10 @@ select.fill option{color:var(--ink);background:var(--white)}
 .sm-prizes h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--text)}
 .prize-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .pz{background:var(--surface);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.pz-vis{position:relative;width:100%;height:176px;border-radius:11px;overflow:hidden;background:var(--white);display:grid;place-items:center}
-.pz-vis img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
-.pz-vis.book img{width:auto;height:150px;max-width:90%;object-fit:contain;filter:drop-shadow(0 8px 12px rgba(11,37,59,.25))}
+.pz-vis{position:relative;width:100%;height:196px;border-radius:11px;overflow:hidden;background:var(--white);display:grid;place-items:center}
+.pz-vis img{width:auto;height:172px;max-width:88%;object-fit:contain;display:block}
+.pz-vis.pic img{border-radius:8px;box-shadow:0 8px 20px rgba(11,37,59,.25),0 0 0 1px rgba(11,37,59,.08)}
+.pz-vis.book img{filter:drop-shadow(0 8px 12px rgba(11,37,59,.25))}
 .pz-text{padding:0 4px 4px}
 .pz-text{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;font-size:13.5px;color:var(--text);line-height:1.35}
 .pz-text b{color:var(--ink);font-size:16px;line-height:1.25}
@@ -268,7 +269,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   .prize-row{grid-template-columns:minmax(0,1fr)}
   .pz{flex-direction:row;align-items:center;gap:14px}
   .pz-vis{flex:none;width:104px;height:104px}
-  .pz-vis.book img{height:84px}
+  .pz-vis img{height:84px}
   .pz-text{padding:0}
 }
 .btn-big{font-size:16px;padding:16px 28px}
@@ -570,7 +571,7 @@ select.fill option{color:var(--ink);background:var(--white)}
         <h3>Призи</h3>
         <div class="prize-row">
           <div class="pz">
-            <div class="pz-vis"><img src="img/prize-app.webp" width="640" height="800" alt="Застосунок ICU Trade зі списком ОВДП" loading="lazy"></div>
+            <div class="pz-vis pic"><img src="img/prize-app.webp" width="640" height="800" alt="Застосунок ICU Trade зі списком ОВДП" loading="lazy"></div>
             <div class="pz-text">
               <span class="prize-count">3 переможці</span>
               <b>Бонус +0,25% до дохідності</b>
@@ -586,7 +587,7 @@ select.fill option{color:var(--ink);background:var(--white)}
             </div>
           </div>
           <div class="pz">
-            <div class="pz-vis"><img src="img/prize-powerbank.webp" width="720" height="960" alt="Power bank з брендуванням ICU" loading="lazy"></div>
+            <div class="pz-vis pic"><img src="img/prize-powerbank.webp" width="720" height="960" alt="Power bank з брендуванням ICU" loading="lazy"></div>
             <div class="pz-text">
               <span class="prize-count">3 переможці</span>
               <b>Power bank</b>
