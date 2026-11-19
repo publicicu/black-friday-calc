@@ -693,25 +693,27 @@ select.fill option{color:var(--ink);background:var(--white)}
   }
   const today = new Date(); today.setHours(0,0,0,0);
   let bf = bfDate(today.getFullYear());
-  if (today > bf) bf = bfDate(today.getFullYear() + 1);
+  if (today >= new Date(bf.getFullYear(), 11, 4)) bf = bfDate(today.getFullYear() + 1);   /* the campaign runs until the end of 3 December */
   const bfYear = bf.getFullYear();
   const bfStr = String(bf.getDate()).padStart(2, '0') + '.' + String(bf.getMonth() + 1).padStart(2, '0') + '.' + bfYear;
   const daysLeft = Math.round((bf - today) / 864e5);
   const cdEl = $('countdown');
   const pad2 = n => String(n).padStart(2, '0');
+  /* before Black Friday: counts down to it; from Black Friday: counts down to the end of 3 December; then «Акція завершена» */
   function tickCountdown(){
-    const now = new Date();
-    let target = bfDate(now.getFullYear());
-    const end = new Date(target); end.setDate(end.getDate() + 1);
-    if (now >= end){ target = bfDate(now.getFullYear() + 1); }
-    if (now >= target && now < end){ cdEl.innerHTML = '<span class="clock" aria-hidden="true">⏰</span>Чорна п’ятниця вже сьогодні'; return; }
+    const now = new Date(), y = now.getFullYear();
+    const start = bfDate(y), end = new Date(y, 11, 4);   /* 00:00 on 4 December = the end of 3 December */
+    const clock = '<span class="clock" aria-hidden="true">⏰</span>';
+    if (now >= end){ cdEl.innerHTML = '<b>Акція завершена</b>'; return; }
+    const before = now < start, target = before ? start : end;
+    const label = before ? 'До Чорної п’ятниці' : 'До кінця акції';
     let t = Math.max(0, Math.floor((target - now) / 1000));
     const d = Math.floor(t / 86400); t -= d * 86400;
     const h = Math.floor(t / 3600); t -= h * 3600;
     const m = Math.floor(t / 60), sec = t - m * 60;
     cdEl.innerHTML = window.innerWidth < 600
-      ? '<span class="clock" aria-hidden="true">⏰</span>До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') + ' <b>' + pad2(h) + ':' + pad2(m) + ':' + pad2(sec) + '</b>'
-      : '<span class="clock" aria-hidden="true">⏰</span>До Чорної п’ятниці <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') +
+      ? clock + label + ' <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') + ' <b>' + pad2(h) + ':' + pad2(m) + ':' + pad2(sec) + '</b>'
+      : clock + label + ' <b>' + d + '</b>&nbsp;' + plural(d, 'день', 'дні', 'днів') +
         ' <b>' + pad2(h) + '</b>&nbsp;год <b>' + pad2(m) + '</b>&nbsp;хв <b>' + pad2(sec) + '</b>&nbsp;с';
   }
   tickCountdown(); setInterval(tickCountdown, 1000);
