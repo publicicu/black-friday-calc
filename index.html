@@ -12,14 +12,14 @@
 <meta property="og:url" content="https://publicicu.github.io/black-friday-calc/">
 <meta property="og:site_name" content="ICU">
 <meta property="og:locale" content="uk_UA">
-<meta property="og:image" content="https://publicicu.github.io/black-friday-calc/og-image-v7.png">
+<meta property="og:image" content="https://publicicu.github.io/black-friday-calc/og-image-v8.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Інвестувати чи витрачати? Чек з прикладом: 10 000 ₴ під 12% річних через 10 років можуть стати 31 058 ₴">
+<meta property="og:image:alt" content="Інвестувати чи витрачати? Чек з прикладом: 10 000 ₴ під 15% річних через 5 років можуть стати 20 114 ₴">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Інвестувати чи витрачати?">
 <meta name="twitter:description" content="Скільки може принести твоя Чорна п’ятниця у вигляді інвестиції">
-<meta name="twitter:image" content="https://publicicu.github.io/black-friday-calc/og-image-v7.png">
+<meta name="twitter:image" content="https://publicicu.github.io/black-friday-calc/og-image-v8.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0B253B">
@@ -120,7 +120,7 @@ select.fill option{color:var(--ink);background:var(--white)}
 /* ---------- dropdown list for rate / years ---------- */
 .pm{position:fixed;z-index:1000;box-sizing:border-box;background:var(--ink);color:var(--white);border:1px solid rgba(116,187,184,.4);border-radius:14px;padding:6px;box-shadow:0 18px 40px rgba(2,24,45,.5);font-family:inherit;animation:pm-in .14s ease-out both}
 .pm[hidden]{display:none}
-.pm-list{max-height:222px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(116,187,184,.55) transparent;display:flex;flex-direction:column;gap:2px}
+.pm-list{max-height:244px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(116,187,184,.55) transparent;display:flex;flex-direction:column;gap:2px}
 .pm-list::-webkit-scrollbar{width:6px}.pm-list::-webkit-scrollbar-thumb{background:rgba(116,187,184,.5);border-radius:6px}
 .pm-opt{appearance:none;border:0;font:inherit;font-size:15px;font-weight:500;line-height:1;display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;min-height:36px;padding:0 10px 0 12px;border-radius:9px;background:transparent;color:var(--white);cursor:pointer;text-align:left;font-variant-numeric:tabular-nums;flex:none}
 .pm-opt:hover,.pm-opt:focus-visible{background:rgba(255,255,255,.1);outline:none}
@@ -197,7 +197,8 @@ select.fill option{color:var(--ink);background:var(--white)}
 .receipt{color:var(--ink);text-align:left;background:var(--white);padding:30px 30px 22px;border-radius:6px 6px 0 0;display:flex;flex-direction:column;gap:16px;position:relative}
 .receipt::after{content:"";position:absolute;left:0;right:0;bottom:-12px;height:12px;background:linear-gradient(135deg,var(--white) 50%,transparent 50%) 0 0/18px 12px repeat-x,linear-gradient(225deg,var(--white) 50%,transparent 50%) 0 0/18px 12px repeat-x}
 .r-head{text-align:center;display:flex;flex-direction:column;gap:2px}
-.r-head strong{font-size:15px;letter-spacing:.1em}
+.r-head strong{font-size:16px;letter-spacing:.01em}
+.receipt-wrap.spend .r-head strong{font-size:15px;letter-spacing:.1em}
 .r-head span{color:var(--text);font-size:13px}
 .dash{border:0;border-top:2px dashed var(--hint);margin:0}
 .rows{display:flex;flex-direction:column;gap:10px;margin:0}
@@ -229,7 +230,7 @@ select.fill option{color:var(--ink);background:var(--white)}
 .share-modal[open]{animation:pop .18s ease-out}
 @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
 .share-modal .share{max-width:none;margin:0;border-radius:0;padding:clamp(22px,4vw,36px);padding-right:clamp(22px,4vw,56px)}
-.sm{padding:clamp(20px,3.6vw,40px);display:grid;grid-template-columns:270px minmax(0,1fr);grid-template-areas:"visual head" "visual steps" "visual status" "visual prizes";column-gap:clamp(24px,4vw,48px);row-gap:20px;align-items:start}
+.sm{padding:clamp(20px,3.6vw,40px);display:grid;grid-template-columns:270px minmax(0,1fr);grid-template-areas:"visual head" "visual steps" "visual status" "prizes prizes";column-gap:clamp(24px,4vw,48px);row-gap:20px;align-items:start}
 .sm-head{grid-area:head;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-right:44px}
 .sm-head h2{font-size:clamp(22px,2.4vw,30px);line-height:1.2}
 .sm-head .gw-lead{font-size:16px}
@@ -250,15 +251,13 @@ select.fill option{color:var(--ink);background:var(--white)}
 .sm-status:empty{display:none}
 .sm-prizes{grid-area:prizes;display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--hint);padding-top:18px}
 .sm-prizes h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--text)}
-.prize-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.pz{background:var(--surface);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;min-width:0}
-.pz-vis{flex:none;width:86px;display:grid;place-items:center}
-.pz-emoji{font-size:44px;line-height:1;transform:rotate(-8deg);font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
-.pz-wide{grid-column:1/-1}
-.pz-vis img{width:56px;height:auto;filter:drop-shadow(0 6px 10px rgba(11,37,59,.22))}
-.pz-tag{position:relative;display:inline-block;background:var(--yellow);color:var(--ink);font-weight:700;font-size:15px;padding:8px 10px 8px 22px;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%);transform:rotate(-8deg);white-space:nowrap;font-variant-numeric:tabular-nums}
-.pz-tag::before{content:"";position:absolute;left:10px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--surface)}
-.pz-text{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;font-size:13.5px;color:var(--text);line-height:1.35}
+.prize-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pz{background:var(--surface);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.pz-vis{position:relative;width:100%;height:176px;border-radius:11px;overflow:hidden;background:var(--white);display:grid;place-items:center}
+.pz-vis img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.pz-vis.book img{width:auto;height:150px;max-width:90%;object-fit:contain;filter:drop-shadow(0 8px 12px rgba(11,37,59,.25))}
+.pz-text{padding:0 4px 4px}
+.pz-text{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;font-size:13.5px;color:var(--text);line-height:1.35}
 .pz-text b{color:var(--ink);font-size:16px;line-height:1.25}
 .pz-text a{color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
 @media (max-width:820px){
@@ -267,6 +266,10 @@ select.fill option{color:var(--ink);background:var(--white)}
   .sm-visual .preview{max-width:min(260px,72vw)}
   .sm-visual .preview.story{width:min(200px,56vw)}
   .prize-row{grid-template-columns:minmax(0,1fr)}
+  .pz{flex-direction:row;align-items:center;gap:14px}
+  .pz-vis{flex:none;width:104px;height:104px}
+  .pz-vis.book img{height:84px}
+  .pz-text{padding:0}
 }
 .btn-big{font-size:16px;padding:16px 28px}
 .modal-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer}
@@ -381,6 +384,10 @@ select.fill option{color:var(--ink);background:var(--white)}
 .contest-kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
 .contest-kicker span{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;letter-spacing:0}
 #shareCta{background:var(--yellow);color:var(--ink);font-size:clamp(17px,1.7vw,20px);padding:20px 38px;animation:glow 2.2s ease-out infinite;transition:transform .15s,background .15s}
+.contest-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:12px}
+#investCta{background:transparent;color:var(--white);border:2px solid var(--turq);font-size:clamp(17px,1.7vw,20px);padding:18px 32px;transition:background .15s,color .15s,transform .15s}
+@media (hover:hover){#investCta:hover{background:var(--turq);color:var(--ink);transform:translateY(-2px)}}
+#investCta[aria-expanded="true"]{background:rgba(116,187,184,.2)}
 #shareCta:hover{filter:none;background:#FFF28A;transform:translateY(-2px)}
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(251,235,80,.6)}70%,100%{box-shadow:0 0 0 20px rgba(251,235,80,0)}}
 .again{appearance:none;background:none;border:0;font:inherit;font-size:15px;font-weight:500;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px 8px}
@@ -398,6 +405,8 @@ select.fill option{color:var(--ink);background:var(--white)}
   .page[data-stage="choose"] .duel:not([data-chosen]){gap:20px}
   .hero-cta .btn-big{width:100%}
   #shareCta{font-size:17px;padding-left:14px;padding-right:14px;white-space:nowrap}
+  .contest-row{flex-direction:column;align-self:stretch}
+  #investCta{font-size:17px;padding-top:15px;padding-bottom:15px}
   .duel[data-chosen],.duel[data-only]{grid-template-columns:minmax(0,380px)}
   .invest-stack.locked-stack .duel-sentence{white-space:nowrap;font-size:15px!important;line-height:1.9!important;padding:2px 12px}
 }
@@ -468,13 +477,13 @@ select.fill option{color:var(--ink);background:var(--white)}
         <div class="invest-stack locked-stack" id="stackInvest">
           <span class="duel-tag good chosen-tag">Інвестувати</span>
           <p class="sentence duel-sentence">
-            <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="1">1%</option><option value="2">2%</option><option value="3">3%</option><option value="4">4%</option><option value="5">5%</option><option value="6">6%</option><option value="7">7%</option><option value="8">8%</option><option value="9">9%</option><option value="10">10%</option><option value="11">11%</option><option value="12">12%</option><option value="13">13%</option><option value="14">14%</option><option value="15" selected>15%</option><option value="16">16%</option><option value="17">17%</option><option value="18">18%</option><option value="19">19%</option><option value="20">20%</option><option value="21">21%</option><option value="22">22%</option><option value="23">23%</option><option value="24">24%</option><option value="25">25%</option><option value="26">26%</option><option value="27">27%</option><option value="28">28%</option><option value="29">29%</option><option value="30">30%</option></select></span> річних</span>
-            <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5" selected>5 років</option><option value="6">6 років</option><option value="7">7 років</option><option value="8">8 років</option><option value="9">9 років</option><option value="10">10 років</option><option value="11">11 років</option><option value="12">12 років</option><option value="13">13 років</option><option value="14">14 років</option><option value="15">15 років</option><option value="16">16 років</option><option value="17">17 років</option><option value="18">18 років</option><option value="19">19 років</option><option value="20">20 років</option><option value="21">21 рік</option><option value="22">22 роки</option><option value="23">23 роки</option><option value="24">24 роки</option><option value="25">25 років</option><option value="26">26 років</option><option value="27">27 років</option><option value="28">28 років</option><option value="29">29 років</option><option value="30">30 років</option><option value="31">31 рік</option><option value="32">32 роки</option><option value="33">33 роки</option><option value="34">34 роки</option><option value="35">35 років</option><option value="36">36 років</option><option value="37">37 років</option><option value="38">38 років</option><option value="39">39 років</option><option value="40">40 років</option></select></span></span>
+            <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="13">13%</option><option value="13.5">13,5%</option><option value="14">14%</option><option value="14.5">14,5%</option><option value="15" selected>15%</option><option value="15.5">15,5%</option><option value="16">16%</option><option value="16.5">16,5%</option><option value="17">17%</option></select></span> річних</span>
+            <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5" selected>5 років</option></select></span></span>
           </p>
         <div class="receipt-wrap locked" id="wrapInvest" data-pick="invest">
           <div class="receipt">
             <div class="r-head">
-              <strong>ДЕРЖАВНІ ОБЛІГАЦІЇ</strong>
+              <strong>Державні облігації з ICU</strong>
             </div>
             <hr class="dash">
             <dl class="rows">
@@ -504,7 +513,10 @@ select.fill option{color:var(--ink);background:var(--white)}
       <button type="button" class="btn primary btn-big" id="tryInvest" hidden>А якщо інвестувати? <span aria-hidden="true">→</span></button>
       <div class="contest" id="contest" hidden>
         <span class="contest-kicker"><span aria-hidden="true">🎁</span> Розіграш</span>
-        <button type="button" class="btn primary btn-big" id="shareCta" data-open-share>Поділися чеком і виграй приз</button>
+        <div class="contest-row">
+          <button type="button" class="btn primary btn-big" id="shareCta" data-open-share>Поділися чеком і виграй приз</button>
+          <button type="button" class="btn btn-big" id="investCta" aria-controls="icu" aria-expanded="false">Інвестуй з ICU</button>
+        </div>
       </div>
       <button type="button" class="again" id="again" hidden>Обрати ще раз</button>
     </div>
@@ -530,7 +542,6 @@ select.fill option{color:var(--ink);background:var(--white)}
       <ol class="sm-steps">
         <li>
           <h3>Збережи свій чек</h3>
-          <p>Обери формат і збережи картинку в галерею.</p>
           <div class="actions">
             <button type="button" class="btn primary" id="saveBtn">Зберегти</button>
           </div>
@@ -555,26 +566,27 @@ select.fill option{color:var(--ink);background:var(--white)}
         <h3>Призи</h3>
         <div class="prize-row">
           <div class="pz">
-            <div class="pz-vis"><span class="pz-tag">+0,25%</span></div>
+            <div class="pz-vis"><img src="img/prize-app.webp" width="640" height="800" alt="Застосунок ICU Trade зі списком ОВДП" loading="lazy"></div>
             <div class="pz-text">
               <span class="prize-count">3 переможці</span>
-              <b>Бонус дохідності</b>
+              <b>Бонус +0,25% до дохідності</b>
               <span>до будь-яких облігацій в ICU&nbsp;Trade</span>
             </div>
           </div>
           <div class="pz">
-            <div class="pz-vis"><img src="img/memonomika.webp" width="275" height="450" alt="Обкладинка книжки «Мемономіка»" loading="lazy"></div>
+            <div class="pz-vis book"><img src="img/memonomika.webp" width="275" height="450" alt="Обкладинка книжки «Мемономіка»" loading="lazy"></div>
             <div class="pz-text">
               <span class="prize-count">3 переможці</span>
               <b>Книжка «Мемономіка»</b>
               <span>від «Останнього Капіталіста» та ICU. <a href="https://kapitalbooks.com.ua/">Про книжку →</a></span>
             </div>
           </div>
-          <div class="pz pz-wide">
-            <div class="pz-vis"><span class="pz-emoji" aria-hidden="true">🔋</span></div>
+          <div class="pz">
+            <div class="pz-vis"><img src="img/prize-powerbank.webp" width="720" height="960" alt="Power bank з брендуванням ICU" loading="lazy"></div>
             <div class="pz-text">
               <span class="prize-count">3 переможці</span>
               <b>Power bank</b>
+              <span>брендований, від ICU</span>
             </div>
           </div>
         </div>
@@ -861,15 +873,18 @@ select.fill option{color:var(--ink);background:var(--white)}
 
     // --- headline: МОЯ ЧОРНА П’ЯТНИЦЯ / Я ОБИРАЮ [ІНВЕСТУВАТИ]
     let y = top + 30;
+    c.textAlign = 'center';
     c.fillStyle = C.turq; c.font = '700 30px ' + FONT; ls('5px');
-    c.fillText('МОЯ ЧОРНА П’ЯТНИЦЯ', M, y); ls('0px');
+    c.fillText('МОЯ ЧОРНА П’ЯТНИЦЯ', W / 2 + 2, y); ls('0px');   // +2: balances the trailing letter-spacing
     y += 92;
-    c.font = '700 70px ' + FONT; c.fillStyle = C.white; c.fillText('Я ОБИРАЮ', M, y);
+    c.font = '700 70px ' + FONT; c.fillStyle = C.white; c.fillText('Я ОБИРАЮ', W / 2, y);
     y += 98;
     const hm = c.measureText('ІНВЕСТУВАТИ');
     const ha = hm.actualBoundingBoxAscent || 50, hd = hm.actualBoundingBoxDescent || 2, hp = 14;
-    rrect(c, M - 6, y - ha - hp, hm.width + 36, ha + hd + hp * 2, 16); c.fillStyle = C.turq; c.fill();
-    c.fillStyle = C.ink; c.fillText('ІНВЕСТУВАТИ', M + 12, y);
+    const hw = hm.width + 48;
+    rrect(c, W / 2 - hw / 2, y - ha - hp, hw, ha + hd + hp * 2, 16); c.fillStyle = C.turq; c.fill();
+    c.fillStyle = C.ink; c.fillText('ІНВЕСТУВАТИ', W / 2, y);
+    c.textAlign = 'left';
 
     // --- receipt paper
     const rx = M, rw = W - 2 * M, ry = y + 14 + 64 * g, rb = ry + rcH;
@@ -885,7 +900,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     const P = 56, x1 = rx + P, x2 = rx + rw - P;
     let ty = ry + 62;
     c.textAlign = 'center'; c.fillStyle = C.ink; c.font = '700 30px ' + FONT;
-    c.fillText('ДЕРЖАВНІ ОБЛІГАЦІЇ', W / 2, ty);
+    c.font = '700 34px ' + FONT; c.fillText('Державні облігації з ICU', W / 2, ty);
     c.textAlign = 'left';
     ty += 36; dashLine(c, x1, x2, ty);
     ty += 62;
@@ -1188,6 +1203,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   /* ---------- choose your adventure ---------- */
   const page = document.querySelector('.page'), duel = document.querySelector('.duel');
   let chosen = null;                       // null | 'spend' | 'invest'
+  let showIcu = false;                     // the «куди інвестувати» block opens only after «Інвестуй з ICU»
   let retry = false;                       // came back from «Витратити» to look at the investment first, blurred
   function syncAdventure(hold){
     // hold: keep the just-picked receipt blurred for one frame so it un-blurs with a transition
@@ -1205,7 +1221,8 @@ select.fill option{color:var(--ink);background:var(--white)}
     $('hint').hidden = chosen !== 'spend';
     $('hint').textContent = 'Ось і все: розпродаж закінчився, а разом із ним і гроші. Спробуємо інакше?';
     $('heroCta').hidden = !chosen;
-    $('icu').hidden = chosen !== 'invest';
+    $('icu').hidden = !(chosen === 'invest' && showIcu);
+    $('investCta').setAttribute('aria-expanded', String(chosen === 'invest' && showIcu));
     [rateIn, yearsIn].forEach(sizeFill);
   }
   function startAdventure(){
@@ -1216,7 +1233,7 @@ select.fill option{color:var(--ink);background:var(--white)}
     requestAnimationFrame(() => window.scrollTo({top: document.querySelector('.hero .budget').getBoundingClientRect().top + scrollY - 20, behavior: calm ? 'auto' : 'smooth'}));
   }
   function choose(kind){
-    chosen = kind; syncAdventure(kind);
+    chosen = kind; showIcu = false; syncAdventure(kind);
     setTimeout(() => syncAdventure(), 80);
   }
   $('startBtn').addEventListener('click', startAdventure);
@@ -1226,11 +1243,16 @@ select.fill option{color:var(--ink);background:var(--white)}
     e.stopPropagation(); choose(el.dataset.pick);
   }));
   $('tryInvest').addEventListener('click', () => {
-    chosen = null; retry = true; syncAdventure();
+    chosen = null; retry = true; showIcu = false; syncAdventure();
     const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     requestAnimationFrame(() => window.scrollTo({top: document.querySelector('.hero .budget').getBoundingClientRect().top + scrollY - 20, behavior: calm ? 'auto' : 'smooth'}));
   });
-  $('again').addEventListener('click', () => { chosen = null; retry = false; syncAdventure(); });
+  $('again').addEventListener('click', () => { chosen = null; retry = false; showIcu = false; syncAdventure(); });
+  $('investCta').addEventListener('click', () => {
+    showIcu = true; syncAdventure();
+    const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(() => window.scrollTo({top: $('icu').getBoundingClientRect().top + scrollY - 16, behavior: calm ? 'auto' : 'smooth'}));
+  });
   syncAdventure();
 
   const sample = 'Чорна п’ятниця чи інвестиція? КАСОВИЙ ЧЕК РАЗОМ 0123456789 ₴%+·';
