@@ -478,7 +478,7 @@ select.fill option{color:var(--ink);background:var(--white)}
           <span class="duel-tag good chosen-tag">Інвестувати</span>
           <p class="sentence duel-sentence">
             <span class="nw">під <span class="selwrap"><select class="fill sel" id="rateIn" aria-label="Дохідність, відсотків річних"><option value="13">13%</option><option value="13.5">13,5%</option><option value="14">14%</option><option value="14.5">14,5%</option><option value="15" selected>15%</option><option value="15.5">15,5%</option><option value="16">16%</option><option value="16.5">16,5%</option><option value="17">17%</option></select></span> річних</span>
-            <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3">3 роки</option><option value="4">4 роки</option><option value="5" selected>5 років</option></select></span></span>
+            <span class="nw">на <span class="selwrap"><select class="fill sel" id="yearsIn" aria-label="Строк інвестування"><option value="1">1 рік</option><option value="2">2 роки</option><option value="3" selected>3 роки</option><option value="4">4 роки</option><option value="5">5 років</option></select></span></span>
           </p>
         <div class="receipt-wrap locked" id="wrapInvest" data-pick="invest">
           <div class="receipt">
@@ -634,7 +634,7 @@ select.fill option{color:var(--ink);background:var(--white)}
   const C = {ink:'#0B253B', text:'#586276', hint:'#D0D0D0', g0:'#02182D', g1:'#204E7A', turq:'#74BBB8', orange:'#E25603', yellow:'#FBEB50', red:'#E0352B', gain:'#2E7B77', white:'#FFFFFF'};
   const CUR = '₴';
   const FONT = '"e-Ukraine", system-ui, sans-serif';
-  const state = {amount:5000, mode:'once', years:5, rate:15, fmt:'post'};
+  const state = {amount:5000, mode:'once', years:3, rate:15, fmt:'post'};
   const $ = id => document.getElementById(id);
 
   /* ---------- helpers ---------- */
