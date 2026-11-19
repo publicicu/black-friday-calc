@@ -357,8 +357,9 @@ select.fill option{color:var(--ink);background:var(--white)}
 .receipt-wrap.locked .receipt{filter:blur(8px);pointer-events:none;user-select:none}
 .receipt-wrap.locked .receipt *{color:transparent!important;text-shadow:0 0 14px rgba(11,37,59,.5)}
 .pick-btn{appearance:none;border:0;font:inherit;font-weight:700;font-size:clamp(17px,1.7vw,21px);line-height:1;white-space:nowrap;padding:17px 30px;border-radius:999px;cursor:pointer;box-shadow:0 14px 30px rgba(2,24,45,.4);--gc:255,255,255}
-.pick-layer{display:none;position:absolute;z-index:2;left:0;right:0;top:46%;height:0;align-items:center;justify-content:center;pointer-events:none}
+.pick-layer{display:none;position:absolute;z-index:2;left:0;right:0;top:50%;height:0;align-items:center;justify-content:center;pointer-events:none}
 .pick-layer .pick-btn{pointer-events:auto}
+.invest-stack .pick-layer{top:calc(50% - 23px)}   /* button + rate pill form one group, centred in the receipt */
 .receipt-wrap.locked + .pick-layer{display:flex}
 .pick-btn.bad{background:var(--red);color:var(--white);--gc:224,53,43}
 .pick-btn.good{background:var(--turq);color:var(--ink);--gc:116,187,184}
@@ -367,10 +368,14 @@ select.fill option{color:var(--ink);background:var(--white)}
 @keyframes pickglow{0%{box-shadow:0 14px 30px rgba(2,24,45,.4),0 0 0 0 rgba(var(--gc),.6)}70%,100%{box-shadow:0 14px 30px rgba(2,24,45,.4),0 0 0 16px rgba(var(--gc),0)}}
 .chosen-tag{display:none;font-size:clamp(17px,1.6vw,20px);padding:12px 26px;border-radius:999px}
 .duel[data-chosen="spend"] .chosen-tag.bad,.duel[data-chosen="invest"] .chosen-tag.good{display:block}
+@media (min-width:821px){   /* the two blurred receipts stand at the same height */
+  .duel:not([data-chosen]):not([data-only]){align-items:stretch}
+  .duel:not([data-chosen]):not([data-only]) .duel-col>.locked-stack{flex:1}
+}
 .spend-stack,.invest-stack{position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;width:100%;min-width:0}
 .spend-stack .receipt-wrap,.invest-stack .receipt-wrap{flex:1}
 /* while the receipt is blurred, the rate / term line sits right under the «Інвестувати» button */
-.invest-stack.locked-stack .duel-sentence{position:absolute;z-index:2;left:50%;top:calc(46% + 36px);transform:translateX(-50%);width:max-content;max-width:94%;margin:0!important;padding:2px 14px;border-radius:14px;background:rgba(2,24,45,.92);box-shadow:0 10px 24px rgba(2,24,45,.35)}
+.invest-stack.locked-stack .duel-sentence{position:absolute;z-index:2;left:50%;top:calc(50% + 13px);transform:translateX(-50%);width:max-content;max-width:94%;margin:0!important;padding:2px 14px;border-radius:14px;background:rgba(2,24,45,.92);box-shadow:0 10px 24px rgba(2,24,45,.35)}
 /* once a receipt is picked the other one leaves */
 .duel[data-chosen="spend"] .duel-col.big,.duel[data-chosen="invest"] .duel-col:first-child{display:none}
 .duel[data-chosen="spend"]{grid-template-columns:minmax(0,350px)}
@@ -403,9 +408,10 @@ select.fill option{color:var(--ink);background:var(--white)}
   .page[data-stage="intro"] .hero>.fine{position:static}
   .page[data-stage="choose"] .duel:not([data-chosen]){gap:20px}
   .hero-cta .btn-big{width:100%}
-  #shareCta{font-size:17px;padding-left:14px;padding-right:14px;white-space:nowrap}
+  #shareCta{font-size:15px;padding:17px 22px;white-space:nowrap}
+  #shareCta .gift{margin-left:.25em}
   .contest-row{flex-direction:column;align-self:stretch}
-  #investCta{font-size:17px;padding-top:15px;padding-bottom:15px}
+  #investCta{font-size:15px;padding-top:15px;padding-bottom:15px}
   .duel[data-chosen],.duel[data-only]{grid-template-columns:minmax(0,380px)}
   .invest-stack.locked-stack .duel-sentence{white-space:nowrap;font-size:15px!important;line-height:1.9!important;padding:2px 12px}
 }
