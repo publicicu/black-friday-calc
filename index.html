@@ -381,9 +381,8 @@ select.fill option{color:var(--ink);background:var(--white)}
 @keyframes rise2{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .contest{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
 .contest[hidden]{display:none}
-.contest-kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
-.contest-kicker span{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;letter-spacing:0}
 #shareCta{background:var(--yellow);color:var(--ink);font-size:clamp(17px,1.7vw,20px);padding:20px 38px;animation:glow 2.2s ease-out infinite;transition:transform .15s,background .15s}
+.gift{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;margin-left:.35em;font-weight:400}
 .contest-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:12px}
 #investCta{background:transparent;color:var(--white);border:2px solid var(--turq);font-size:clamp(17px,1.7vw,20px);padding:18px 32px;transition:background .15s,color .15s,transform .15s}
 @media (hover:hover){#investCta:hover{background:var(--turq);color:var(--ink);transform:translateY(-2px)}}
@@ -512,9 +511,8 @@ select.fill option{color:var(--ink);background:var(--white)}
       <p class="choose-hint" id="hint" hidden></p>
       <button type="button" class="btn primary btn-big" id="tryInvest" hidden>А якщо інвестувати? <span aria-hidden="true">→</span></button>
       <div class="contest" id="contest" hidden>
-        <span class="contest-kicker"><span aria-hidden="true">🎁</span> Розіграш</span>
         <div class="contest-row">
-          <button type="button" class="btn primary btn-big" id="shareCta" data-open-share>Поділися чеком і виграй приз</button>
+          <button type="button" class="btn primary btn-big" id="shareCta" data-open-share>Поділися чеком і виграй приз <span class="gift" aria-hidden="true">🎁</span></button>
           <button type="button" class="btn btn-big" id="investCta" aria-controls="icu" aria-expanded="false">Інвестуй з ICU</button>
         </div>
       </div>
